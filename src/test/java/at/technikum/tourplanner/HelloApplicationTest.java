@@ -7,8 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class HelloApplicationTest {
 
     @Test
-    void ok123() {
+    void okwhatev() {
         assertEquals(1, 1);
     }
+
 
 }
