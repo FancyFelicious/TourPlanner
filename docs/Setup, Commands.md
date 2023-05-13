@@ -134,7 +134,12 @@ $ mvn clean javafx:run
 ```sh
 $ mvn clean install -U
 ```
-     
+
+###### Validation shizzle (verbose, brief, default)
+```sh
+$ mvn clean install -Dmaven.plugin.validation=verbose
+```    
+
 
 ## Git
 ###### View config (username, password, etc.)
@@ -166,6 +171,7 @@ $ git branch -m old-branch new-branch
 - New JavaFX Project
 - Maven
 - Select JDK
+- Install Gluon extension
 - POM File (junit/jupiter, lombok)
 - Save on Format
 - Tests: Project Modules
@@ -175,6 +181,9 @@ $ git branch -m old-branch new-branch
 
 
 ### Other
+- Scene Builder
+
+
 ###### Edit `resolv.conf` and set `nameserver` to `8.8.8.8` to resolve addresses / access internet in WSL
 ```sh
 $ sudo vim /etc/resolv.conf
