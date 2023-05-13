@@ -112,13 +112,6 @@ $ GRANT ALL PRIVILEGES ON DATABASE database TO username;
 \q
 ```
 
-## Git
- - Add SSH key
- - Init repo locally
- - Create repo on GitHub -> follow instructions
- - GitHub Desktop?
-  github desktop
-
 
 ## Maven / Compile
 
@@ -126,22 +119,63 @@ $ GRANT ALL PRIVILEGES ON DATABASE database TO username;
 ```sh
 $ mvn clean install
 ```
-###### Force update snapshots (e.g. when adding new dependency)
-```sh
-$ mvn clean install -U
-```
+
 ###### Run / Execute
 ```sh
 $ mvn exec:java
 ```
+
+###### JavaFX Run
+```sh
+$ mvn clean javafx:run   
+```
+
+###### Force update snapshots (e.g. when adding new dependency)
+```sh
+$ mvn clean install -U
+```
+     
+
+## Git
+###### View config (username, password, etc.)
+```sh
+$ git config --list
+```
+
+###### Rename branch
+```sh
+$ git checkout <old_name>
+$ git branch -m <new_name>
+$ git push origin -u <new_name>
+$ git push origin --delete <old_name>
+```
+```sh
+$ git checkout main/master
+$ git branch -m old-branch new-branch
+```
+
+
+
+ - Add SSH key
+ - Init repo locally
+ - Create repo on GitHub -> follow instructions
+ - GitHub Desktop?
+
+
+## IntelliJ
+- New JavaFX Project
+- Maven
+- Select JDK
+- POM File (junit/jupiter, lombok)
+- Save on Format
+- Tests: Project Modules
+- MainClass definen 
+- Connect to DB
+- Libraries  / .m2
+
+
 ### Other
 ###### Edit `resolv.conf` and set `nameserver` to `8.8.8.8` to resolve addresses / access internet in WSL
 ```sh
 $ sudo vim /etc/resolv.conf
 ```
-
-## JavaFX
-
-## JUnit
-
-## Other
