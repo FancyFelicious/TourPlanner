@@ -1,4 +1,4 @@
-package at.technikum.tourplanner.database;
+package org.fancylynx.application.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -11,7 +11,7 @@ public class DataSource implements DatabaseConnector {
     private final HikariDataSource hikariDataSource;
 
     private DataSource() {
-        HikariConfig config = new HikariConfig("src/main/java/at/technikum/tourplanner/database/hikari.properties");
+        HikariConfig config = new HikariConfig("src/main/resources/hikari.properties");
         this.hikariDataSource = new HikariDataSource(config);
     }
 
@@ -26,7 +26,7 @@ public class DataSource implements DatabaseConnector {
         try {
             return hikariDataSource.getConnection();
         } catch (SQLException e) {
-            throw new IllegalStateException("Database not available!", e);
+            throw new IllegalStateException("Database not available", e);
         }
     }
 }

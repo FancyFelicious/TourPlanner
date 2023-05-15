@@ -1,14 +1,14 @@
-package at.technikum.tourplanner;
+package org.fancylynx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class GenericBaseController {
     @FXML
     private Label welcomeText;
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("whazzup my nigga");
+        welcomeText.setText("versace versace versace");
     }
 }

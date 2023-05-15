@@ -1,4 +1,4 @@
-package at.technikum.tourplanner;
+package org.fancylynx;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,17 +7,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class GenericBaseApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(GenericBaseApplication.class.getResource("generic-base-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        stage.setTitle("title hier ok cool ich bin title");
         stage.setScene(scene);
         stage.show();
     }
-
-//    public static void main(String[] args) {
-//        launch();
-//    }
 }

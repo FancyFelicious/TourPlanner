@@ -1,6 +1,7 @@
-package at.technikum.tourplanner.database;
+package org.fancylynx.application.database;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
+import org.fancylynx.application.config.Constants;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

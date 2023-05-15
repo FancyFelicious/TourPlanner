@@ -1,4 +1,4 @@
-package at.technikum.tourplanner.database;
+package org.fancylynx.application.database;
 
 import java.sql.Connection;
 

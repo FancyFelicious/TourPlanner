@@ -1,4 +1,4 @@
-package at.technikum.tourplanner;
+package org.fancylynx;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

@@ -1,25 +1,29 @@
-package at.technikum.tourplanner;
+package org.fancylynx;
 
-import at.technikum.tourplanner.playground.SerializationTest;
+import org.fancylynx.playground.SerializationTest;
+import org.fancylynx.playground.TestClass1;
 
 import java.io.IOException;
 
 
 public class App {
     public static void main(String[] args) throws IOException {
-        System.out.println("Hello, worlddddddddd!");
+        System.out.println("whazzup app startet etc");
+
+        TestClass1 testClass1 = new TestClass1("ok", 4, 5);
+
+        System.out.println(testClass1.testInt2());
+        System.out.println(testClass1.testInt1());
 
         SerializationTest.run();
 
+        System.out.println("yo1");
+        GenericBaseApplication genericBaseApplication = new GenericBaseApplication();
+        System.out.println("yo2");
 
-        System.out.println("yo 1");
-        HelloApplication helloApplication = new HelloApplication();
-        System.out.println("yo 2");
-//        helloApplication.start(new Stage());
+        //        helloApplication.start(new Stage());
 //        System.out.println("yo 3");
 
-
-//        public static void main(String[] args) {
 //            final int port = 2552;
 ////            Log.newEntry("App launched!", false);
 ////            Log.newEntry("Port set to: " + port, false);
