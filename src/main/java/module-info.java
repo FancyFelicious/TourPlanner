@@ -1,4 +1,4 @@
-module at.technikum.tourplanner {
+module org.fancylynx {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
@@ -12,5 +12,8 @@ module at.technikum.tourplanner {
     opens org.fancylynx.application.config to javafx.fxml;
 
     exports org.fancylynx;
-    exports org.fancylynx.application.config;
+//    exports org.fancylynx.application.config;
+//    exports org.fancylynx.playground;
+//    exports org.fancylynx.http;
+//    exports org.fancylynx.application.database;
 }
