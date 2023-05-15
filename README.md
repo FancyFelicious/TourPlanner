@@ -1,11 +1,18 @@
 # Tour Planner
 <sub> *by Raza Ghulam (2do) & Felix Piber (if21b265)* </sub>
 
-## Setup / Installation
+---
 
-### PostgreSQL
+[Link to GitHub repository](https://github.com/FancyFelicious/TourPlanner) (necessary? / delete?)
 
-#### Docker (recommended)
+---
+
+## PostgreSQL Setup / Installation
+
+
+
+### Docker (recommended)
+
 
 ```sh  
 $ docker-compose up -d
@@ -13,7 +20,7 @@ $ docker-compose up -d
 
 ---
 
-#### Linux
+### Linux
 
 ##### 1. Install PostgreSQL
 
@@ -49,11 +56,9 @@ ps -f -u postgres
 $ sudo lsof -n -u postgres | grep LISTEN
 ```
 
-
 ---
 
-
-#### Windows
+### Windows
 
 ##### 1. Install PostgreSQL
 
