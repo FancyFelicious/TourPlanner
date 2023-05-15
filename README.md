@@ -1,18 +1,18 @@
 # Tour Planner
+
 <sub> *by Raza Ghulam (2do) & Felix Piber (if21b265)* </sub>
 
 ---
 
-[Link to GitHub repository](https://github.com/FancyFelicious/TourPlanner) (necessary? / delete?)
+[Link to GitHub repository](https://github.com/FancyFelicious/TourPlanner)
+
+<sub>*necessary? / delete?*</sub>
 
 ---
 
 ## PostgreSQL Setup / Installation
 
-
-
 ### Docker (recommended)
-
 
 ```sh  
 $ docker-compose up -d
@@ -76,6 +76,7 @@ $ pg_ctl start/stop/status
 ---
 
 To Do:
+
 - Application architecture and structure
 - Key decisions
 - UML diagram & Wireframes
