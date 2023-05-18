@@ -1,6 +1,7 @@
 package org.fancylynx;
 
 import org.fancylynx.playground.SerializationTest;
+import org.fancylynx.playground.SpringTest;
 import org.fancylynx.playground.TestClass2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,8 @@ import java.io.IOException;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) throws IOException {
+
+        SpringTest springTest = new SpringTest(1, "ja", "ja");
 
         System.out.println("whazzup app startet etc");
         SpringApplication.run(App.class, args);
@@ -45,7 +48,7 @@ public class App {
         System.out.println("yo1");
         GenericBaseApplication genericBaseApplication = new GenericBaseApplication();
         System.out.println("yo2");
-
+   
         //        helloApplication.start(new Stage());
 //        System.out.println("yo 3");
 

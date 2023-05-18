@@ -3,7 +3,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!--    2do: naming, versioning, description-->
+    <!-- 2do: naming, versioning, description -->
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,10 +19,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <!--        <maven.compiler.source>17</maven.compiler.source>-->
-        <!--        <maven.compiler.target>17</maven.compiler.target>-->
+
         <!-- 2do: order? -->
-        <!--        <springdatajpa.version>3.0.3</springdatajpa.version>-->
+        <!-- <springdatajpa.version>3.0.3</springdatajpa.version> -->
         <junit.jupiter.version>5.9.2</junit.jupiter.version>
         <lombok.version>1.18.26</lombok.version>
         <javafx.version>17.0.2</javafx.version>
@@ -31,8 +30,11 @@
         <hikaricp.version>5.0.1</hikaricp.version>
         <mybatis.version>3.5.13</mybatis.version>
         <log4j.version>2.17.1</log4j.version>
+
         <!-- 2do: remove -->
         <maven.plugin.validation>VERBOSE</maven.plugin.validation>
+        <!-- <maven.compiler.source>17</maven.compiler.source> -->
+        <!-- <maven.compiler.target>17</maven.compiler.target> -->
     </properties>
 
     <dependencies>
@@ -40,20 +42,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-web</artifactId>-->
-        <!--            <version>3.0.6</version>-->
-        <!--        </dependency>-->
-
-        <!-- Spring Data JPA -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.data</groupId>-->
-        <!--            <artifactId>spring-data-jpa</artifactId>-->
-        <!--            <version>${springdatajpa.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!--                    <version>3.0.6</version>-->
+        </dependency>
 
         <!-- Jackson -->
         <dependency>
@@ -75,23 +68,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- 2do: needed? -->
-        <!-- Mybatis (run .sql script) -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.mybatis</groupId>-->
-        <!--            <artifactId>mybatis</artifactId>-->
-        <!--            <version>${mybatis.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
-        <!-- HikariCP -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.zaxxer</groupId>-->
-        <!--            <artifactId>HikariCP</artifactId>-->
-        <!--            <version>${hikaricp.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
         <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -99,14 +75,6 @@
             <version>${postgresql.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- Lombok -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.projectlombok</groupId>-->
-        <!--            <artifactId>lombok</artifactId>-->
-        <!--            <version>${lombok.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
 
         <!-- JavaFX -->
         <dependency>
@@ -137,6 +105,41 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- 2do: needed? (probably not) -->
+
+        <!-- Spring Data JPA -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.data</groupId>-->
+        <!--            <artifactId>spring-data-jpa</artifactId>-->
+        <!--            <version>${springdatajpa.version}</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+
+        <!-- Mybatis (run .sql script) -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.mybatis</groupId>-->
+        <!--            <artifactId>mybatis</artifactId>-->
+        <!--            <version>${mybatis.version}</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+
+        <!-- HikariCP -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.zaxxer</groupId>-->
+        <!--            <artifactId>HikariCP</artifactId>-->
+        <!--            <version>${hikaricp.version}</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+
+        <!-- Lombok -->
+        <!--        <dependency>-->
+        <!--            <groupId>org.projectlombok</groupId>-->
+        <!--            <artifactId>lombok</artifactId>-->
+        <!--            <version>${lombok.version}</version>-->
+        <!--            <scope>compile</scope>-->
+        <!--        </dependency>-->
+
     </dependencies>
     <build>
         <plugins>

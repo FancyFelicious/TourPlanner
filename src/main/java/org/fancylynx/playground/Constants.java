@@ -1,4 +1,4 @@
-package org.fancylynx.application.config;
+package org.fancylynx.playground;
 
 public final class Constants {
     public static final String PATH_TO_SQL_INIT_FILE = "src/main/resources/DB_init.sql";
