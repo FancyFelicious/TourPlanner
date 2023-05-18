@@ -2,14 +2,18 @@ package org.fancylynx;
 
 import org.fancylynx.playground.SerializationTest;
 import org.fancylynx.playground.TestClass2;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 
 
-//@SpringBootApplication
+@SpringBootApplication
 public class App {
     public static void main(String[] args) throws IOException {
+
         System.out.println("whazzup app startet etc");
+        SpringApplication.run(App.class, args);
 
         TestClass2 testClass1 = new TestClass2("ok", 4, 5);
         TestClass2 testClass2 = new TestClass2("ok2", 7, 9);

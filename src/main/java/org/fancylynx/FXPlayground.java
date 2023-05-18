@@ -25,7 +25,7 @@ public class FXPlayground extends Application {
         countText.setFont(Font.font("Verdana", FontWeight.BOLD, 18));
         countText.setFill(Color.LIGHTGREEN);
 
-        Button incrementButton = new Button("Increment");
+        Button incrementButton = new Button("Incrementtttt");
         incrementButton.setOnAction(event -> {
             count++;
             countText.setText("Count: " + count);

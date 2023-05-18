@@ -1,19 +1,19 @@
-package org.fancylynx.playground;
-
-import lombok.Data;
-
-@Data
-public class TestClass1 {
-    private final String testString;
-    private final int testInt1;
-    private final int testInt2;
-
-    public TestClass1(String testString, int testInt1, int testInt2) {
-        this.testString = testString;
-        this.testInt1 = testInt1;
-        this.testInt2 = testInt2;
-    }
-}
+//package org.fancylynx.playground;
+//
+//import lombok.Data;
+//
+//@Data
+//public class TestClass1 {
+//    private final String testString;
+//    private final int testInt1;
+//    private final int testInt2;
+//
+//    public TestClass1(String testString, int testInt1, int testInt2) {
+//        this.testString = testString;
+//        this.testInt1 = testInt1;
+//        this.testInt2 = testInt2;
+//    }
+//}
 
 
 //
