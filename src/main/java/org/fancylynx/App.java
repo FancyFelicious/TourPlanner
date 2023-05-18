@@ -6,6 +6,7 @@ import org.fancylynx.playground.TestClass2;
 import java.io.IOException;
 
 
+//@SpringBootApplication
 public class App {
     public static void main(String[] args) throws IOException {
         System.out.println("whazzup app startet etc");
