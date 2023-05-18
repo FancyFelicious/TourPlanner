@@ -143,6 +143,23 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.codehaus.mojo</groupId>-->
+            <!--                <artifactId>exec-maven-plugin</artifactId>-->
+            <!--                <version>3.0.0</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>java-execution</id>-->
+            <!--                        <phase>package</phase>-->
+            <!--                        &lt;!&ndash;                        <goals>&ndash;&gt;-->
+            <!--                        &lt;!&ndash;                            <goal>java</goal>&ndash;&gt;-->
+            <!--                        &lt;!&ndash;                        </goals>&ndash;&gt;-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--                <configuration>-->
+            <!--                    <mainClass>org.fancylynx.App</mainClass>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 </project>

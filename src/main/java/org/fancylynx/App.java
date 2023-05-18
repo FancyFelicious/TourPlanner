@@ -14,6 +14,11 @@ public class App {
         TestClass2 testClass2 = new TestClass2("ok2", 7, 9);
         TestClass2 testClass3 = new TestClass2("ok", 4, 5);
 
+        String env = System.getenv("JAVA_HOME");
+        System.out.println("ok hierp ls");
+        System.out.println("ok hierp ls");
+
+        System.out.println(env);
 
         System.out.println(testClass1.testInt1());
         System.out.println(testClass1.testInt2());
