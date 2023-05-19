@@ -1,3 +1,12 @@
+
+
+
+#### Login to PostgreSQL console with 'postgres' user:
+
+```sh
+$ psql -U postgres
+```
+
 ## PostgreSQL / PSQL
 
 #### Login to PostgreSQL console with 'postgres' user:
