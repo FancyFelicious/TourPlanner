@@ -1,6 +1,7 @@
 package org.fancylynx;
 
 import org.fancylynx.application.config.Configuration;
+import org.fancylynx.application.view.SetValuesFXPlayground;
 import org.fancylynx.playground.APIPlayground;
 import org.fancylynx.playground.JPAPlayground;
 import org.fancylynx.playground.JPAPlaygroundRepository;
@@ -27,6 +28,9 @@ public class App {
         // SpringApplication tourPlanner = new SpringApplication(App.class);
         // tourPlanner.setDefaultProperties(dotenv.get());
         // tourPlanner.run(args);
+
+//        UserInterface.launch(UserInterface.class, args);
+        SetValuesFXPlayground.launch(SetValuesFXPlayground.class, args);
 
         System.out.println("TESTING / PLAYGROUND / TRASH / ARCHIVE");
         System.out.println("XXXXXXXX API XXXXXXXX");

@@ -24,7 +24,6 @@ public class APIPlayground {
 //    }
 
     public void run() throws IOException {
-
         Tour testTour = new Tour();
         testTour.setFrom("vienna");
         testTour.setTo("madrid");
@@ -88,6 +87,9 @@ public class APIPlayground {
             // 2do
             e.printStackTrace();
         }
+
+
+        /// ARCHIVE - kann man wsl alles löschen
 
 //        // Path to save the JPEG file
 //        String filePath = "testDir/image.jpeg";
