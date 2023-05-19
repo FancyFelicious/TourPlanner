@@ -1,6 +1,6 @@
 package org.fancylynx.application.service;
 
-import org.fancylynx.playground.Constants;
+import org.fancylynx.application.config.Constants;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,7 +1,6 @@
 package org.fancylynx;
 
 import org.fancylynx.application.config.Configuration;
-import org.fancylynx.application.view.SetValuesFXPlayground;
 import org.fancylynx.playground.APIPlayground;
 import org.fancylynx.playground.JPAPlayground;
 import org.fancylynx.playground.JPAPlaygroundRepository;
@@ -20,8 +19,8 @@ public class App {
     public static void main(String[] args) throws IOException {
         System.out.println("whazzup app startet etc");
 
-        System.out.println("LOAD CONFIG");
-        Configuration.load();
+        System.out.println("LOAD APP CONFIG");
+        Configuration.loadAppConfiguration();
 
         System.out.println("START SPRING APP");
         SpringApplication.run(App.class, args);
@@ -30,7 +29,9 @@ public class App {
         // tourPlanner.run(args);
 
 //        UserInterface.launch(UserInterface.class, args);
-        SetValuesFXPlayground.launch(SetValuesFXPlayground.class, args);
+        GenericBaseApplication genericBaseApplication = new GenericBaseApplication();
+//        genericBaseApplication.start(new Stage());
+//        SetValuesFXPlayground.launch(SetValuesFXPlayground.class, args);
 
         System.out.println("TESTING / PLAYGROUND / TRASH / ARCHIVE");
         System.out.println("XXXXXXXX API XXXXXXXX");

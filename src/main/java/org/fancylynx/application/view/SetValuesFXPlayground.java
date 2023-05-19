@@ -4,10 +4,12 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.fancylynx.application.config.Configuration;
 import org.fancylynx.application.service.SaveImageToFileSystem;
 
 public class SetValuesFXPlayground extends Application {
@@ -43,42 +45,50 @@ public class SetValuesFXPlayground extends Application {
         nameField.setText("tourImage");
         directoryField.setText("/images");
 
-        Button testButton = new Button("TESTBUTTON");
-        Button okButton = new Button("GO!");
+        Button saveButton = new Button("Apply");
+        Button testButton = new Button("Show current config");
 
 
-// Create an event handler for the testButton
-        EventHandler<ActionEvent> okButtonHandler = event -> {
+        // Create an event handler for the testButton
+        EventHandler<ActionEvent> saveButtonHandler = event -> {
             RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
             if (selectedRadioButton != null) {
+                Configuration.setImageFormat(pngRadioButton.getText());
                 String selectedFormat = selectedRadioButton.getText();
                 System.out.println(selectedFormat);
             }
+            Configuration.setImageName(nameField.getText());
+            Configuration.setImageDirectory(directoryField.getText());
         };
 
+        EventHandler<ActionEvent> showConfigHandler = event -> {
+            System.out.println(Configuration.getImageDirectory());
+            System.out.println(Configuration.getImageName());
+            System.out.println(Configuration.getImageFormat());
+        };
 
         // Set the actions for the buttons
         directoryButton.setOnAction(e -> setDefaultDirectory(directoryField.getText()));
         nameButton.setOnAction(e -> setDefaultName(nameField.getText()));
-        testButton.setOnAction(okButtonHandler);
-
-        okButton.setOnAction(e -> youClickedMe());
+        testButton.setOnAction(showConfigHandler);
+        saveButton.setOnAction(saveButtonHandler);
 
         // Create the layout
         VBox root = new VBox(10);
         root.setPadding(new Insets(15));
+        root.setAlignment(Pos.CENTER);
         root.getChildren().addAll(
                 directoryLabel, directoryField, directoryButton,
                 nameLabel, nameField, nameButton,
                 pngRadioButton, jpgRadioButton, jpegRadioButton,
                 testButton,
-                okButton
+                saveButton
         );
 
         // Create the scene and set it to the stage
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Simple User Interface");
+        primaryStage.setTitle("Edit Settings");
         primaryStage.show();
     }
 
