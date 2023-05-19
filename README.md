@@ -1,10 +1,8 @@
 # Tour Planner
 
-<sub> *by Raza Ghulam (if21b177) & Felix Piber (if21b265)* </sub>
+<sub> *by Raza Ghulam & Felix Piber* </sub>
 
----
-
-[Link to GitHub repository](https://github.com/FancyFelicious/TourPlanner)  <sub>*remove?*</sub>
+[Link to GitHub Repository](https://github.com/FancyFelicious/TourPlanner)  <sub>*remove?*</sub>
 
 ---
 
