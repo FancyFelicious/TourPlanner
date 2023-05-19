@@ -4,19 +4,20 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.model.Tour;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
-@Service
+//@Service
 public class APIPlayground {
-    //    private static WebClient webClient = null;
-    private final WebClient webClient;
+//    //    private static WebClient webClient = null;
+//    private final WebClient webClient;
 
-    @Autowired
-    public APIPlayground(WebClient.Builder webClientBuilder) {
-        webClient = webClientBuilder.build();
-    }
+//    @Autowired
+//    public APIPlayground(WebClient.Builder webClientBuilder) {
+//        webClient = webClientBuilder.build();
+//    }
 
     public void run() throws JsonProcessingException {
 
@@ -27,19 +28,24 @@ public class APIPlayground {
         String apiKey = System.getProperty("MAP_QUEST_API_KEY"); // "R9fOD3ja6eTQpWBEQCLiYyWr3OecThSh";
         String url = baseUrl + "?key=" + apiKey + "&from=" + testTour.getFrom() + "&to=" + testTour.getTo();
 
-//        String urlTest = "https://www.mapquestapi.com/directions/v2/route?key=R9fOD3ja6eTQpWBEQCLiYyWr3OecThSh&from=wien&to=rom";
+        System.out.println("XXXXXXXXXXXXXX URL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        System.out.println(url);
 
-//        WebClient webClient = WebClient.create();
-        WebClient.Builder builder = WebClient.builder();
 
-        String responseTest = builder.build().get()
-                .uri(url)
-                .retrieve()
-                .bodyToMono(String.class).block();
+//        WebClient.Builder builder = WebClient.builder();
+        WebClient.RequestHeadersUriSpec<?> okcool = WebClient.builder().baseUrl(url).build().get();
+        String responseTest = okcool.retrieve().bodyToMono(String.class).block();
+        HttpStatusCode testStatus = okcool.exchangeToMono(response -> Mono.just(response.statusCode())).block();
+        HttpHeaders testHeaders = okcool.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
 
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX RAW RESPONSE XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX body XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         System.out.println(responseTest);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX status XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        System.out.println(testStatus);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX headers XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        System.out.println(testHeaders);
 
+//
         System.out.println("---------------------------------------------------------");
 //        JSON to Jackson JsonNode
         System.out.println("JSON to Jackson JsonNode");
@@ -49,6 +55,16 @@ public class APIPlayground {
         System.out.println(jsonNode);
         System.out.println(sessionId);
         System.out.println("---------------------------------------------------------");
+//
+//        String okStringTest = "https://www.mapquestapi.com/staticmap/v5/map?key=" + apiKey + "&session=" + sessionId;
+//        System.out.println(okStringTest);
+
+//        String responseTest2 = builder.build().get()
+//                .uri(url)
+//                .retrieve()
+//                .bodyToMono(String.class).block();
+
+
 ////        Creating a Java List From a JSON Array String
 //        System.out.println("LIST FROM JSON");
 ////        List listCar = objectMapper.readValue(responseTest) {
@@ -118,6 +134,62 @@ public class APIPlayground {
 //                .retrieve()
 //                .bodyToMono(String.class)
 //                .subscribe(System.out::println);
+
+
+//    WebClient.Builder builder = WebClient.builder();
+//        WebClient.RequestHeadersUriSpec<?> okcool = WebClient.builder().baseUrl(url).build().get();
+//        ClientResponse response = okcool.exchangeToMono(Mono::just).block();
+//
+//        if (response != null) {
+//            System.out.println("cool");
+//            Mono<String> responseBodyMono = response.bodyToMono(String.class);
+//
+////            String responseBodyTest = responseBodyMono.block();
+////            System.out.println(responseBodyTest);
+//            HttpHeaders responsHeaderTest = response.headers().asHttpHeaders();
+//            System.out.println(responsHeaderTest);
+//            HttpStatusCode statusCode = response.statusCode();
+//            System.out.println(statusCode);
+//
+//        } else {
+//            System.out.println("nah");
+//        }
+
+//        okcool.retrieve().bodyToMono(String.class).block();
+//
+//        WebClient webClient = WebClient.builder().build();
+//        ClientResponse response = webClient.get().uri(url).exchangeToMono(Mono::just).block();
+//
+//
+//        System.out.println("das is raw response");
+//        System.out.println(response);
+//
+//
+//        if (response != null) {
+//            String responseBody = response.bodyToMono(String.class).block();
+//            System.out.println("Response Body: " + responseBody);
+//            HttpStatusCode statusCode = response.statusCode();
+//            System.out.println("Status Code: " + statusCode);
+//
+//            HttpHeaders headers = response.headers().asHttpHeaders();
+//            System.out.println("Headers: " + headers);
+//        } else {
+//            System.out.println("Failed to receive response");
+//        }
+
+
+//        String responseTest = builder.baseUrl(url).build().get()
+//                .retrieve()
+//                .bodyToMono(String.class).block();
+//
+//        HttpStatusCode teststatus = WebClient.builder().baseUrl(url).build()
+//                .get().exchangeToMono(response -> Mono.just(response.statusCode()))
+//                .block();
+
+//        Mono<HttpHeaders> result = webClient.get()
+//                .uri("/example")
+//                .exchange()
+//                .map(response -> response.headers().asHttpHeaders());
 
     }
 }
