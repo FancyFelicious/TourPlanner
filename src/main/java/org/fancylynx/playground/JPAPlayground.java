@@ -16,7 +16,7 @@ public class JPAPlayground {
     @Column(name = "test_name2", nullable = false, columnDefinition = "TEXT")
     private String name;
 
-    @Column(name = "test_name2", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
     public JPAPlayground() {

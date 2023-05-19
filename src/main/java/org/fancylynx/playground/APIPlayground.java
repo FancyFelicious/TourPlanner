@@ -1,6 +1,5 @@
 package org.fancylynx.playground;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.model.Tour;
@@ -8,6 +7,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 //@Service
 public class APIPlayground {
@@ -19,7 +25,7 @@ public class APIPlayground {
 //        webClient = webClientBuilder.build();
 //    }
 
-    public void run() throws JsonProcessingException {
+    public void run() throws IOException {
 
         Tour testTour = new Tour();
         testTour.setFrom("vienna");
@@ -55,6 +61,56 @@ public class APIPlayground {
         System.out.println(jsonNode);
         System.out.println(sessionId);
         System.out.println("---------------------------------------------------------");
+
+        String testReq = "https://www.mapquestapi.com/staticmap/v5/map?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
+        System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 1 YYYYYYYYYYYYYYYYYYYYYYYYYYY");
+        System.out.println(testReq);
+//        String testReqEncoded = URLEncoder.encode(testReq, StandardCharsets.UTF_8);
+//        System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 2 YYYYYYYYYYYYYYYYYYYYYYYYYYY");
+//        System.out.println(testReqEncoded);
+
+        WebClient.RequestHeadersUriSpec<?> okcool2 = WebClient.builder().baseUrl(testReq).build().get();
+        String responseTest2 = okcool2.retrieve().bodyToMono(String.class).block();
+        HttpStatusCode testStatus2 = okcool2.exchangeToMono(response -> Mono.just(response.statusCode())).block();
+        HttpHeaders testHeaders2 = okcool2.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
+
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX body XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+//        System.out.println(responseTest2);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX status XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        System.out.println(testStatus2);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX headers XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        System.out.println(testHeaders2);
+
+        // Convert the response body string to a byte array
+        assert responseTest2 != null;
+//        System.out.println(responseTest2);
+        byte[] imageData = okcool2.retrieve().bodyToMono(byte[].class).block();
+//        byte[] imageData = responseTest2.getBytes();
+//        Bitmap imageData = BitmapFactory.decodeStream((InputStream) response.getEntity().getContent());
+
+        String filePath = "testDir/image2.png";
+        Path path = Paths.get(filePath);
+        Files.write(path, imageData);
+
+//        // Path to save the JPEG file
+//        String filePath = "testDir/image.jpeg";
+//
+//        try {
+//            // Create a FileOutputStream to write the byte array to the file
+//            FileOutputStream fos = new FileOutputStream(filePath);
+//
+//            // Write the byte array to the file
+//            fos.write(imageData);
+//
+//            // Close the FileOutputStream
+//            fos.close();
+//
+//            System.out.println("Image saved successfully.");
+//        } catch (IOException e) {
+//            System.out.println("Error occurred while saving the image: " + e.getMessage());
+//        }
+
+
 //
 //        String okStringTest = "https://www.mapquestapi.com/staticmap/v5/map?key=" + apiKey + "&session=" + sessionId;
 //        System.out.println(okStringTest);
