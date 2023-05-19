@@ -24,13 +24,13 @@ $ gpg --list-secret-keys --keyid-format=long
 ###### 4. Export secret key:
 
 ```sh
-$ gpg --armor --export-secret-keys **key**
+$ gpg --armor --export-secret-keys keyId
 ```
 
 ###### 5. Export public key, copy and paste to GitHub (User > Settings > SSH and GPG keys > New GPG key):
 
 ```sh
-$ gpg --armor --export **key**
+$ gpg --armor --export keyId
 ```
 
 ###### 6. Config git accordingly:
