@@ -1,10 +1,44 @@
+## Git
 
+### Add GPG Key to GitHub to get **Verified** badge (sign commits)
 
+#### Windows
 
-#### Login to PostgreSQL console with 'postgres' user:
+<sub>
+See: https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key</sub>
+
+##### 1. Download & Install Gpg4Win: https://gpg4win.org/download.html
+
+###### 2. Create a new RSA Key:
 
 ```sh
-$ psql -U postgres
+$ gpg --default-new-key-algo rsa4096 --gen-key
+```
+
+###### 3. List all keys and grab ID:
+
+```sh
+$ gpg --list-secret-keys --keyid-format=long 
+```
+
+###### 4. Export secret key:
+
+```sh
+$ gpg --armor --export-secret-keys **key**
+```
+
+###### 5. Export public key, copy and paste to GitHub (User > Settings > SSH and GPG keys > New GPG key):
+
+```sh
+$ gpg --armor --export **key**
+```
+
+###### 6. Config git accordingly:
+
+```sh
+$ git config --global commit.gpgsign true
+$ git config --global user.signingkey your_email@example.com
+$ git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"
 ```
 
 ## PostgreSQL / PSQL
