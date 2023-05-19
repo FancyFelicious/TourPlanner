@@ -1,6 +1,6 @@
 ## Git
 
-### Add GPG Key to GitHub to get **Verified** badge (sign commits)
+### Add GPG Key to GitHub (Sign Commits / **'Verified'** Badge)
 
 #### Windows
 
@@ -9,7 +9,7 @@ See: https://docs.github.com/en/authentication/managing-commit-signature-verific
 
 ##### 1. Download & Install Gpg4Win: https://gpg4win.org/download.html
 
-###### 2. Create a new RSA Key:
+###### 2. Create a new RSA key:
 
 ```sh
 $ gpg --default-new-key-algo rsa4096 --gen-key
