@@ -3,6 +3,7 @@ package org.fancylynx.playground;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.model.Tour;
+import org.fancylynx.application.service.SaveImageToFileSystem;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -11,9 +12,6 @@ import reactor.core.publisher.Mono;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 //@Service
 public class APIPlayground {
@@ -29,7 +27,7 @@ public class APIPlayground {
 
         Tour testTour = new Tour();
         testTour.setFrom("vienna");
-        testTour.setTo("moscow");
+        testTour.setTo("madrid");
         String baseUrl = "https://www.mapquestapi.com/directions/v2/route";
         String apiKey = System.getProperty("MAP_QUEST_API_KEY"); // "R9fOD3ja6eTQpWBEQCLiYyWr3OecThSh";
         String url = baseUrl + "?key=" + apiKey + "&from=" + testTour.getFrom() + "&to=" + testTour.getTo();
@@ -82,15 +80,14 @@ public class APIPlayground {
         System.out.println(testHeaders2);
 
         // Convert the response body string to a byte array
-        assert responseTest2 != null;
 //        System.out.println(responseTest2);
         byte[] imageData = okcool2.retrieve().bodyToMono(byte[].class).block();
-//        byte[] imageData = responseTest2.getBytes();
-//        Bitmap imageData = BitmapFactory.decodeStream((InputStream) response.getEntity().getContent());
-
-        String filePath = "testDir/image2.png";
-        Path path = Paths.get(filePath);
-        Files.write(path, imageData);
+        try {
+            SaveImageToFileSystem.save(imageData);
+        } catch (IOException e) {
+            // 2do
+            e.printStackTrace();
+        }
 
 //        // Path to save the JPEG file
 //        String filePath = "testDir/image.jpeg";
