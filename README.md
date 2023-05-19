@@ -1,6 +1,5 @@
 # Tour Planner
 
-testVer
 <sub> *by Raza Ghulam & Felix Piber* </sub>
 
 [Link to GitHub Repository](https://github.com/FancyFelicious/TourPlanner)  <sub>*remove?*</sub>
