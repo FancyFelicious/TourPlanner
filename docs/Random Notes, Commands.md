@@ -4,8 +4,8 @@
 
 #### Windows
 
-<sub>*
-See: https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key*</sub>
+<sub>
+See: https://docs.github.com/en/authentication/managing-commit-signature-verification/generating-a-new-gpg-key</sub>
 
 ###### 1. Download & Install Gpg4Win: https://gpg4win.org/download.html
 
@@ -38,7 +38,7 @@ $ gpg --armor --export **key**
 ```sh
 $ git config --global commit.gpgsign true
 $ git config --global user.signingkey your_email@example.com
-$ git config --global gpg.program "C:\Program Files (x86)\GnuPG\bin\gpg.exe"
+$ git config --global gpg.program "C:\path\to\GnuPG\bin\gpg.exe"
 ```
 
 ## PostgreSQL / PSQL
