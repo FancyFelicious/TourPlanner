@@ -8,12 +8,12 @@ services:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
     ports:
-      - '5431:5432'
+      - '${PORT}:5432'
     volumes:
       - database:/var/lib/postgresql/data
     env_file:
-    # - .env # 2do: not really necessary since path defaults to (.env), left for clarity
-#      - src/main/resources/config.properties # test: use central config file for env vars
+      - .env # 2do: not really necessary since path defaults to (.env), left for clarity
+#      - src/main/resources/config.properties
 volumes:
   database:
     driver: local

@@ -1,26 +1,35 @@
 package org.fancylynx.playground;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-@Entity
+@Entity(name = "spring_test")
+//@Table(name = "spring_test333", uniqueConstraints = {
+//        @UniqueConstraint(name = "spring_test_unique_name", columnNames = "testName2")
+//})
 public class SpringTest {
 
     @Id
-    private int id;
+    @SequenceGenerator(name = "spring_test_sequence", sequenceName = "spring_test_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "spring_test_sequence")
+
+    // 2do: add @Column for column name in db (best practice)
+    @Column(name = "id", unique = true, updatable = false, nullable = false, columnDefinition = "BIGINT")
+    private long id; // 2do: change to long / big serial? (not necessary but best practice flex, simulating huge db)
+
+    @Column(name = "testName2", nullable = false, columnDefinition = "TEXT")
     private String name;
     private String description;
 
     public SpringTest() {
     }
 
-    public SpringTest(int id, String name, String description) {
+    public SpringTest(long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

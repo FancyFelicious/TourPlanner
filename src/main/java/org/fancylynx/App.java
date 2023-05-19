@@ -1,10 +1,11 @@
 package org.fancylynx;
 
-import org.fancylynx.playground.SerializationTest;
-import org.fancylynx.playground.SpringTest;
-import org.fancylynx.playground.TestClass2;
+import org.fancylynx.application.config.Configuration;
+import org.fancylynx.playground.*;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
 
@@ -12,20 +13,28 @@ import java.io.IOException;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) throws IOException {
-
-        SpringTest springTest = new SpringTest(1, "ja", "ja");
-
         System.out.println("whazzup app startet etc");
+
+        APIPlayground.run();
+
+        Configuration.load();
+
         SpringApplication.run(App.class, args);
+//        SpringApplication tourPlanner = new SpringApplication(App.class);
+//        tourPlanner.setDefaultProperties(dotenv.get());
+//        tourPlanner.run(args);
+
+
+//        SpringTestRepository springTestRepository;
+//        SpringTest springTest = new SpringTest(1, "test", "test description");
+//        springTestRepository.save(springTest);
 
         TestClass2 testClass1 = new TestClass2("ok", 4, 5);
         TestClass2 testClass2 = new TestClass2("ok2", 7, 9);
         TestClass2 testClass3 = new TestClass2("ok", 4, 5);
 
         String env = System.getenv("JAVA_HOME");
-        System.out.println("ok hierp ls");
-        System.out.println("ok hierp ls");
-
+        System.out.println("java home env path:");
         System.out.println(env);
 
         System.out.println(testClass1.testInt1());
@@ -48,7 +57,7 @@ public class App {
         System.out.println("yo1");
         GenericBaseApplication genericBaseApplication = new GenericBaseApplication();
         System.out.println("yo2");
-   
+
         //        helloApplication.start(new Stage());
 //        System.out.println("yo 3");
 
@@ -79,5 +88,13 @@ public class App {
 //            // Shut down application
 ////            Log.newEntry("Shutting down...", false);
 //        }
+    }
+
+    @Bean
+    CommandLineRunner commandLineRunner(SpringTestRepository springTestRepository) {
+        return args -> {
+            SpringTest springTest = new SpringTest(1, "test", "test description");
+            springTestRepository.save(springTest);
+        };
     }
 }
