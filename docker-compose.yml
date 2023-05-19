@@ -12,8 +12,7 @@ services:
     volumes:
       - database:/var/lib/postgresql/data
     env_file:
-      - .env # 2do: not really necessary since path defaults to (.env), left for clarity
-#      - src/main/resources/config.properties
+      - .env # 2do: not really necessary since path defaults to (.env), left for clarity, remove later
 volumes:
   database:
     driver: local

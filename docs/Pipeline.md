@@ -9,14 +9,15 @@
 - Alles
 - Business logic / models
 - Project structure
-- JavaFX
 - JPA
 - Spring Web
 - ...
 
 ## To Do
+- JavaFX / GUI
 - Logging (log4j)
 - Report (create .pdf)
+- Search
 - Clean exception handling
 - Constants file containing all messages/notifications
 - Unit Tests
