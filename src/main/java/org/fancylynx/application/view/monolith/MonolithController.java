@@ -1,25 +1,81 @@
-//package org.fancylynx.application.view;
-//
-//import javafx.application.Application;
-//import javafx.event.ActionEvent;
-//import javafx.event.EventHandler;
-//import javafx.geometry.Insets;
-//import javafx.geometry.Pos;
-//import javafx.scene.Scene;
-//import javafx.scene.control.*;
-//import javafx.scene.layout.VBox;
-//import javafx.stage.Stage;
-//import org.fancylynx.application.config.Configuration;
-//import org.fancylynx.application.service.SaveImageToFileSystem;
-//
-//public class SetValuesFXPlayground extends Application {
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//
-//    @Override
-//    public void start(Stage primaryStage) {
-//        // Create the UI components
+package org.fancylynx.application.view.monolith;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import org.fancylynx.application.config.Configuration;
+
+public class MonolithController {
+    @FXML
+    private TextField imageDirectory;
+    @FXML
+    private TextField imageName;
+
+
+    // 2do: add image formats
+    @FXML
+    private RadioButton png;
+    @FXML
+    private RadioButton jpg;
+    @FXML
+    private RadioButton jpeg;
+    @FXML
+    private ToggleGroup formatToggleGroup;
+
+    @FXML
+    private Button save;
+    @FXML
+    private Button viewConfiguration;
+    @FXML
+    private Button createTour;
+    @FXML
+    private Button testButton;
+
+
+    @FXML
+    private void handleSaveButtonAction() {
+        RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
+//        Configuration.setImageFormat(png.getText());
+//        if (selectedRadioButton != null) {
+        Configuration.setImageFormat(selectedRadioButton.getText());
+//        }
+        Configuration.setImageName(imageName.getText());
+        Configuration.setImageDirectory(imageDirectory.getText());
+    }
+
+
+    @FXML
+    private void handleViewConfigurationButtonAction() {
+        System.out.println(Configuration.getImageDirectory());
+        System.out.println(Configuration.getImageName());
+        System.out.println(Configuration.getImageFormat());
+    }
+
+    @FXML
+    private void handleCreateTourButtonAction() {
+        // Add your logic here
+    }
+
+    @FXML
+    private void handleTestButtonAction() {
+
+    }
+
+    public void initialize() {
+        formatToggleGroup = new ToggleGroup();
+        png.setToggleGroup(formatToggleGroup);
+        jpg.setToggleGroup(formatToggleGroup);
+        jpeg.setToggleGroup(formatToggleGroup);
+        png.setSelected(true);
+
+        imageName.setText("tourImage");
+        imageDirectory.setText("/images");
+    }
+}
+
+// Create the UI components
 //        Label directoryLabel = new Label("Default Directory:");
 //        TextField directoryField = new TextField();
 //        Button directoryButton = new Button("Set directory");
@@ -116,4 +172,3 @@
 //        // Handle the OK button click
 //        System.out.println("OK button clicked!");
 //    }
-//}
