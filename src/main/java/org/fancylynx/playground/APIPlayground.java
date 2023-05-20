@@ -2,6 +2,7 @@ package org.fancylynx.playground;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fancylynx.application.exception.SaveImageException;
 import org.fancylynx.application.model.Tour;
 import org.fancylynx.application.service.SaveImageToFileSystem;
 import org.springframework.http.HttpHeaders;
@@ -83,7 +84,7 @@ public class APIPlayground {
         byte[] imageData = okcool2.retrieve().bodyToMono(byte[].class).block();
         try {
             SaveImageToFileSystem.save(imageData);
-        } catch (IOException e) {
+        } catch (SaveImageException e) {
             // 2do
             e.printStackTrace();
         }

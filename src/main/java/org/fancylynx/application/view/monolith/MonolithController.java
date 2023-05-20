@@ -1,20 +1,26 @@
 package org.fancylynx.application.view.monolith;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.fancylynx.application.config.Configuration;
 
+import java.io.IOException;
+
 public class MonolithController {
+    private Stage primaryStage;
+
+    @FXML
+    private Label imageDirectoryLabel;
     @FXML
     private TextField imageDirectory;
     @FXML
+    private Label imageNameLabel;
+    @FXML
     private TextField imageName;
-
-
-    // 2do: add image formats
     @FXML
     private RadioButton png;
     @FXML
@@ -22,17 +28,20 @@ public class MonolithController {
     @FXML
     private RadioButton jpeg;
     @FXML
+    private Label imageFormatLabel;
+    @FXML
     private ToggleGroup formatToggleGroup;
-
     @FXML
     private Button save;
     @FXML
     private Button viewConfiguration;
     @FXML
     private Button createTour;
-    @FXML
-    private Button testButton;
 
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     @FXML
     private void handleSaveButtonAction() {
@@ -55,13 +64,21 @@ public class MonolithController {
 
     @FXML
     private void handleCreateTourButtonAction() {
-        // Add your logic here
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TestView.fxml"));
+            Parent testViewRoot = fxmlLoader.load();
+
+            TestViewController testViewController = fxmlLoader.getController();
+            testViewController.setPrimaryStage(primaryStage); // Pass the primaryStage to the TestViewController
+
+            Scene testViewScene = new Scene(testViewRoot, 800, 600);
+            primaryStage.setScene(testViewScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
     }
 
-    @FXML
-    private void handleTestButtonAction() {
-
-    }
 
     public void initialize() {
         formatToggleGroup = new ToggleGroup();
@@ -147,28 +164,3 @@ public class MonolithController {
 //        primaryStage.show();
 //    }
 //
-//    private void setDefaultDirectory(String directory) {
-//        // Set the default directory
-//        SaveImageToFileSystem.setDefaultDirectory(directory);
-//        System.out.println("Directory set: " + directory); // 2do
-//
-//    }
-//
-//    private void setDefaultName(String name) {
-//        // Set the default name
-//        SaveImageToFileSystem.setDefaultName(name);
-//        System.out.println("Nam set: " + name); // 2do
-//
-//    }
-//
-//    private void setDefaultFormat(String format) {
-//        // Set the default format
-//        SaveImageToFileSystem.setDefaultFormat(format);
-//        System.out.println("Format set: " + format); // 2do
-//
-//    }
-//
-//    private void youClickedMe() {
-//        // Handle the OK button click
-//        System.out.println("OK button clicked!");
-//    }

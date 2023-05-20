@@ -46,15 +46,3 @@ public class SaveImageToFileSystem {
     }
 }
 
-////@Service
-//public class SaveImageToFileSystem {
-//    // 2od: why does custom SaveImageException not work?
-//    public static void save(byte[] imageData) throws IOException { //SaveImageException {
-//        assert imageData != null;
-//
-//        String filePath = Constants.DEFAULT_IMAGE_SAVE_DIRECTORY + Constants.DEFAULT_IMAGE_NAME + Constants.DEFAULT_IMAGE_FORMAT;
-//        Path path = Paths.get(filePath);
-//        Files.write(path, imageData);
-//    }
-//
-//}
