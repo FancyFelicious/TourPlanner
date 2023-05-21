@@ -20,16 +20,21 @@ public class ClassXViewModel {
         y = new SimpleDoubleProperty();
         z = new SimpleDoubleProperty();
         updateTimeStamp = new SimpleStringProperty("Last update: ");
+
+        // Bind the properties to the model
+        x.bind(model.xProperty());
+        y.bind(model.yProperty());
+        z.bind(model.zProperty());
+//        updateTimeStamp.bind(model.updateTimeStampProperty());
     }
 
-    public void updatePieChart() {
-        double[] dataValues = model.getDataValues();
-        x.setValue(dataValues[0]);
-        y.setValue(dataValues[1]);
-        z.setValue(dataValues[2]);
-        updateTimeStamp.setValue("Last update: " + model.getLatestUpdateTimeStamp());
-
-    }
+//    public void updatePieChart() {
+//        double[] dataValues = model.getDataValues();
+//        x.setValue(dataValues[0]);
+//        y.setValue(dataValues[1]);
+//        z.setValue(dataValues[2]);
+//        updateTimeStamp.setValue("Last update: " + model.getLatestUpdateTimeStamp());
+//    }
 
     public DoubleProperty xProperty() {
         return x;
@@ -46,5 +51,4 @@ public class ClassXViewModel {
     public StringProperty updateTimeStampProperty() {
         return updateTimeStamp;
     }
-
 }

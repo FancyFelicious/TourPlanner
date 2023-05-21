@@ -36,7 +36,7 @@ public class ClassXController {
         pieChart.setData(data);
     }
 
-    public void onUpdateButton() {
-        viewModel.updatePieChart();
-    }
+//    public void onUpdateButton() {
+//        viewModel.updatePieChart();
+//    }
 }

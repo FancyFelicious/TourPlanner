@@ -1,35 +1,65 @@
 package org.fancylynx.application.view.MVVMPlayground.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
 public class DataModelManager implements DataModel {
     private final Random random = new Random();
-    private double x;
-    private double y;
-    private double z;
-    private String lastUpdate;
+    private final DoubleProperty x = new SimpleDoubleProperty();
+    private final DoubleProperty y = new SimpleDoubleProperty();
+    private final DoubleProperty z = new SimpleDoubleProperty();
+    private final StringProperty lastUpdate = new SimpleStringProperty();
+
+    public DataModelManager() {
+        recalculateData();
+    }
 
     @Override
     public double[] getDataValues() {
-        return new double[]{x, y, z};
+        return new double[]{x.get(), y.get(), z.get()};
     }
 
     @Override
     public String getLatestUpdateTimeStamp() {
+        return lastUpdate.get();
+    }
+
+    @Override
+    public DoubleProperty xProperty() {
+        return x;
+    }
+
+    @Override
+    public DoubleProperty yProperty() {
+        return y;
+    }
+
+    @Override
+    public DoubleProperty zProperty() {
+        return z;
+    }
+
+    @Override
+    public StringProperty lastUpdateProperty() {
         return lastUpdate;
     }
 
     public void recalculateData() {
-        int first = random.nextInt(100) + 1;
-        int second = random.nextInt(100) + 1;
-        int bottom = Math.min(first, second);
-        int top = Math.max(first, second);
-
-        x = bottom;
-        y = top - bottom;
-        z = 100 - top;
+        final int MAX_VALUE = 100;
+        final int MIN_VALUE = 1;
+        int randomNumber1 = random.nextInt(MAX_VALUE) + MIN_VALUE;
+        int randomNumber2 = random.nextInt(MAX_VALUE) + MIN_VALUE;
+        int minValue = Math.min(randomNumber1, randomNumber2);
+        int maxValue = Math.max(randomNumber1, randomNumber2);
+        x.set(minValue);
+        y.set(maxValue - minValue);
+        z.set(MAX_VALUE - maxValue);
         calcTimeStamp();
     }
 
@@ -38,27 +68,52 @@ public class DataModelManager implements DataModel {
         Date now = new Date();
         String stringDate = simpleDateFormat.format(now);
         System.out.println(stringDate);
-        lastUpdate = stringDate;
+        lastUpdate.set(stringDate);
     }
-
-
-//    private int dataValue;
-//    public DataModelManager() {
-//        dataValue = 10;
-//    }
-
-//    @Override
-//    public int getDataValue() {
-//        return dataValue;
-//    }
-//
-//    @Override
-//    public void randomizeDataValue() {
-//        dataValue = (int) (Math.random() * 100);
-//    }
-//
-//    @Override
-//    public void saveDataValue(int value) {
-//        dataValue = value;
-//    }
 }
+
+
+//package org.fancylynx.application.view.MVVMPlayground.model;
+//
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+//import java.util.Random;
+//
+//public class DataModelManager implements DataModel {
+//    private final Random random = new Random();
+//    private double x;
+//    private double y;
+//    private double z;
+//    private String lastUpdate;
+//
+//    @Override
+//    public double[] getDataValues() {
+//        return new double[]{x, y, z};
+//    }
+//
+//    @Override
+//    public String getLatestUpdateTimeStamp() {
+//        return lastUpdate;
+//    }
+//
+//    public void recalculateData() {
+//        final int MAX_VALUE = 100;
+//        final int MIN_VALUE = 1;
+//        int randomNumber1 = random.nextInt(MAX_VALUE) + MIN_VALUE;
+//        int randomNumber2 = random.nextInt(MAX_VALUE) + MIN_VALUE;
+//        int minValue = Math.min(randomNumber1, randomNumber2);
+//        int maxValue = Math.max(randomNumber1, randomNumber2);
+//        x = minValue;
+//        y = maxValue - minValue;
+//        z = MAX_VALUE - maxValue;
+//        calcTimeStamp();
+//    }
+//
+//    private void calcTimeStamp() {
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+//        Date now = new Date();
+//        String stringDate = simpleDateFormat.format(now);
+//        System.out.println(stringDate);
+//        lastUpdate = stringDate;
+//    }
+//}
