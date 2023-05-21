@@ -3,6 +3,8 @@ package org.fancylynx.application.view.MVVMPlayground.model;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.StringProperty;
 
+import java.beans.PropertyChangeListener;
+
 public interface DataModel {
     DoubleProperty xProperty();
 
@@ -16,9 +18,5 @@ public interface DataModel {
 
     String getLatestUpdateTimeStamp();
 
-//    int getDataValue();
-//
-//    void randomizeDataValue();
-
-//    void saveDataValue(int value);
+    void addPropertyChangeListener(PropertyChangeListener listener);
 }

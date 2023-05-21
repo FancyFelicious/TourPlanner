@@ -6,6 +6,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.fancylynx.application.view.MVVMPlayground.model.DataModel;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 public class ClassXViewModel {
     private final DoubleProperty x;
     private final DoubleProperty y;
@@ -13,6 +16,7 @@ public class ClassXViewModel {
     private final StringProperty updateTimeStamp;
 
     private final DataModel model;
+
 
     public ClassXViewModel(DataModel model) {
         this.model = model;
@@ -22,10 +26,25 @@ public class ClassXViewModel {
         updateTimeStamp = new SimpleStringProperty("Last update: ");
 
         // Bind the properties to the model
-        x.bind(model.xProperty());
-        y.bind(model.yProperty());
-        z.bind(model.zProperty());
+//        x.bind(model.xProperty());
+//        y.bind(model.yProperty());
+//        z.bind(model.zProperty());
 //        updateTimeStamp.bind(model.updateTimeStampProperty());
+
+        model.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (evt.getPropertyName().equals("dataValues")) {
+                    double[] dataValues = (double[]) evt.getNewValue();
+                    x.setValue(dataValues[0]);
+                    y.setValue(dataValues[1]);
+                    z.setValue(dataValues[2]);
+                } else if (evt.getPropertyName().equals("latestUpdateTimeStamp")) {
+                    String timeStamp = (String) evt.getNewValue();
+                    updateTimeStamp.setValue("Last update: " + timeStamp);
+                }
+            }
+        });
     }
 
 //    public void updatePieChart() {

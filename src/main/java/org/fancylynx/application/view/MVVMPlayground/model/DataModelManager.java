@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -15,8 +17,11 @@ public class DataModelManager implements DataModel {
     private final DoubleProperty y = new SimpleDoubleProperty();
     private final DoubleProperty z = new SimpleDoubleProperty();
     private final StringProperty lastUpdate = new SimpleStringProperty();
+    private final PropertyChangeSupport propertyChangeSupport;
+
 
     public DataModelManager() {
+        propertyChangeSupport = new PropertyChangeSupport(this);
         recalculateData();
     }
 
@@ -61,6 +66,24 @@ public class DataModelManager implements DataModel {
         y.set(maxValue - minValue);
         z.set(MAX_VALUE - maxValue);
         calcTimeStamp();
+
+        propertyChangeSupport.firePropertyChange("dataValues", null, getDataValues());
+//        propertyChangeSupport.firePropertyChange("latestUpdateTimeStamp", null, getLatestUpdateTimeStamp());
+
+//        Platform.runLater(() -> {
+//            xProperty().set(x);
+//            yProperty().set(y);
+//            zProperty().set(z);
+//            lastUpdateProperty().set(lastUpdate);
+//        });
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        propertyChangeSupport.removePropertyChangeListener(listener);
     }
 
     private void calcTimeStamp() {
