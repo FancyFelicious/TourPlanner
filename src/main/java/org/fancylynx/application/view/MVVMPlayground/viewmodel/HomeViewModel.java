@@ -5,11 +5,14 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.fancylynx.application.view.MVVMPlayground.model.DataModel;
+import org.springframework.stereotype.Component;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class ClassXViewModel {
+// 2do: make component, dependency injection
+@Component
+public class HomeViewModel {
     private final DoubleProperty x;
     private final DoubleProperty y;
     private final DoubleProperty z;
@@ -17,8 +20,7 @@ public class ClassXViewModel {
 
     private final DataModel model;
 
-
-    public ClassXViewModel(DataModel model) {
+    public HomeViewModel(DataModel model) {
         this.model = model;
         x = new SimpleDoubleProperty();
         y = new SimpleDoubleProperty();

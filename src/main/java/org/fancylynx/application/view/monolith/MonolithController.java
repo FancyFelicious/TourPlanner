@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.fancylynx.application.config.Configuration;
+import org.fancylynx.application.config.Constants;
 
 import java.io.IOException;
 
@@ -55,14 +56,12 @@ public class MonolithController {
     }
 
 
-    @FXML
     private void handleViewConfigurationButtonAction() {
         System.out.println(Configuration.getImageDirectory());
         System.out.println(Configuration.getImageName());
         System.out.println(Configuration.getImageFormat());
     }
 
-    @FXML
     private void handleCreateTourButtonAction() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TestView.fxml"));
@@ -79,7 +78,6 @@ public class MonolithController {
         }
     }
 
-
     public void initialize() {
         formatToggleGroup = new ToggleGroup();
         png.setToggleGroup(formatToggleGroup);
@@ -87,8 +85,8 @@ public class MonolithController {
         jpeg.setToggleGroup(formatToggleGroup);
         png.setSelected(true);
 
-        imageName.setText("tourImage");
-        imageDirectory.setText("/images");
+        imageName.setText(Constants.DEFAULT_IMAGE_NAME);
+        imageDirectory.setText(Constants.DEFAULT_IMAGE_SAVE_DIRECTORY);
     }
 }
 

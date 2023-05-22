@@ -11,6 +11,7 @@ public class AutoUpdater implements Runnable {
         this.dataModelManager = dataModelManager;
     }
 
+    // Updates db every few seconds for testing purposes (pie chart)
     @Override
     public void run() {
         Random random = new Random();

@@ -1,7 +1,7 @@
 package org.fancylynx;
 
 import org.fancylynx.application.config.Configuration;
-import org.fancylynx.application.view.monolith.Monolith;
+import org.fancylynx.playground.APIPlayground;
 import org.fancylynx.playground.JPAPlaygroundRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +20,7 @@ public class LaunchApp {
 
         System.out.println("START SPRING APP");
         SpringApplication.run(LaunchApp.class, args);
+//        SpringApplication.run(Entry.class, args);
         // SpringApplication tourPlanner = new SpringApplication(App.class);
         // tourPlanner.setDefaultProperties(dotenv.get());
         // tourPlanner.run(args);
@@ -27,12 +28,12 @@ public class LaunchApp {
 
         System.out.println("TESTING / PLAYGROUND / TRASH / ARCHIVE");
 
-        System.out.println("XXXXXXXX JAVAFX / MVVM XXXXXXXX");
-        Monolith.launch(Monolith.class, args);
+//        System.out.println("XXXXXXXX JAVAFX / MVVM XXXXXXXX");
+//        Monolith.launch(Monolith.class, args);
 
-//        System.out.println("XXXXXXXX API XXXXXXXX");
-//        APIPlayground apiPlayground = new APIPlayground();
-//        apiPlayground.run();
+        System.out.println("XXXXXXXX API XXXXXXXX");
+        APIPlayground apiPlayground = new APIPlayground();
+        apiPlayground.run();
 //
 //        System.out.println(" XXXXXXXX DOTENV XXXXXXXX");
 //        String env = System.getenv("JAVA_HOME");

@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.springframework.stereotype.Repository;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -11,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+@Repository
 public class DataModelManager implements DataModel {
     private final Random random = new Random();
     private final DoubleProperty x = new SimpleDoubleProperty();
@@ -70,12 +72,6 @@ public class DataModelManager implements DataModel {
         propertyChangeSupport.firePropertyChange("dataValues", null, getDataValues());
 //        propertyChangeSupport.firePropertyChange("latestUpdateTimeStamp", null, getLatestUpdateTimeStamp());
 
-//        Platform.runLater(() -> {
-//            xProperty().set(x);
-//            yProperty().set(y);
-//            zProperty().set(z);
-//            lastUpdateProperty().set(lastUpdate);
-//        });
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

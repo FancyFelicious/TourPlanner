@@ -2,6 +2,7 @@ package org.fancylynx.playground;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fancylynx.application.config.Constants;
 import org.fancylynx.application.exception.SaveImageException;
 import org.fancylynx.application.model.Tour;
 import org.fancylynx.application.service.SaveImageToFileSystem;
@@ -28,8 +29,8 @@ public class APIPlayground {
         Tour testTour = new Tour();
         testTour.setFrom("vienna");
         testTour.setTo("madrid");
-        String baseUrl = "https://www.mapquestapi.com/directions/v2/route";
-        String apiKey = System.getProperty("MAP_QUEST_API_KEY"); // "R9fOD3ja6eTQpWBEQCLiYyWr3OecThSh";
+        String baseUrl = Constants.MAP_QUEST_DIRECTIONS_BASE_URL;
+        String apiKey = System.getProperty("MAP_QUEST_API_KEY");
         String url = baseUrl + "?key=" + apiKey + "&from=" + testTour.getFrom() + "&to=" + testTour.getTo();
 
         System.out.println("XXXXXXXXXXXXXX URL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
@@ -60,7 +61,7 @@ public class APIPlayground {
         System.out.println(sessionId);
         System.out.println("---------------------------------------------------------");
 
-        String testReq = "https://www.mapquestapi.com/staticmap/v5/map?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
+        String testReq = Constants.MAP_QUEST_STATIC_MAP_BASE_URL + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
         System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 1 YYYYYYYYYYYYYYYYYYYYYYYYYYY");
         System.out.println(testReq);
 //        String testReqEncoded = URLEncoder.encode(testReq, StandardCharsets.UTF_8);

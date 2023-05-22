@@ -1,15 +1,12 @@
 package org.fancylynx;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-
 //@SpringBootApplication
-public class App extends Application {
+//public class App {
 
-    @Override
-    public void start(Stage stage) throws Exception {
+//    @Override
+//    public void start(Stage stage) throws Exception {
+//
+//    }
 
-    }
 
-
-}
+//}
