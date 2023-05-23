@@ -6,11 +6,15 @@ import io.github.cdimascio.dotenv.Dotenv;
 //@org.springframework.context.annotation.Configuration
 //@PropertySource("classpath:application.yaml")
 
+// 2do
 public class Configuration {
-
     private static String imageDirectory = Constants.DEFAULT_IMAGE_SAVE_DIRECTORY;
     private static String imageName = Constants.DEFAULT_IMAGE_NAME;
     private static String imageFormat = Constants.DEFAULT_IMAGE_FORMAT;
+
+    // 2do
+    private Configuration() {
+    }
 
     public static String getImageDirectory() {
         return imageDirectory;
