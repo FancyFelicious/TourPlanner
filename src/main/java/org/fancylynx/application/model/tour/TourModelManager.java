@@ -1,7 +1,6 @@
 package org.fancylynx.application.model.tour;
 
 
-import javafx.beans.property.StringProperty;
 import org.fancylynx.application.entity.Tour;
 import org.fancylynx.application.repository.TourRepository;
 import org.springframework.stereotype.Repository;
@@ -20,9 +19,9 @@ public class TourModelManager implements TourModel {
     }
 
     @Override
-    public void createNewTour(StringProperty tourName) {
-        Tour tour = new Tour();
-        tour.setName(String.valueOf(tourName));
+    public void createNewTour(Tour tour) {
+//        Tour tour = new Tour();
+//        tour.setName(String.valueOf(tourName));
 
         try {
             tourRepository.save(tour);

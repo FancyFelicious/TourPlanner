@@ -15,24 +15,52 @@ import java.io.IOException;
 //@Component @Controller
 public class TourController {
     @FXML
+    TextField imageDirectoryInput;
+    @FXML
+    Label imageDirectoryOutput;
+
+    @FXML
+    TextField imageNameInput;
+    @FXML
+    Label imageNameOutput;
+
+    @FXML
     TextField originInput;
+    @FXML
+    Label originOutput;
+
     @FXML
     TextField destinationInput;
     @FXML
-    TextField imageDirectory;
-    @FXML
-    TextField imageName;
+    Label destinationOutput;
 
     @FXML
-    Label originOutput;
-    @FXML
-    Label destinationOutput;
+    TextField nameInput;
     @FXML
     Label nameOutput;
+
+    @FXML
+    TextField descriptionInput;
+    @FXML
+    Label descriptionOutput;
+
+    @FXML
+    ToggleGroup formatToggleGroup;
+    @FXML
+    RadioButton png;
+    @FXML
+    RadioButton jpg;
+    @FXML
+    RadioButton jpeg;
+    @FXML
+    Label imageFormatOutput;
+
+    @FXML
+    Label status;
     @FXML
     Label sessionID;
     @FXML
-    Label status;
+    ImageView imageView;
 
     @FXML
     Button save;
@@ -43,27 +71,6 @@ public class TourController {
     @FXML
     Button viewConfiguration;
 
-    @FXML
-    ToggleGroup formatToggleGroup;
-    @FXML
-    RadioButton png;
-    @FXML
-    RadioButton jpg;
-    @FXML
-    RadioButton jpeg;
-
-    @FXML
-    TextField TEST_INPUT;
-    @FXML
-    Label TEST_OUTPUT;
-
-    @FXML
-    TextField tourNameInput;
-    @FXML
-    Label tourNameOutput;
-
-    @FXML
-    ImageView imageView;
     private TourViewModel viewModel;
     private ViewHandler viewHandler;
 
@@ -76,11 +83,36 @@ public class TourController {
         this.viewHandler = viewHandler;
         loadConfiguration();
 
-        // Testing real-time GUI updates
-        tourNameInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setTourNameOutput(newValue); // Update the TEST_OUTPUT property in the view model
+        // Real-time GUI updates
+        nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setNameOutput(newValue);
         });
-        tourNameOutput.textProperty().bind(viewModel.getTourNameOutput()); // Bind the TEST_OUTPUT label to the view model property
+        nameOutput.textProperty().bind(viewModel.getNameOutput());
+
+        descriptionInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setDescriptionOutput(newValue);
+        });
+        descriptionOutput.textProperty().bind(viewModel.getDescriptionOutput());
+
+        originInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setOriginOutput(newValue);
+        });
+        originOutput.textProperty().bind(viewModel.getOriginOutput());
+
+        destinationInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setDestinationOutput(newValue);
+        });
+        destinationOutput.textProperty().bind(viewModel.getDestinationOutput());
+
+        imageDirectoryInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setImageDirectoryOutput(newValue);
+        });
+        imageDirectoryOutput.textProperty().bind(viewModel.getImageDirectoryOutput());
+
+        imageNameInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setImageNameOutput(newValue);
+        });
+        imageNameOutput.textProperty().bind(viewModel.getImageNameOutput());
 
 
         Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
@@ -104,8 +136,8 @@ public class TourController {
         System.out.println("CLICKED SAVE BUTTON");
         RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
         Configuration.setImageFormat(selectedRadioButton.getText());
-        Configuration.setImageName(imageName.getText());
-        Configuration.setImageDirectory(imageDirectory.getText());
+        Configuration.setImageDirectory(imageDirectoryOutput.getText());
+        Configuration.setImageName(imageNameOutput.getText());
 //      Configuration.setTourName(tourNameOutput.getText());
 
         // 2do: Create tour entity at this point instead and pass as argument?
@@ -131,8 +163,8 @@ public class TourController {
         png.setToggleGroup(formatToggleGroup);
         jpg.setToggleGroup(formatToggleGroup);
         jpeg.setToggleGroup(formatToggleGroup);
-        imageName.setText(Configuration.getImageName());
-        imageDirectory.setText(Configuration.getImageDirectory());
+        imageNameInput.setText(Configuration.getImageName());
+        imageDirectoryOutput.setText(Configuration.getImageDirectory());
         switch (Configuration.getImageFormat()) {
             case Constants.FILE_EXTENSION_PNG -> png.setSelected(true);
             case Constants.FILE_EXTENSION_JPG -> jpg.setSelected(true);

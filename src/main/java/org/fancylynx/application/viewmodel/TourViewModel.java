@@ -2,22 +2,29 @@ package org.fancylynx.application.viewmodel;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.fancylynx.application.entity.Tour;
 import org.fancylynx.application.model.tour.TourModel;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TourViewModel {//{
     private final TourModel tourModel;
-    private final StringProperty tourNameOutput;
-    //    private final StringProperty TEST_OUTPUT;
-
+    private final StringProperty imageDirectoryOutput;
+    private final StringProperty imageNameOutput;
+    private final StringProperty nameOutput;
+    private final StringProperty originOutput;
+    private final StringProperty destinationOutput;
+    private final StringProperty descriptionOutput;
 
     public TourViewModel(TourModel tourModel) {
         this.tourModel = tourModel;
-        tourNameOutput = new SimpleStringProperty();
-        //        TEST_OUTPUT = new SimpleStringProperty();
-
-
+        this.imageDirectoryOutput = new SimpleStringProperty();
+        this.imageNameOutput = new SimpleStringProperty();
+        this.nameOutput = new SimpleStringProperty();
+        this.descriptionOutput = new SimpleStringProperty();
+        this.originOutput = new SimpleStringProperty();
+        this.destinationOutput = new SimpleStringProperty();
+        
 //        tourModel.addPropertyChangeListener(evt -> {
 //            if (evt.getPropertyName().equals("testTourName")) {
 ////                setTourName(evt.getNewValue().toString());
@@ -27,26 +34,60 @@ public class TourViewModel {//{
 //        });
     }
 
-
     public void createNewTour() {
-//        String newTourName = Configuration.getTourName();
-        tourModel.createNewTour(tourNameOutput);
+        Tour newTour = new Tour();
+        newTour.setName(imageNameOutput.get());
+        newTour.setDescription(descriptionOutput.get());
+        newTour.setOrigin(originOutput.get());
+        newTour.setDestination(destinationOutput.get());
+        tourModel.createNewTour(newTour);
     }
 
-
-    public StringProperty getTourNameOutput() {
-        return tourNameOutput;
+    public StringProperty getImageDirectoryOutput() {
+        return imageDirectoryOutput;
     }
 
-    public void setTourNameOutput(String tourNameOutput) {
-        this.tourNameOutput.set(tourNameOutput);
+    public void setImageDirectoryOutput(String imageDirectoryOutput) {
+        this.imageDirectoryOutput.set(imageDirectoryOutput);
     }
 
-//    public void setTEST_OUTPUT(String TEST_OUTPUT) {
-//        this.TEST_OUTPUT.set(TEST_OUTPUT);
-//    }
-//    public StringProperty TEST_OUTPUTProperty() {
-//        return TEST_OUTPUT;
-//    }
+    public StringProperty getImageNameOutput() {
+        return imageNameOutput;
+    }
 
+    public void setImageNameOutput(String imageNameOutput) {
+        this.imageNameOutput.set(imageNameOutput);
+    }
+
+    public StringProperty getNameOutput() {
+        return nameOutput;
+    }
+
+    public void setNameOutput(String nameOutput) {
+        this.nameOutput.set(nameOutput);
+    }
+
+    public StringProperty getDescriptionOutput() {
+        return descriptionOutput;
+    }
+
+    public void setDescriptionOutput(String descriptionOutput) {
+        this.descriptionOutput.set(descriptionOutput);
+    }
+
+    public StringProperty getOriginOutput() {
+        return originOutput;
+    }
+
+    public void setOriginOutput(String originOutput) {
+        this.originOutput.set(originOutput);
+    }
+
+    public StringProperty getDestinationOutput() {
+        return destinationOutput;
+    }
+
+    public void setDestinationOutput(String destinationOutput) {
+        this.destinationOutput.set(destinationOutput);
+    }
 }

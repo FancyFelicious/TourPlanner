@@ -1,6 +1,6 @@
 package org.fancylynx.application.model.tour;
 
-import javafx.beans.property.StringProperty;
+import org.fancylynx.application.entity.Tour;
 
 import java.beans.PropertyChangeListener;
 
@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
 // 2do
 public interface TourModel {
 
-    void createNewTour(StringProperty tourName);
+    void createNewTour(Tour tour);
 
     void addPropertyChangeListener(PropertyChangeListener listener);
 
