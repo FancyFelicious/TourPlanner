@@ -1,4 +1,4 @@
-package org.fancylynx.playground;
+package org.fancylynx.playground.archive.JPA;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

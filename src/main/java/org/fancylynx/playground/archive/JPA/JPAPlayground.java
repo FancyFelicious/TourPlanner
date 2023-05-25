@@ -1,4 +1,4 @@
-package org.fancylynx.playground;
+package org.fancylynx.playground.archive.JPA;
 
 import jakarta.persistence.*;
 

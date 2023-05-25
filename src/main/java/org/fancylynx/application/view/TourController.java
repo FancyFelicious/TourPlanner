@@ -12,10 +12,27 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-
-//@Component
+//@Component @Controller
 public class TourController {
-    private final String testListen = "testListen";
+    @FXML
+    TextField originInput;
+    @FXML
+    TextField destinationInput;
+    @FXML
+    TextField imageDirectory;
+    @FXML
+    TextField imageName;
+
+    @FXML
+    Label originOutput;
+    @FXML
+    Label destinationOutput;
+    @FXML
+    Label nameOutput;
+    @FXML
+    Label sessionID;
+    @FXML
+    Label status;
 
     @FXML
     Button save;
@@ -25,12 +42,7 @@ public class TourController {
     Button updateImage;
     @FXML
     Button viewConfiguration;
-    @FXML
-    TextField imageDirectory;
-    @FXML
-    TextField imageName;
-    @FXML
-    Label status;
+
     @FXML
     ToggleGroup formatToggleGroup;
     @FXML
@@ -46,9 +58,9 @@ public class TourController {
     Label TEST_OUTPUT;
 
     @FXML
-    TextField tourName;
+    TextField tourNameInput;
     @FXML
-    Label tourNameLabel;
+    Label tourNameOutput;
 
     @FXML
     ImageView imageView;
@@ -56,34 +68,62 @@ public class TourController {
     private ViewHandler viewHandler;
 
     public TourController() {
-
     }
 
+    // Note: Init method needed because constructor of controller must be empty
     public void init(TourViewModel tourViewModel, ViewHandler viewHandler) throws FileNotFoundException {
         this.viewModel = tourViewModel;
         this.viewHandler = viewHandler;
         loadConfiguration();
 
-        TEST_INPUT.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setTEST_OUTPUT(newValue); // Update the TEST_OUTPUT property in the view model
+        // Testing real-time GUI updates
+        tourNameInput.textProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.setTourNameOutput(newValue); // Update the TEST_OUTPUT property in the view model
         });
-        TEST_OUTPUT.textProperty().bind(viewModel.TEST_OUTPUTProperty()); // Bind the TEST_OUTPUT label to the view model property
-
-//        TEST_OUTPUT.textProperty().addListener((observable, oldValue, newValue) -> {
-//            viewModel.setTEST_OUTPUT(newValue); // Update the TEST_OUTPUT property in the view model
-//        });
-
-//        tourNameLabel.textProperty().bind(viewModel.testTourNameProperty()); // Bind the TEST_OUTPUT label to the view model property
-
-//        TEST_INPUT.textProperty().bindBidirectional(viewModel.TEST_OUTPUTProperty());
-//
-//        ObservableList<String> testUpdate = FXCollections.observableArrayList(testListen);
-////        TEST_OUTPUT.setText(TEST_INPUT.getText());
-//        tourNameLabel.setText(testUpdate.toString());
+        tourNameOutput.textProperty().bind(viewModel.getTourNameOutput()); // Bind the TEST_OUTPUT label to the view model property
 
 
         Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
         imageView.setImage(image);
+
+
+//        TEST_INPUT.textProperty().addListener((observable, oldValue, newValue) -> {
+//            viewModel.setTEST_OUTPUT(newValue); // Update the TEST_OUTPUT property in the view model
+//        });
+//        TEST_OUTPUT.textProperty().bind(viewModel.TEST_OUTPUTProperty()); // Bind the TEST_OUTPUT label to the view model property
+    }
+
+
+    @FXML
+    public void handleBackButton() throws IOException {
+        viewHandler.openView(Views.HOME.getFxmlFileName());
+    }
+
+    @FXML
+    public void handleSaveButton() throws IOException {
+        System.out.println("CLICKED SAVE BUTTON");
+        RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
+        Configuration.setImageFormat(selectedRadioButton.getText());
+        Configuration.setImageName(imageName.getText());
+        Configuration.setImageDirectory(imageDirectory.getText());
+//      Configuration.setTourName(tourNameOutput.getText());
+
+        // 2do: Create tour entity at this point instead and pass as argument?
+        viewModel.createNewTour();
+    }
+
+    @FXML
+    private void handleUpdateImageButton() throws FileNotFoundException {
+        System.out.println("updating image");
+        Image image = new Image(new FileInputStream("images/tourImage_3.png"));
+        imageView.setImage(image);
+    }
+
+    @FXML
+    private void handleViewConfigurationButton() {
+        System.out.println(Configuration.getImageDirectory());
+        System.out.println(Configuration.getImageName());
+        System.out.println(Configuration.getImageFormat());
     }
 
     private void loadConfiguration() {
@@ -98,40 +138,5 @@ public class TourController {
             case Constants.FILE_EXTENSION_JPG -> jpg.setSelected(true);
             default -> jpeg.setSelected(true);
         }
-    }
-
-    @FXML
-    public void handleBackButton() throws IOException {
-        viewHandler.openView(Views.HOME.getFxmlFileName());
-    }
-
-    @FXML
-    public void handleSaveButton() throws IOException {
-        System.out.println("saving");
-        RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
-        Configuration.setImageFormat(selectedRadioButton.getText());
-        Configuration.setImageName(imageName.getText());
-        Configuration.setImageDirectory(imageDirectory.getText());
-
-        Configuration.setTourName(tourName.getText());
-        // Create tour entity at this point instead and pass as argument?
-
-        viewModel.createNewTour();
-
-//        viewModel.createNewTour();
-    }
-
-    @FXML
-    private void handleViewConfigurationButton() {
-        System.out.println(Configuration.getImageDirectory());
-        System.out.println(Configuration.getImageName());
-        System.out.println(Configuration.getImageFormat());
-    }
-
-    @FXML
-    private void handleUpdateImageButton() throws FileNotFoundException {
-        System.out.println("updating image");
-        Image image = new Image(new FileInputStream("images/tourImage_3.png"));
-        imageView.setImage(image);
     }
 }

@@ -1,12 +1,14 @@
 package org.fancylynx.application.model.tour;
 
+import javafx.beans.property.StringProperty;
+
 import java.beans.PropertyChangeListener;
 
 //@Component
+// 2do
 public interface TourModel {
 
-    // 2do
-    void testCreateTour();
+    void createNewTour(StringProperty tourName);
 
     void addPropertyChangeListener(PropertyChangeListener listener);
 

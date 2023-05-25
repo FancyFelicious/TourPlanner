@@ -1,4 +1,4 @@
-package org.fancylynx;
+package org.fancylynx.playground.archive;
 
 import org.fancylynx.application.model.DataModelManager;
 

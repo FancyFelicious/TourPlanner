@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TourRepository extends JpaRepository<Tour, Long> {
-//    SpringTest findByName(String name);
+//    Tour findByName(String name);
 }

@@ -1,7 +1,6 @@
 package org.fancylynx.application.model.tour;
 
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import org.fancylynx.application.entity.Tour;
 import org.fancylynx.application.repository.TourRepository;
@@ -12,30 +11,26 @@ import java.beans.PropertyChangeSupport;
 
 @Repository
 public class TourModelManager implements TourModel {
-    private final PropertyChangeSupport propertyChangeSupport;
-
     private final TourRepository tourRepository;
-    private final StringProperty tourNameTest = new SimpleStringProperty();
-    private Tour tour;
+    private final PropertyChangeSupport propertyChangeSupport;
 
     public TourModelManager(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
-//    @Autowired
-//    public void setTourRepository(TourRepository tourRepository) {
-//        this.tourRepository = tourRepository;
-//    }
-
     @Override
-    public void testCreateTour() {
-        tour = new Tour();
-        tour.setName("testName3333333333333333333333333");
-        tourRepository.save(tour);
-//        tourService.saveTest();
+    public void createNewTour(StringProperty tourName) {
+        Tour tour = new Tour();
+        tour.setName(String.valueOf(tourName));
 
-        propertyChangeSupport.firePropertyChange("testTourName", null, tour.getName());
+        try {
+            tourRepository.save(tour);
+        } catch (Exception e) { // 2do
+            System.out.println("XXXXXXXXXXXXXXX nah: " + e.getMessage());
+        }
+
+        propertyChangeSupport.firePropertyChange("tourName", null, tour.getName());
 
     }
 

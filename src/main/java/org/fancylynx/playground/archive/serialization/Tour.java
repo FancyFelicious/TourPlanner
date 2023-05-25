@@ -1,4 +1,4 @@
-package org.fancylynx.playground;
+package org.fancylynx.playground.archive.serialization;
 
 //public record Tour(String name,
 //                   String description,

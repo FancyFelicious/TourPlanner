@@ -22,11 +22,8 @@ public class HomeController {
     Button createTour;
     @FXML
     PieChart pieChart;
-
-    // 2do: testing
     @FXML
     Button forceUpdate;
-
 
     private ViewHandler viewHandler;
     private HomeViewModel viewModel;
@@ -34,6 +31,7 @@ public class HomeController {
     public HomeController() {
     }
 
+    // Note: Init method needed because constructor of controller must be empty
     public void init(HomeViewModel viewModel, ViewHandler viewHandler) {
         this.viewHandler = viewHandler;
         this.viewModel = viewModel;

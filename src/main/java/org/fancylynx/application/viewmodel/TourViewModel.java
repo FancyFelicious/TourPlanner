@@ -8,45 +8,45 @@ import org.springframework.stereotype.Component;
 @Component
 public class TourViewModel {//{
     private final TourModel tourModel;
-    private final StringProperty TEST_OUTPUT;
-    private final StringProperty testTourName;
+    private final StringProperty tourNameOutput;
+    //    private final StringProperty TEST_OUTPUT;
 
 
     public TourViewModel(TourModel tourModel) {
         this.tourModel = tourModel;
-        TEST_OUTPUT = new SimpleStringProperty();
-        testTourName = new SimpleStringProperty();
+        tourNameOutput = new SimpleStringProperty();
+        //        TEST_OUTPUT = new SimpleStringProperty();
 
-        tourModel.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("testTourName")) {
+
+//        tourModel.addPropertyChangeListener(evt -> {
+//            if (evt.getPropertyName().equals("testTourName")) {
+////                setTourName(evt.getNewValue().toString());
+////                testTourName.set(evt.getNewValue().toString());
 //                setTourName(evt.getNewValue().toString());
-//                testTourName.set(evt.getNewValue().toString());
-                setTourName(evt.getNewValue().toString());
-            }
-        });
+//            }
+//        });
     }
 
 
     public void createNewTour() {
-        tourModel.testCreateTour();
-//        String testString = "eyoyocoolhatfunktionerthioapsjf";
-//        this.testTourName.set(testString);
+//        String newTourName = Configuration.getTourName();
+        tourModel.createNewTour(tourNameOutput);
     }
 
-    public void setTourName(String tourName) {
-        this.testTourName.set(tourName);
+
+    public StringProperty getTourNameOutput() {
+        return tourNameOutput;
     }
 
-    public StringProperty testTourNameProperty() {
-        return testTourName;
+    public void setTourNameOutput(String tourNameOutput) {
+        this.tourNameOutput.set(tourNameOutput);
     }
 
-    public void setTEST_OUTPUT(String TEST_OUTPUT) {
-        this.TEST_OUTPUT.set(TEST_OUTPUT);
-    }
-
-    public StringProperty TEST_OUTPUTProperty() {
-        return TEST_OUTPUT;
-    }
+//    public void setTEST_OUTPUT(String TEST_OUTPUT) {
+//        this.TEST_OUTPUT.set(TEST_OUTPUT);
+//    }
+//    public StringProperty TEST_OUTPUTProperty() {
+//        return TEST_OUTPUT;
+//    }
 
 }

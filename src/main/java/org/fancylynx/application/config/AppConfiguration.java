@@ -1,9 +1,19 @@
 package org.fancylynx.application.config;
 
+import javafx.stage.Stage;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// 2do
 @Configuration
 public class AppConfiguration {
+
+    @Bean
+    public Stage primaryStage() {
+        return new Stage();
+    }
+
+}
 
 //    @Bean
 //    public DataModel dataModel() {
@@ -29,10 +39,7 @@ public class AppConfiguration {
 //        return new ViewModelFactory(modelFactory);
 //    }
 
-//    @Bean
-//    public Stage primaryStage() {
-//        return new Stage();
-//    }
+
 //
 //    @Bean
 //    public ViewHandler viewHandler(Stage stage, ViewModelFactory viewModelFactory) {
@@ -40,4 +47,4 @@ public class AppConfiguration {
 //        return new ViewHandler(stage, viewModelFactory);
 //    }
 
-}
+//}

@@ -3,6 +3,7 @@ package org.fancylynx.playground;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.config.Constants;
+import org.fancylynx.application.entity.Tour;
 import org.fancylynx.application.exception.SaveImageException;
 import org.fancylynx.application.service.SaveImageToFileSystem;
 import org.springframework.http.HttpHeaders;
@@ -16,21 +17,14 @@ import java.nio.charset.StandardCharsets;
 
 //@Service
 public class APIPlayground {
-//    //    private static WebClient webClient = null;
-//    private final WebClient webClient;
-
-//    @Autowired
-//    public APIPlayground(WebClient.Builder webClientBuilder) {
-//        webClient = webClientBuilder.build();
-//    }
-
     public void run() throws IOException {
+//        Tour testTour = new Tour();
         Tour testTour = new Tour();
-        testTour.setFrom("vienna");
-        testTour.setTo("madrid");
-        String baseUrl = Constants.MAP_QUEST_DIRECTIONS_BASE_URL;
+        testTour.setOrigin("vienna");
+        testTour.setDestination("madrid");
+        String baseUrl = Constants.MAP_QUEST_BASE_URL_DIRECTIONS;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
-        String url = baseUrl + "?key=" + apiKey + "&from=" + testTour.getFrom() + "&to=" + testTour.getTo();
+        String url = baseUrl + "?key=" + apiKey + "&from=" + testTour.getOrigin() + "&to=" + testTour.getDestination();
 
         System.out.println("XXXXXXXXXXXXXX URL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
         System.out.println(url);
@@ -60,7 +54,7 @@ public class APIPlayground {
         System.out.println(sessionId);
         System.out.println("---------------------------------------------------------");
 
-        String testReq = Constants.MAP_QUEST_STATIC_MAP_BASE_URL + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
+        String testReq = Constants.MAP_QUEST_BASE_URL_STATICMAP + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
         System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 1 YYYYYYYYYYYYYYYYYYYYYYYYYYY");
         System.out.println(testReq);
 //        String testReqEncoded = URLEncoder.encode(testReq, StandardCharsets.UTF_8);

@@ -1,31 +1,30 @@
 package org.fancylynx.application.factory;
 
 import org.fancylynx.application.model.DataModel;
-import org.fancylynx.application.model.DataModelManager;
 import org.fancylynx.application.model.tour.TourModel;
 import org.fancylynx.application.model.tour.TourModelManager;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ModelFactory {
-    private final DataModelManager dataModelManager;
-    private final TourModelManager tourModelManager;
+    private final DataModel dataModel;
+    private final TourModel tourModel;
 
-    public ModelFactory(TourModelManager tourModelManager, DataModelManager dataModelManager) {
-        this.tourModelManager = tourModelManager;
-        this.dataModelManager = dataModelManager;
+    public ModelFactory(TourModelManager tourModel, DataModel dataModel) {
+        this.tourModel = tourModel;
+        this.dataModel = dataModel;
     }
 
     public TourModel getTourModel() {
-        return tourModelManager;
+        return tourModel;
     }
 
     public DataModel getDataModel() {
-        return dataModelManager;
+        return dataModel;
     }
 }
 
-// note: lazy
+// note: lazy approach
 //    private TourModel tourModel;
 //    private TourModelManager tourModelManager;
 //    private TourRepository tourRepository;
@@ -43,13 +42,5 @@ public class ModelFactory {
 //            tourModel = new TourModelManager();
 //        }
 //        return tourModel;
-//    }
-
-
-//    public CustomerModel getDataModel() {
-//        if (dataModel == null) {
-//            dataModel = new CustomerModelManager();
-//        }
-//        return dataModel;
 //    }
 //}

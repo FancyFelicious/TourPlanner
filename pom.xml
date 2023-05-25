@@ -171,7 +171,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.fancylynx.LaunchApp</mainClass>
+                            <mainClass>org.fancylynx.TourPlanner</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
@@ -197,7 +197,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
-                    <mainClass>org.fancylynx.LaunchApp</mainClass>
+                    <mainClass>org.fancylynx.TourPlanner</mainClass>
                 </configuration>
             </plugin>
         </plugins>

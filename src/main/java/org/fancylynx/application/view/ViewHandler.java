@@ -6,10 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.fancylynx.application.config.Constants;
 import org.fancylynx.application.factory.ViewModelFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-//@Component
+@Component
 public class ViewHandler {
     private final Stage stage;
     private final ViewModelFactory viewModelFactory;

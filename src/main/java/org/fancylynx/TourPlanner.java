@@ -1,51 +1,64 @@
 package org.fancylynx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import org.fancylynx.application.config.Configuration;
 import org.fancylynx.application.factory.ModelFactory;
-import org.fancylynx.application.factory.ViewModelFactory;
 import org.fancylynx.application.model.DataModelManager;
 import org.fancylynx.application.view.ViewHandler;
+import org.fancylynx.playground.archive.AutoUpdater;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
+import java.util.Random;
 
 @SpringBootApplication
-public class LaunchApp extends Application {
+public class TourPlanner extends Application {
     public static void main(String[] args) throws IOException {
-        System.out.println("LOAD APP CONFIG");
         Configuration.loadAppConfiguration();
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        ConfigurableApplicationContext applicationContext = SpringApplication.run(LaunchApp.class);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(TourPlanner.class);
 
-        // 2do: Dependency Injection?
-        ViewModelFactory viewModelFactory = applicationContext.getBean(ViewModelFactory.class);
-        ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
-
-        ModelFactory modelFactory = applicationContext.getBean(ModelFactory.class);
-
+        // Dependency Injection
+        ViewHandler viewHandler = applicationContext.getBean(ViewHandler.class);
         viewHandler.start();
 
-
+        // 2do: remove later - testing / simulating changes to db
+        ModelFactory modelFactory = applicationContext.getBean(ModelFactory.class);
         runAutoUpdate((DataModelManager) modelFactory.getDataModel());
 
-
+//        System.out.println("XXXXXXXX API XXXXXXXX");
+//        APIPlayground apiPlayground = new APIPlayground();
+//        apiPlayground.run();
     }
 
-    // 2do: remove later - testing / simulating changes to db
-    private void runAutoUpdate(DataModelManager m) {
-        AutoUpdater autoUpdater = new AutoUpdater(m);
-        Thread thread = new Thread(autoUpdater);
+    private void runAutoUpdate(DataModelManager dataModelManager) {
+        AutoUpdater autoUpdater = new AutoUpdater(dataModelManager);
+        Thread thread = new Thread(() -> {
+            Random random = new Random();
+            while (true) {
+
+                // Note: In JavaFX, all UI updates must be performed on the Application Thread
+                Platform.runLater(dataModelManager::recalculateData);
+
+                try {
+                    Thread.sleep(random.nextInt(5000) + 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         thread.setDaemon(true);
         thread.start();
     }
+
 
 //    @Bean
 //    CommandLineRunner commandLineRunner(JPAPlaygroundRepository JPAPlaygroundRepository) {
@@ -77,30 +90,14 @@ public class LaunchApp extends Application {
 
 //        System.out.println("TESTING / PLAYGROUND / TRASH / ARCHIVE");
 //
-////        System.out.println("XXXXXXXX JAVAFX / MVVM XXXXXXXX");
-////        Monolith.launch(Monolith.class, args);
-//
-//        System.out.println("XXXXXXXX API XXXXXXXX");
-//        APIPlayground apiPlayground = new APIPlayground();
-//        apiPlayground.run();
-////
 ////        System.out.println(" XXXXXXXX DOTENV XXXXXXXX");
 ////        String env = System.getenv("JAVA_HOME");
 ////        System.out.println("java home env path:");
 ////        System.out.println(env);
 ////
-////        System.out.println("XXXXXXXX SERIALIZATION XXXXXXXX");
-////        SerializationTest.run();
-//
-////        System.out.println("shut down");
+
 ////        }
 //    }
 //
-
 //}
 
-
-//        SpringApplication.run(Entry.class, args);
-// SpringApplication tourPlanner = new SpringApplication(App.class);
-// tourPlanner.setDefaultProperties(dotenv.get());
-// tourPlanner.run(args);

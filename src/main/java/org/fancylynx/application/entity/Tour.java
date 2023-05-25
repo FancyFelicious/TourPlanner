@@ -43,8 +43,8 @@ public class Tour {
     @Column(name = "map", columnDefinition = "TEXT")
     private String map;
 
-    public Tour() {
-    }
+//    public Tour() {
+//    }
 }
 
 
