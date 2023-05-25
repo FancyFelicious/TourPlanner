@@ -24,15 +24,16 @@ public class TourModelManager implements TourModel {
     public void createNewTour(Tour tour) {
         try {
             String sessionId = tourService.getRoute(tour);
-            String jpeg = tourService.getStaticMap(sessionId);
+            String json = tourService.getStaticMap(sessionId);
             tour.setSessionId(sessionId);
+            propertyChangeSupport.firePropertyChange("sessionFire", null, tour.getSessionId());
             tourRepository.save(tour);
         } catch (Exception e) { // 2do
             System.out.println("XXXXXXXXXXXXXXX nah: " + e.getMessage());
         }
 
-        propertyChangeSupport.firePropertyChange("transportFire", null, tour.getTransportType());
-        propertyChangeSupport.firePropertyChange("sessionFire", null, tour.getSessionId());
+//        propertyChangeSupport.firePropertyChange("transportFire", null, tour.getTransportType());
+
 
     }
 
@@ -41,16 +42,3 @@ public class TourModelManager implements TourModel {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 }
-
-
-//
-////
-////    // get request
-////    // parse
-////    // create tour object
-////    // set values set by user (to, from etc.) on object
-////    // make api request
-////    // if successful: call repository to save object to db
-////    // return response to controller
-////    // controller updates ui based on response
-////}

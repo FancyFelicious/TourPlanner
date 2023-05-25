@@ -17,21 +17,14 @@ public class TourService {
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
         String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination();
 
-//        System.out.println("XXXXXXXXXXXXXX URL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        System.out.println(requestUri);
-//        WebClient.Builder builder = WebClient.builder();
 
         WebClient.RequestHeadersUriSpec<?> requestSpec = WebClient.builder().baseUrl(requestUrl).build().get();
         String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
         HttpHeaders responseHeaders = requestSpec.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
         HttpStatusCode statusCode = requestSpec.exchangeToMono(response -> Mono.just(response.statusCode())).block();
 
-//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX body XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        System.out.println(responseBody);
-//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX status XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        System.out.println(statusCode);
-//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX headers XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        System.out.println(responseHeaders);
+//        if statusCode >= 400 throw exception // 2do
+        // headers notwendig?
 
         String sessionId = " - ";
         try {

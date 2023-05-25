@@ -21,7 +21,6 @@ public class TourViewModel {
     private final StringProperty imageFormat;
     private final StringProperty sessionId;
 
-
     public TourViewModel(TourModel tourModel) {
         this.tourModel = tourModel;
         this.imageDirectory = new SimpleStringProperty();
@@ -31,7 +30,7 @@ public class TourViewModel {
         this.description = new SimpleStringProperty();
         this.origin = new SimpleStringProperty();
         this.destination = new SimpleStringProperty();
-        this.transportType = new SimpleStringProperty("transportgott");
+        this.transportType = new SimpleStringProperty();
         this.sessionId = new SimpleStringProperty();
 
         tourModel.addPropertyChangeListener(evt -> {
@@ -41,6 +40,14 @@ public class TourViewModel {
                 setSessionId(evt.getNewValue().toString());
             }
         });
+    }
+
+    public StringProperty getImageFormat() {
+        return imageFormat;
+    }
+
+    public void setImageFormat(String imageFormat) {
+        this.imageFormat.set(imageFormat);
     }
 
     public StringProperty getTransportType() {

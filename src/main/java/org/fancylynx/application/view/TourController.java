@@ -56,6 +56,14 @@ public class TourController {
     Label imageFormat;
 
     @FXML
+    ToggleGroup transportTypeToggleGroup;
+    @FXML
+    RadioButton car;
+    @FXML
+    RadioButton bicycle;
+    @FXML
+    RadioButton walk;
+    @FXML
     Label transportType;
 
     @FXML
@@ -120,8 +128,14 @@ public class TourController {
         });
         imageName.textProperty().bind(viewModel.getImageName());
 
+        formatToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
+            String selectedValue = selectedRadioButton.getText();
+            viewModel.setImageFormat(selectedValue);
+        });
+        imageFormat.textProperty().bind(viewModel.getImageFormat());
 
-        Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
+        Image image = new Image(new FileInputStream("images/tourImage_PLACEHOLDER.png")); //2do
         imageView.setImage(image);
     }
 
@@ -140,7 +154,7 @@ public class TourController {
     @FXML
     private void handleUpdateImageButton() throws FileNotFoundException {
         System.out.println("updating image");
-        Image image = new Image(new FileInputStream("images/tourImage_3.png"));
+        Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
         imageView.setImage(image);
     }
 
