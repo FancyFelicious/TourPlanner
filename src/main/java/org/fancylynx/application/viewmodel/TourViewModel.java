@@ -20,6 +20,7 @@ public class TourViewModel {
     private final StringProperty transportType;
     private final StringProperty imageFormat;
     private final StringProperty sessionId;
+    private final StringProperty finalImagePath;
 
     public TourViewModel(TourModel tourModel) {
         this.tourModel = tourModel;
@@ -32,14 +33,24 @@ public class TourViewModel {
         this.destination = new SimpleStringProperty();
         this.transportType = new SimpleStringProperty();
         this.sessionId = new SimpleStringProperty();
+        this.finalImagePath = new SimpleStringProperty();
 
         tourModel.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("transportFire")) {
-                setTransportType(evt.getNewValue().toString());
-            } else if (evt.getPropertyName().equals("sessionFire")) {
+            if (evt.getPropertyName().equals("sessionTokenRetrieved")) {
                 setSessionId(evt.getNewValue().toString());
+            } else if (evt.getPropertyName().equals("staticMapRetrieved")) {
+                setFinalImagePath(evt.getNewValue().toString());
+//                System.out.println(evt.getNewValue().toString());
             }
         });
+    }
+
+    public StringProperty getFinalImagePath() {
+        return finalImagePath;
+    }
+
+    public void setFinalImagePath(String finalImagePath) {
+        this.finalImagePath.set(finalImagePath);
     }
 
     public StringProperty getImageFormat() {
@@ -64,7 +75,7 @@ public class TourViewModel {
         newTour.setDescription(description.get());
         newTour.setOrigin(origin.get());
         newTour.setDestination(destination.get());
-        newTour.setTransportType("HE HALLO TEST");
+        newTour.setTransportType(transportType.get());
         tourModel.createNewTour(newTour);
     }
 

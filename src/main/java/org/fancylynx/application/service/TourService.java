@@ -10,16 +10,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @Service
 public class TourService {
     public String getRoute(Tour tour) {
         String endpoint = Constants.MAP_QUEST_ENDPOINT_DIRECTIONS;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
-        String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination();
-
+        String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination(); //2do more options
 
         WebClient.RequestHeadersUriSpec<?> requestSpec = WebClient.builder().baseUrl(requestUrl).build().get();
         String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
+
+        //2o needed?
         HttpHeaders responseHeaders = requestSpec.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
         HttpStatusCode statusCode = requestSpec.exchangeToMono(response -> Mono.just(response.statusCode())).block();
 
@@ -38,36 +43,38 @@ public class TourService {
         return sessionId;
     }
 
+    // 2do: merge into one function?
     public String getStaticMap(String sessionId) {
+        System.out.println("OK ICH BIN HIEROIFJIODSF");
+        String endpoint = Constants.MAP_QUEST_ENDPOINT_STATICMAP;
+        String apiKey = System.getProperty("MAP_QUEST_API_KEY");
+        String requestUrl = endpoint + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
 
-//        String testReq = Constants.MAP_QUEST_BASE_URL_STATICMAP + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
-//        System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 1 YYYYYYYYYYYYYYYYYYYYYYYYYYY");
-//        System.out.println(testReq);
-////        String testReqEncoded = URLEncoder.encode(testReq, StandardCharsets.UTF_8);
-////        System.out.println("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 2 YYYYYYYYYYYYYYYYYYYYYYYYYYY");
-////        System.out.println(testReqEncoded);
+//        String testReqEncoded = URLEncoder.encode(testReq, StandardCharsets.UTF_8);
+
+        System.out.println("REQUEST URL: ");
+        System.out.println(requestUrl);
+
+        WebClient.RequestHeadersUriSpec<?> requestSpec = WebClient.builder().baseUrl(requestUrl).build().get();
+//        HttpStatusCode statusCode = requestSpec.exchangeToMono(response -> Mono.just(response.statusCode())).block();
 //
-//        WebClient.RequestHeadersUriSpec<?> okcool2 = WebClient.builder().baseUrl(testReq).build().get();
-//        String responseTest2 = okcool2.retrieve().bodyToMono(String.class).block();
-//        HttpStatusCode testStatus2 = okcool2.exchangeToMono(response -> Mono.just(response.statusCode())).block();
 //        HttpHeaders testHeaders2 = okcool2.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
-//
-//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX body XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-////        System.out.println(responseTest2);
-//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX status XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        System.out.println(testStatus2);
-//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX headers XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-//        System.out.println(testHeaders2);
-//
-//        // Convert the response body string to a byte array
-////        System.out.println(responseTest2);
-//        byte[] imageData = okcool2.retrieve().bodyToMono(byte[].class).block();
-//        try {
-//            SaveImageToFileSystem.save(imageData);
-//        } catch (SaveImageException e) {
-//            // 2do
-//            e.printStackTrace();
-//        }
-        return "test - " + sessionId;
+//        String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
+
+        System.out.println("UND DANACH ");
+
+        // Convert the response body string to a byte array
+//        System.out.println(responseTest2);
+        byte[] imageData = requestSpec.retrieve().bodyToMono(byte[].class).block();
+        String imagePath = "";
+        try {
+            System.out.println("ANFANG COM TRY BLOCKSDFJOSDFJ");
+            imagePath = ImageService.saveImage(imageData);
+        } catch (IOException e) {
+            // 2do
+            e.printStackTrace();
+        }
+        System.out.println("OK UND HIER UACH NOCHAPFJSDKF OJASDFOÖJSFODSÖJF");
+        return imagePath;
     }
 }

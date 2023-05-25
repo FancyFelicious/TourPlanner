@@ -71,6 +71,8 @@ public class TourController {
     @FXML
     Label sessionID;
     @FXML
+    Label imagePath;
+    @FXML
     ImageView imageView;
 
     @FXML
@@ -92,12 +94,12 @@ public class TourController {
         this.viewHandler = viewHandler;
         loadConfiguration();
 
-
+        // Bind UI elements to view model
         transportType.textProperty().bind(viewModel.getTransportType());
         sessionID.textProperty().bind(viewModel.getSessionId());
+        imagePath.textProperty().bind(viewModel.getFinalImagePath());
 
-
-        // Real-time GUI updates
+        // Tour Configuration Preview / Real-time UI updates
         nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setName(newValue);
         });
@@ -135,6 +137,13 @@ public class TourController {
         });
         imageFormat.textProperty().bind(viewModel.getImageFormat());
 
+        transportTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            RadioButton selectedRadioButton = (RadioButton) transportTypeToggleGroup.getSelectedToggle();
+            String selectedValue = selectedRadioButton.getText();
+            viewModel.setTransportType(selectedValue);
+        });
+        imageFormat.textProperty().bind(viewModel.getImageFormat());
+
         Image image = new Image(new FileInputStream("images/tourImage_PLACEHOLDER.png")); //2do
         imageView.setImage(image);
     }
@@ -149,7 +158,6 @@ public class TourController {
         // 2do: Create tour entity at this point instead and pass as argument?
         viewModel.createNewTour();
     }
-
 
     @FXML
     private void handleUpdateImageButton() throws FileNotFoundException {

@@ -6,7 +6,6 @@ public class Configuration {
     private static String imageDirectory = Constants.DEFAULT_IMAGE_SAVE_DIRECTORY;
     private static String imageName = Constants.DEFAULT_IMAGE_NAME;
     private static String imageFormat = Constants.DEFAULT_IMAGE_FORMAT;
-    private static final String tourName = "STANDARD_TOUR_NAME"; // 2do
 
     // 2do: remove?
     private Configuration() {

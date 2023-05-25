@@ -40,8 +40,8 @@ public class Tour {
     @Column(name = "estimated_time", columnDefinition = "TEXT")
     private String estimatedTime;
 
-    @Column(name = "map", columnDefinition = "TEXT")
-    private String map;
+    @Column(name = "imagePath", columnDefinition = "TEXT")
+    private String imagePath;
 
     private String sessionId;
 
