@@ -1,4 +1,4 @@
-package org.fancylynx.playground.monolith;
+package org.fancylynx.playground.archive.monolith;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -7,14 +7,12 @@ import javafx.beans.property.StringProperty;
 import org.fancylynx.application.model.DataModel;
 import org.springframework.stereotype.Component;
 
-// 2do: make component, dependency injection
 @Component
 public class HomeViewModel {
     private final DoubleProperty x;
     private final DoubleProperty y;
     private final DoubleProperty z;
-    private final StringProperty updateTimeStamp;
-
+    private final StringProperty timeStamp;
     private final DataModel model;
 
     public HomeViewModel(DataModel model) {
@@ -22,13 +20,7 @@ public class HomeViewModel {
         x = new SimpleDoubleProperty();
         y = new SimpleDoubleProperty();
         z = new SimpleDoubleProperty();
-        updateTimeStamp = new SimpleStringProperty("Last update: ");
-
-        // Bind the properties to the model
-//        x.bind(model.xProperty());
-//        y.bind(model.yProperty());
-//        z.bind(model.zProperty());
-//        updateTimeStamp.bind(model.updateTimeStampProperty());
+        timeStamp = new SimpleStringProperty("Last Update: ");
 
         model.addPropertyChangeListener(evt -> {
             if (evt.getPropertyName().equals("dataValues")) {
@@ -36,20 +28,18 @@ public class HomeViewModel {
                 x.setValue(dataValues[0]);
                 y.setValue(dataValues[1]);
                 z.setValue(dataValues[2]);
-            } else if (evt.getPropertyName().equals("latestUpdateTimeStamp")) {
-                String timeStamp = (String) evt.getNewValue();
-                updateTimeStamp.setValue("Last update: " + timeStamp);
+            } else if (evt.getPropertyName().equals("timeStamp")) {
+                String lastUpdate = "Last Update: " + evt.getNewValue();
+                this.timeStamp.setValue(lastUpdate);
             }
         });
     }
 
-//    public void updatePieChart() {
-//        double[] dataValues = model.getDataValues();
-//        x.setValue(dataValues[0]);
-//        y.setValue(dataValues[1]);
-//        z.setValue(dataValues[2]);
-//        updateTimeStamp.setValue("Last update: " + model.getLatestUpdateTimeStamp());
-//    }
+    public void forceUpdate() {
+        model.recalculateData();
+//        model.recalculateTimeStamp();
+//        updateTestString("FORCE UPDATE: " + model.getLatestUpdateTimeStamp());
+    }
 
     public DoubleProperty xProperty() {
         return x;
@@ -63,7 +53,17 @@ public class HomeViewModel {
         return z;
     }
 
-    public StringProperty updateTimeStampProperty() {
-        return updateTimeStamp;
+    public StringProperty timeStampProperty() {
+        return timeStamp;
+    }
+
+    public void updateTestString(String newString) {
+        timeStamp.set(newString);
     }
 }
+
+//        double[] dataValues = model.getDataValues();
+//        x.setValue(dataValues[0]);
+//        y.setValue(dataValues[1]);
+//        z.setValue(dataValues[2]);
+//        timeStamp.set("Last updatevxdvx: " + model.getLatestUpdateTimeStamp());

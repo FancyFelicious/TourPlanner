@@ -1,25 +1,24 @@
 package org.fancylynx.application.factory;
 
-import org.fancylynx.application.viewmodel.CreateTourViewModel;
 import org.fancylynx.application.viewmodel.HomeViewModel;
+import org.fancylynx.application.viewmodel.TourViewModel;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ViewModelFactory {
     private final HomeViewModel homeViewModel;
-    private final CreateTourViewModel createTourViewModel;
+    private final TourViewModel tourViewModel;
 
-    public ViewModelFactory(ModelFactory modelFactory) {
-        homeViewModel = new HomeViewModel(modelFactory.getDataModel());
-        createTourViewModel = new CreateTourViewModel(modelFactory.getDataModel());
+    public ViewModelFactory(HomeViewModel homeViewModel, TourViewModel tourViewModel) {
+        this.homeViewModel = homeViewModel;
+        this.tourViewModel = tourViewModel;
     }
 
     public HomeViewModel getHomeViewModel() {
         return homeViewModel;
     }
 
-    public CreateTourViewModel getCreateTourViewModel() {
-        return createTourViewModel;
+    public TourViewModel getTourModelView() {
+        return tourViewModel;
     }
-
 }

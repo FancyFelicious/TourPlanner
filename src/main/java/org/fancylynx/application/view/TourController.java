@@ -1,25 +1,21 @@
 package org.fancylynx.application.view;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.fancylynx.application.config.Configuration;
 import org.fancylynx.application.config.Constants;
-import org.fancylynx.application.viewmodel.CreateTourViewModel;
-import org.springframework.stereotype.Component;
+import org.fancylynx.application.viewmodel.TourViewModel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-@Component
-public class CreateTourController {
-    private final IntegerProperty TESTINT = new SimpleIntegerProperty(22);
-    private final IntegerProperty TESTINT_2 = new SimpleIntegerProperty(35);
+//@Component
+public class TourController {
+    private final String testListen = "testListen";
 
     @FXML
     Button save;
@@ -50,30 +46,40 @@ public class CreateTourController {
     Label TEST_OUTPUT;
 
     @FXML
+    TextField tourName;
+    @FXML
+    Label tourNameLabel;
+
+    @FXML
     ImageView imageView;
-    private CreateTourViewModel viewModel;
+    private TourViewModel viewModel;
     private ViewHandler viewHandler;
 
-    public CreateTourController() {
+    public TourController() {
+
     }
 
-    public void init(CreateTourViewModel viewModel, ViewHandler viewHandler) throws FileNotFoundException {
-        this.viewModel = viewModel;
+    public void init(TourViewModel tourViewModel, ViewHandler viewHandler) throws FileNotFoundException {
+        this.viewModel = tourViewModel;
         this.viewHandler = viewHandler;
         loadConfiguration();
-
-        TESTINT.bindBidirectional(viewModel.TESTINT_2Property());
-//        TESTINT_2.bindBidirectional(viewModel.TESTINTProperty());
 
         TEST_INPUT.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setTEST_OUTPUT(newValue); // Update the TEST_OUTPUT property in the view model
         });
         TEST_OUTPUT.textProperty().bind(viewModel.TEST_OUTPUTProperty()); // Bind the TEST_OUTPUT label to the view model property
 
+//        TEST_OUTPUT.textProperty().addListener((observable, oldValue, newValue) -> {
+//            viewModel.setTEST_OUTPUT(newValue); // Update the TEST_OUTPUT property in the view model
+//        });
+
+//        tourNameLabel.textProperty().bind(viewModel.testTourNameProperty()); // Bind the TEST_OUTPUT label to the view model property
+
 //        TEST_INPUT.textProperty().bindBidirectional(viewModel.TEST_OUTPUTProperty());
 //
-////        ObservableList<StringProperty> testUpdate = FXCollections.observableArrayList(TEST_INPUT.textProperty());
-//        TEST_OUTPUT.setText(TEST_INPUT.getText());
+//        ObservableList<String> testUpdate = FXCollections.observableArrayList(testListen);
+////        TEST_OUTPUT.setText(TEST_INPUT.getText());
+//        tourNameLabel.setText(testUpdate.toString());
 
 
         Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
@@ -106,6 +112,13 @@ public class CreateTourController {
         Configuration.setImageFormat(selectedRadioButton.getText());
         Configuration.setImageName(imageName.getText());
         Configuration.setImageDirectory(imageDirectory.getText());
+
+        Configuration.setTourName(tourName.getText());
+        // Create tour entity at this point instead and pass as argument?
+
+        viewModel.createNewTour();
+
+//        viewModel.createNewTour();
     }
 
     @FXML

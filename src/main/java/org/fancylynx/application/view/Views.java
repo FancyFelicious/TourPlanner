@@ -2,8 +2,7 @@ package org.fancylynx.application.view;
 
 public enum Views {
     HOME("HomeView.fxml"),
-    CREATETOUR("CreateTourView.fxml");
-
+    CREATETOUR("TourView.fxml");
 
     private final String fxmlFile;
 

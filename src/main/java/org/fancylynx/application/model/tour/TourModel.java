@@ -1,10 +1,15 @@
 package org.fancylynx.application.model.tour;
 
-public interface Tour {
+import java.beans.PropertyChangeListener;
+
+//@Component
+public interface TourModel {
 
     // 2do
+    void testCreateTour();
 
-    String createNewTour();
+    void addPropertyChangeListener(PropertyChangeListener listener);
+
 
 //    String getName();
 //

@@ -1,4 +1,4 @@
-package org.fancylynx.application.model;
+package org.fancylynx.playground;
 
 //public record Tour(String name,
 //                   String description,

@@ -1,4 +1,4 @@
-package org.fancylynx.playground.monolith;
+package org.fancylynx.playground.archive.monolith;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,25 +8,23 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
-public class Monolith extends Application {
-//    SceneController sceneController = new SceneController();
-
+public class TestView extends Application {
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Monolith.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TestView.fxml"));
         Parent root = fxmlLoader.load();
 
-        MonolithController monolithController = fxmlLoader.getController();
-        monolithController.setPrimaryStage(primaryStage);
+        TestViewController testViewController = fxmlLoader.getController();
+        testViewController.setPrimaryStage(primaryStage);
 
-
-        primaryStage.setTitle("M O N O L I T H");
+        primaryStage.setTitle("TESTVIEW");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }
+
+
 }

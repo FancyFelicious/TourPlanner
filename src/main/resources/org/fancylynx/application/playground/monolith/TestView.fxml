@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19"
-            fx:controller="org.fancylynx.playground.monolith.TestViewController">
+            fx:controller="org.fancylynx.playground.archive.monolith.TestViewController">
     <Button fx:id="backButton" layoutX="212.0" layoutY="348.0" mnemonicParsing="false"
             onAction="#handleBackButtonAction" prefHeight="25.0" prefWidth="161.0" text="Back"/>
     <TextField layoutX="76.0" layoutY="105.0"/>

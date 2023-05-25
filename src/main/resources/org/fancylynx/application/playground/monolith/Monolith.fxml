@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19"
-            fx:controller="org.fancylynx.playground.monolith.MonolithController">
+            fx:controller="org.fancylynx.playground.archive.monolith.MonolithController">
     <TextField fx:id="imageDirectory" layoutX="106.0" layoutY="71.0"/>
     <TextField fx:id="imageName" layoutX="323.0" layoutY="71.0"/>
     <Label fx:id="imageDirectoryLabel" layoutX="147.0" layoutY="36.0" prefHeight="17.0" prefWidth="96.0"
