@@ -1,14 +1,15 @@
 # Tour Planner
+<p align="center"><b>
+💎 🔥 ✨ Raza Ghulam ❤️ Felix Piber ✨ 🔥 💎
+  </b></p>
 
-<sub> *by Raza Ghulam & Felix Piber* </sub>
-
-[Link to GitHub Repository](https://github.com/FancyFelicious/TourPlanner)  <sub>*remove?*</sub>
+[Link to GitHub Repository](https://github.com/FancyFelicious/TourPlanner)  <sub>*- remove?*</sub>
 
 ---
 
-## PostgreSQL Setup / Installation
+## Setup / Installation - PostgreSQL
 
-### Docker (recommended)
+### Docker *(recommended)*
 
 ```sh  
 $ docker-compose up -d
