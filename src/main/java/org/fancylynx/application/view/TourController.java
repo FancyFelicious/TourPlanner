@@ -17,32 +17,32 @@ public class TourController {
     @FXML
     TextField imageDirectoryInput;
     @FXML
-    Label imageDirectoryOutput;
+    Label imageDirectory;
 
     @FXML
     TextField imageNameInput;
     @FXML
-    Label imageNameOutput;
+    Label imageName;
 
     @FXML
     TextField originInput;
     @FXML
-    Label originOutput;
+    Label origin;
 
     @FXML
     TextField destinationInput;
     @FXML
-    Label destinationOutput;
+    Label destination;
 
     @FXML
     TextField nameInput;
     @FXML
-    Label nameOutput;
+    Label name;
 
     @FXML
     TextField descriptionInput;
     @FXML
-    Label descriptionOutput;
+    Label description;
 
     @FXML
     ToggleGroup formatToggleGroup;
@@ -53,7 +53,10 @@ public class TourController {
     @FXML
     RadioButton jpeg;
     @FXML
-    Label imageFormatOutput;
+    Label imageFormat;
+
+    @FXML
+    Label transportType;
 
     @FXML
     Label status;
@@ -68,8 +71,6 @@ public class TourController {
     Button back;
     @FXML
     Button updateImage;
-    @FXML
-    Button viewConfiguration;
 
     private TourViewModel viewModel;
     private ViewHandler viewHandler;
@@ -83,52 +84,45 @@ public class TourController {
         this.viewHandler = viewHandler;
         loadConfiguration();
 
+
+        transportType.textProperty().bind(viewModel.getTransportType());
+        sessionID.textProperty().bind(viewModel.getSessionId());
+
+
         // Real-time GUI updates
         nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setNameOutput(newValue);
+            viewModel.setName(newValue);
         });
-        nameOutput.textProperty().bind(viewModel.getNameOutput());
+        name.textProperty().bind(viewModel.getName());
 
         descriptionInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setDescriptionOutput(newValue);
+            viewModel.setDescription(newValue);
         });
-        descriptionOutput.textProperty().bind(viewModel.getDescriptionOutput());
+        description.textProperty().bind(viewModel.getDescription());
 
         originInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setOriginOutput(newValue);
+            viewModel.setOrigin(newValue);
         });
-        originOutput.textProperty().bind(viewModel.getOriginOutput());
+        origin.textProperty().bind(viewModel.getOrigin());
 
         destinationInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setDestinationOutput(newValue);
+            viewModel.setDestination(newValue);
         });
-        destinationOutput.textProperty().bind(viewModel.getDestinationOutput());
+        destination.textProperty().bind(viewModel.getDestination());
 
         imageDirectoryInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setImageDirectoryOutput(newValue);
+            viewModel.setImageDirectory(newValue);
         });
-        imageDirectoryOutput.textProperty().bind(viewModel.getImageDirectoryOutput());
+        imageDirectory.textProperty().bind(viewModel.getImageDirectory());
 
         imageNameInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.setImageNameOutput(newValue);
+            viewModel.setImageName(newValue);
         });
-        imageNameOutput.textProperty().bind(viewModel.getImageNameOutput());
+        imageName.textProperty().bind(viewModel.getImageName());
 
 
         Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
         imageView.setImage(image);
-
-
-//        TEST_INPUT.textProperty().addListener((observable, oldValue, newValue) -> {
-//            viewModel.setTEST_OUTPUT(newValue); // Update the TEST_OUTPUT property in the view model
-//        });
-//        TEST_OUTPUT.textProperty().bind(viewModel.TEST_OUTPUTProperty()); // Bind the TEST_OUTPUT label to the view model property
-    }
-
-
-    @FXML
-    public void handleBackButton() throws IOException {
-        viewHandler.openView(Views.HOME.getFxmlFileName());
     }
 
     @FXML
@@ -136,13 +130,12 @@ public class TourController {
         System.out.println("CLICKED SAVE BUTTON");
         RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
         Configuration.setImageFormat(selectedRadioButton.getText());
-        Configuration.setImageDirectory(imageDirectoryOutput.getText());
-        Configuration.setImageName(imageNameOutput.getText());
-//      Configuration.setTourName(tourNameOutput.getText());
-
+        Configuration.setImageDirectory(imageDirectory.getText());
+        Configuration.setImageName(imageName.getText());
         // 2do: Create tour entity at this point instead and pass as argument?
         viewModel.createNewTour();
     }
+
 
     @FXML
     private void handleUpdateImageButton() throws FileNotFoundException {
@@ -152,10 +145,8 @@ public class TourController {
     }
 
     @FXML
-    private void handleViewConfigurationButton() {
-        System.out.println(Configuration.getImageDirectory());
-        System.out.println(Configuration.getImageName());
-        System.out.println(Configuration.getImageFormat());
+    public void handleBackButton() throws IOException {
+        viewHandler.openView(Views.HOME.getFxmlFileName());
     }
 
     private void loadConfiguration() {
@@ -163,8 +154,8 @@ public class TourController {
         png.setToggleGroup(formatToggleGroup);
         jpg.setToggleGroup(formatToggleGroup);
         jpeg.setToggleGroup(formatToggleGroup);
-        imageNameInput.setText(Configuration.getImageName());
-        imageDirectoryOutput.setText(Configuration.getImageDirectory());
+        imageName.setText(Configuration.getImageName());
+        imageDirectory.setText(Configuration.getImageDirectory());
         switch (Configuration.getImageFormat()) {
             case Constants.FILE_EXTENSION_PNG -> png.setSelected(true);
             case Constants.FILE_EXTENSION_JPG -> jpg.setSelected(true);

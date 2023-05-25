@@ -43,6 +43,8 @@ public class Tour {
     @Column(name = "map", columnDefinition = "TEXT")
     private String map;
 
+    private String sessionId;
+
 //    public Tour() {
 //    }
 }

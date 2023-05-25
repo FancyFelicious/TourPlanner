@@ -7,87 +7,113 @@ import org.fancylynx.application.model.tour.TourModel;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TourViewModel {//{
+public class TourViewModel {
     private final TourModel tourModel;
-    private final StringProperty imageDirectoryOutput;
-    private final StringProperty imageNameOutput;
-    private final StringProperty nameOutput;
-    private final StringProperty originOutput;
-    private final StringProperty destinationOutput;
-    private final StringProperty descriptionOutput;
+
+    // 2do: remove '' from variable/getter/setter names
+    private final StringProperty imageDirectory;
+    private final StringProperty imageName;
+    private final StringProperty name;
+    private final StringProperty origin;
+    private final StringProperty destination;
+    private final StringProperty description;
+    private final StringProperty transportType;
+    private final StringProperty imageFormat;
+    private final StringProperty sessionId;
+
 
     public TourViewModel(TourModel tourModel) {
         this.tourModel = tourModel;
-        this.imageDirectoryOutput = new SimpleStringProperty();
-        this.imageNameOutput = new SimpleStringProperty();
-        this.nameOutput = new SimpleStringProperty();
-        this.descriptionOutput = new SimpleStringProperty();
-        this.originOutput = new SimpleStringProperty();
-        this.destinationOutput = new SimpleStringProperty();
-        
-//        tourModel.addPropertyChangeListener(evt -> {
-//            if (evt.getPropertyName().equals("testTourName")) {
-////                setTourName(evt.getNewValue().toString());
-////                testTourName.set(evt.getNewValue().toString());
-//                setTourName(evt.getNewValue().toString());
-//            }
-//        });
+        this.imageDirectory = new SimpleStringProperty();
+        this.imageName = new SimpleStringProperty();
+        this.imageFormat = new SimpleStringProperty();
+        this.name = new SimpleStringProperty();
+        this.description = new SimpleStringProperty();
+        this.origin = new SimpleStringProperty();
+        this.destination = new SimpleStringProperty();
+        this.transportType = new SimpleStringProperty("transportgott");
+        this.sessionId = new SimpleStringProperty();
+
+        tourModel.addPropertyChangeListener(evt -> {
+            if (evt.getPropertyName().equals("transportFire")) {
+                setTransportType(evt.getNewValue().toString());
+            } else if (evt.getPropertyName().equals("sessionFire")) {
+                setSessionId(evt.getNewValue().toString());
+            }
+        });
+    }
+
+    public StringProperty getTransportType() {
+        return transportType;
+    }
+
+    public void setTransportType(String transportType) {
+        this.transportType.set(transportType);
     }
 
     public void createNewTour() {
         Tour newTour = new Tour();
-        newTour.setName(imageNameOutput.get());
-        newTour.setDescription(descriptionOutput.get());
-        newTour.setOrigin(originOutput.get());
-        newTour.setDestination(destinationOutput.get());
+        newTour.setName(name.get());
+        newTour.setDescription(description.get());
+        newTour.setOrigin(origin.get());
+        newTour.setDestination(destination.get());
+        newTour.setTransportType("HE HALLO TEST");
         tourModel.createNewTour(newTour);
     }
 
-    public StringProperty getImageDirectoryOutput() {
-        return imageDirectoryOutput;
+    public StringProperty getImageDirectory() {
+        return imageDirectory;
     }
 
-    public void setImageDirectoryOutput(String imageDirectoryOutput) {
-        this.imageDirectoryOutput.set(imageDirectoryOutput);
+    public void setImageDirectory(String imageDirectory) {
+        this.imageDirectory.set(imageDirectory);
     }
 
-    public StringProperty getImageNameOutput() {
-        return imageNameOutput;
+    public StringProperty getImageName() {
+        return imageName;
     }
 
-    public void setImageNameOutput(String imageNameOutput) {
-        this.imageNameOutput.set(imageNameOutput);
+    public void setImageName(String imageName) {
+        this.imageName.set(imageName);
     }
 
-    public StringProperty getNameOutput() {
-        return nameOutput;
+    public StringProperty getName() {
+        return name;
     }
 
-    public void setNameOutput(String nameOutput) {
-        this.nameOutput.set(nameOutput);
+    public void setName(String name) {
+        this.name.set(name);
     }
 
-    public StringProperty getDescriptionOutput() {
-        return descriptionOutput;
+    public StringProperty getDescription() {
+        return description;
     }
 
-    public void setDescriptionOutput(String descriptionOutput) {
-        this.descriptionOutput.set(descriptionOutput);
+    public void setDescription(String description) {
+        this.description.set(description);
     }
 
-    public StringProperty getOriginOutput() {
-        return originOutput;
+    public StringProperty getOrigin() {
+        return origin;
     }
 
-    public void setOriginOutput(String originOutput) {
-        this.originOutput.set(originOutput);
+    public void setOrigin(String origin) {
+        this.origin.set(origin);
     }
 
-    public StringProperty getDestinationOutput() {
-        return destinationOutput;
+    public StringProperty getDestination() {
+        return destination;
     }
 
-    public void setDestinationOutput(String destinationOutput) {
-        this.destinationOutput.set(destinationOutput);
+    public void setDestination(String destination) {
+        this.destination.set(destination);
+    }
+
+    public StringProperty getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId.set(sessionId);
     }
 }

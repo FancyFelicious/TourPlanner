@@ -1,8 +1,8 @@
 package org.fancylynx.application.model.tour;
 
-
 import org.fancylynx.application.entity.Tour;
 import org.fancylynx.application.repository.TourRepository;
+import org.fancylynx.application.service.TourService;
 import org.springframework.stereotype.Repository;
 
 import java.beans.PropertyChangeListener;
@@ -12,24 +12,27 @@ import java.beans.PropertyChangeSupport;
 public class TourModelManager implements TourModel {
     private final TourRepository tourRepository;
     private final PropertyChangeSupport propertyChangeSupport;
+    private final TourService tourService;
 
-    public TourModelManager(TourRepository tourRepository) {
+    public TourModelManager(TourRepository tourRepository, TourService tourService) {
+        this.tourService = tourService;
         this.tourRepository = tourRepository;
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
 
     @Override
     public void createNewTour(Tour tour) {
-//        Tour tour = new Tour();
-//        tour.setName(String.valueOf(tourName));
-
         try {
+            String sessionId = tourService.getRoute(tour);
+            String jpeg = tourService.getStaticMap(sessionId);
+            tour.setSessionId(sessionId);
             tourRepository.save(tour);
         } catch (Exception e) { // 2do
             System.out.println("XXXXXXXXXXXXXXX nah: " + e.getMessage());
         }
 
-        propertyChangeSupport.firePropertyChange("tourName", null, tour.getName());
+        propertyChangeSupport.firePropertyChange("transportFire", null, tour.getTransportType());
+        propertyChangeSupport.firePropertyChange("sessionFire", null, tour.getSessionId());
 
     }
 

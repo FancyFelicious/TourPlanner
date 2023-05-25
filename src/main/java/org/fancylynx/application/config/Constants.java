@@ -13,8 +13,8 @@ public final class Constants {
     public static final String DEFAULT_IMAGE_FORMAT = FILE_EXTENSION_PNG;
 
     // API Endpoints // 2do: put into .env file instead?
-    public static final String MAP_QUEST_BASE_URL_DIRECTIONS = "https://www.mapquestapi.com/directions/v2/route";
-    public static final String MAP_QUEST_BASE_URL_STATICMAP = "https://www.mapquestapi.com/staticmap/v5/map";
+    public static final String MAP_QUEST_ENDPOINT_DIRECTIONS = "https://www.mapquestapi.com/directions/v2/route";
+    public static final String MAP_QUEST_ENDPOINT_STATICMAP = "https://www.mapquestapi.com/staticmap/v5/map";
 
     // Stage Titles
     public static final String STAGE_TITLE_HOME = "Home";
