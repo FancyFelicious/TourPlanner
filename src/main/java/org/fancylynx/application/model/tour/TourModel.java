@@ -7,9 +7,9 @@ import java.beans.PropertyChangeListener;
 //@Component
 // 2do
 public interface TourModel {
-
     void createNewTour(Tour tour);
 
+    // 2do: make private?
     void addPropertyChangeListener(PropertyChangeListener listener);
 
 

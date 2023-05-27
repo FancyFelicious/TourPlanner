@@ -1,5 +1,7 @@
 package org.fancylynx.application.view;
 
+
+// 2do: necessary?? move to constants?
 public enum Views {
     HOME("HomeView.fxml"),
     CREATETOUR("TourView.fxml");

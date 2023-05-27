@@ -22,26 +22,29 @@ public class TourModelManager implements TourModel {
 
     @Override
     public void createNewTour(Tour tour) {
+        // Stage 1: Calculate route / get session ID
         try {
             String sessionId = tourService.getRoute(tour);
-//            tour.setSessionId(sessionId);
-            System.out.println("Session ID: " + sessionId);
             propertyChangeSupport.firePropertyChange("sessionTokenRetrieved", null, sessionId);
+
+            // Stage 2: Retrieve map & save to file system
             try {
                 String imagePath = tourService.getStaticMap(sessionId);
+                tour.setImagePath(imagePath);
                 propertyChangeSupport.firePropertyChange("staticMapRetrieved", null, imagePath);
-                tourRepository.save(tour);
+
+                // Stage 3: Save tour to database
+                try {
+                    tourRepository.save(tour);
+                } catch (Exception e) {
+                    System.out.println("Error saving tour to database: " + e.getMessage()); // 2do
+                }
             } catch (Exception e) { // 2do
                 System.out.println("Error parsing request - unable to retrieve static map:: " + e.getMessage());
             }
         } catch (Exception e) { // 2do
             System.out.println("Error parsing request - unable to retrieve session ID: " + e.getMessage());
         }
-
-
-//        propertyChangeSupport.firePropertyChange("transportFire", null, tour.getTransportType());
-
-
     }
 
     @Override

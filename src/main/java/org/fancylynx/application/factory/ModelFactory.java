@@ -15,6 +15,7 @@ public class ModelFactory {
         this.dataModel = dataModel;
     }
 
+    //2do
     public TourModel getTourModel() {
         return tourModel;
     }

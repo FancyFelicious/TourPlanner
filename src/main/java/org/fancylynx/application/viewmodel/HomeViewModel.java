@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import org.fancylynx.application.model.DataModel;
 import org.springframework.stereotype.Component;
 
+// 2do: home view only for testing purposes - remove / refactor
 @Component
 public class HomeViewModel {
     private final DoubleProperty x;
@@ -37,8 +38,6 @@ public class HomeViewModel {
 
     public void forceUpdate() {
         model.recalculateData();
-//        model.recalculateTimeStamp();
-//        updateTestString("FORCE UPDATE: " + model.getLatestUpdateTimeStamp());
     }
 
     public DoubleProperty xProperty() {
@@ -56,14 +55,4 @@ public class HomeViewModel {
     public StringProperty timeStampProperty() {
         return timeStamp;
     }
-
-    public void updateTestString(String newString) {
-        timeStamp.set(newString);
-    }
 }
-
-//        double[] dataValues = model.getDataValues();
-//        x.setValue(dataValues[0]);
-//        y.setValue(dataValues[1]);
-//        z.setValue(dataValues[2]);
-//        timeStamp.set("Last updatevxdvx: " + model.getLatestUpdateTimeStamp());

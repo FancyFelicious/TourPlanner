@@ -33,10 +33,6 @@ public class TourPlanner extends Application {
         // 2do: remove later - testing / simulating changes to db
         ModelFactory modelFactory = applicationContext.getBean(ModelFactory.class);
         runAutoUpdate((DataModelManager) modelFactory.getDataModel());
-
-//        System.out.println("XXXXXXXX API XXXXXXXX");
-//        APIPlayground apiPlayground = new APIPlayground();
-//        apiPlayground.run();
     }
 
     private void runAutoUpdate(DataModelManager dataModelManager) {
@@ -58,8 +54,10 @@ public class TourPlanner extends Application {
         thread.setDaemon(true);
         thread.start();
     }
+}
 
 
+// 2do: delete
 //    @Bean
 //    CommandLineRunner commandLineRunner(JPAPlaygroundRepository JPAPlaygroundRepository) {
 //        return args -> {
@@ -85,19 +83,4 @@ public class TourPlanner extends Application {
 //            }
 //        };
 //    }
-}
-
-
-//        System.out.println("TESTING / PLAYGROUND / TRASH / ARCHIVE");
-//
-////        System.out.println(" XXXXXXXX DOTENV XXXXXXXX");
-////        String env = System.getenv("JAVA_HOME");
-////        System.out.println("java home env path:");
-////        System.out.println(env);
-////
-
-////        }
-//    }
-//
-//}
 

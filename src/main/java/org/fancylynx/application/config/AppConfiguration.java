@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-// 2do
+// 2do: merge with "Configuration" class?
 @Configuration
 public class AppConfiguration {
 

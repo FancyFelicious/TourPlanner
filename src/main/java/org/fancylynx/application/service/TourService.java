@@ -4,11 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.config.Constants;
 import org.fancylynx.application.entity.Tour;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -16,23 +13,30 @@ import java.nio.charset.StandardCharsets;
 
 @Service
 public class TourService {
+    // 2do put endpoint & api keys here?
+
     public String getRoute(Tour tour) {
+        // 2do: implement .png / transport type options
+
+        // Generate request URL
         String endpoint = Constants.MAP_QUEST_ENDPOINT_DIRECTIONS;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
         String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination(); //2do more options
 
-        System.out.println("HIER DAS IS URL: ");
+        System.out.println("DEBUG - GENERATED REQUEST URL:");
         System.out.println(requestUrl);
+
+        // Get response
         WebClient.RequestHeadersUriSpec<?> requestSpec = WebClient.builder().baseUrl(requestUrl).build().get();
         String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
+        // 2o needed?
+//        HttpHeaders responseHeaders = requestSpec.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
+//        HttpStatusCode statusCode = requestSpec.exchangeToMono(response -> Mono.just(response.statusCode())).block();
 
-        //2o needed?
-        HttpHeaders responseHeaders = requestSpec.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
-        HttpStatusCode statusCode = requestSpec.exchangeToMono(response -> Mono.just(response.statusCode())).block();
-
+        // 2do: error handling
 //        if statusCode >= 400 throw exception // 2do
-        // headers notwendig?
 
+        // Extract session ID
         String sessionId = " - ";
         try {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -41,40 +45,30 @@ public class TourService {
         } catch (Exception e) {
             System.out.println("ok nicht cool: " + e.getMessage()); // 2do
         }
-
         return sessionId;
     }
 
-    // 2do: merge into one function?
     public String getStaticMap(String sessionId) {
-        System.out.println("OK ICH BIN HIEROIFJIODSF");
         String endpoint = Constants.MAP_QUEST_ENDPOINT_STATICMAP;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
         String requestUrl = endpoint + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
 
-//        String testReqEncoded = URLEncoder.encode(testReq, StandardCharsets.UTF_8);
-
-        System.out.println("REQUEST URL: ");
+        System.out.println("DEBUG - GENERATED REQUEST URL:");
         System.out.println(requestUrl);
 
         WebClient.RequestHeadersUriSpec<?> requestSpec = WebClient.builder().baseUrl(requestUrl).build().get();
+
 //        HttpStatusCode statusCode = requestSpec.exchangeToMono(response -> Mono.just(response.statusCode())).block();
-//
 //        HttpHeaders testHeaders2 = okcool2.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
 //        String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
 
-
-        // Convert the response body string to a byte array
-//        System.out.println(responseTest2);
+        // Convert response body string to byte array & save image to file system
         byte[] imageData = requestSpec.retrieve().bodyToMono(byte[].class).block();
         String imagePath = "";
         try {
-            System.out.println("ANFANG COM TRY BLOCKSDFJOSDFJ");
             imagePath = ImageService.saveImage(imageData);
-
         } catch (IOException e) {
-            System.out.println("OOOH NOOOO");
-            e.printStackTrace();
+            e.printStackTrace(); // 2do
         }
         return imagePath;
     }

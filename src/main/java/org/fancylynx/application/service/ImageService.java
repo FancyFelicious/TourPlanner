@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-// 2do
+// 2do: annotation?
 public class ImageService {
     public static String imageDirectory = Constants.DEFAULT_IMAGE_SAVE_DIRECTORY;
     public static String imageName = Constants.DEFAULT_IMAGE_NAME;

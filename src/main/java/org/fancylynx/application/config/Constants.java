@@ -19,6 +19,7 @@ public final class Constants {
     public static final String TRANSPORT_TYPE_BICYCLE = "bicycle";
     public static final String TRANSPORT_TYPE_PEDESTRIAN = "walk";
 
+    // 2do: put into TourService class?
     // API Endpoints
     public static final String MAP_QUEST_ENDPOINT_DIRECTIONS = "https://www.mapquestapi.com/directions/v2/route";
     public static final String MAP_QUEST_ENDPOINT_STATICMAP = "https://www.mapquestapi.com/staticmap/v5/map";
@@ -27,6 +28,7 @@ public final class Constants {
     public static final String STAGE_TITLE_HOME = "Home";
     public static final String STAGE_TITLE_CREATE_TOUR = "Create New Tour";
 
+    // 2do: put paths into constants or overkill?
 //    public static final String VIEW_FXML_FILE_HOME = "HomeView.fxml";
 //    public static final String VIEW_FXML_FILE_CREATE_TOUR = "TourView.fxml";
 

@@ -93,6 +93,7 @@ public class TourViewModel {
         this.imageFormat.set(imageFormat);
     }
 
+    // 2do
     public StringProperty getTransportType() {
         return transportType;
     }

@@ -95,7 +95,7 @@ public class TourController {
         loadConfiguration(); // Remember settings after switching scenes // 2do: necessary?
 
         // Bind UI elements to view model
-        // 2do: bidirectional binding nicht unbedingt notwendig
+        // 2do: remove bidirectional binding? not reall necessar
         // Tour Configuration Preview / Real-time UI updates
         nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setName(newValue);
@@ -152,10 +152,11 @@ public class TourController {
     public void handleApplyButton() throws IOException { // 2do: exception?
         System.out.println("CLICKED APPLY BUTTON"); // 2do
 
-        // Check input, duplicate name, etc. (probably in view model)
+        // 2do: Check input, duplicate name, etc. (probably in view model)
         viewModel.createNewTour();
     }
 
+    // 2do: delete
     @FXML
     private void handleUpdateImageButton() throws FileNotFoundException {
         System.out.println("updating image");
@@ -179,12 +180,11 @@ public class TourController {
         bicycle.setToggleGroup(transportTypeToggleGroup);
         walk.setToggleGroup(transportTypeToggleGroup);
 
-        // Set radio buttons based on last used/default settings
+        // Set image settings based on last used/default settings
         RadioButton selectedImageFormat = (RadioButton) imageFormatToggleGroup.getSelectedToggle();
         RadioButton selectedTransportType = (RadioButton) transportTypeToggleGroup.getSelectedToggle();
         imageDirectory.setText(ImageService.imageDirectory);
         imageName.setText(ImageService.imageName);
-
         switch (ImageService.imageFormat) {
             case Constants.FILE_EXTENSION_PNG -> jpg.setSelected(true);
             case Constants.FILE_EXTENSION_JPG -> jpeg.setSelected(true);
@@ -196,7 +196,7 @@ public class TourController {
             default -> car.setSelected(true);
         }
 
-        // Set VieModel values (this is only necessary on first load up)
+        // Set ViewModel default values (this is only necessary on first load up)
         viewModel.setOrigin(originInput.getText());
         viewModel.setDestination(destinationInput.getText());
         viewModel.setName(nameInput.getText());
@@ -205,12 +205,7 @@ public class TourController {
         viewModel.setImageDirectory(imageDirectoryInput.getText());
         viewModel.setImageName(imageNameInput.getText());
         viewModel.setImageFormat(selectedImageFormat.getText());
+        viewModel.setStatus("STATUS");
         viewModel.setTourMap(new Image(new FileInputStream(Constants.DEFUALT_TOUR_MAP_PLACEHOLDER_IMAGE)));
-        viewModel.setStatus("STATUSSSS");
-
-        System.out.println("YO DAS HIAWERFHAISOFHDSFAHSDFAIOSFAJSFASf");
-        System.out.println(viewModel.getTourMap());
-        System.out.println(viewModel.getTourMap());
-        tourMap.setImage(new Image(new FileInputStream(Constants.DEFUALT_TOUR_MAP_PLACEHOLDER_IMAGE)));
     }
 }

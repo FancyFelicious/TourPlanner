@@ -1,3 +1,5 @@
+<!--2do: move from 'resources' to 'views'?-->
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>

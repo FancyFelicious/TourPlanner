@@ -63,6 +63,7 @@ public class DataModelManager implements DataModel {
         propertyChangeSupport.addPropertyChangeListener(listener);
     }
 
+    // 2do: delete?
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         propertyChangeSupport.removePropertyChangeListener(listener);
     }

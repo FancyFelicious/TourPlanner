@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.stereotype.Repository;
 
+// 2do
 //, uniqueConstraints = {
 //        @UniqueConstraint(name = "tour_unique_name", columnNames = "test_name2")
 //})
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Repository;
 @Data
 @Repository
 public class Tour {
-
     @Id
     @SequenceGenerator(name = "tour_sequence", sequenceName = "tour_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tour_sequence")
@@ -32,22 +32,16 @@ public class Tour {
     private String destination;
 
     @Column(name = "transport_type", columnDefinition = "TEXT")
-    private String transportType; // 2do: make enum or smth
+    private String transportType; // 2do: make enum?
 
     @Column(name = "distance", columnDefinition = "TEXT")
-    private String distance;
+    private String distance; // 2do: float?
 
     @Column(name = "estimated_time", columnDefinition = "TEXT")
-    private String estimatedTime;
+    private String estimatedTime; // 2do: time?
 
-    @Column(name = "imagePath", columnDefinition = "TEXT")
+    @Column(name = "image_path", columnDefinition = "TEXT")
     private String imagePath;
-
-
-//    private String sessionId;
-
-//    public Tour() {
-//    }
 }
 
 
