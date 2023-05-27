@@ -4,15 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import org.fancylynx.application.config.Configuration;
 import org.fancylynx.application.config.Constants;
+import org.fancylynx.application.service.ImageService;
 import org.fancylynx.application.viewmodel.TourViewModel;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-//@Component @Controller
+//@Component @Controller // 2do
 public class TourController {
     @FXML
     TextField imageDirectoryInput;
@@ -45,7 +45,7 @@ public class TourController {
     Label description;
 
     @FXML
-    ToggleGroup formatToggleGroup;
+    ToggleGroup imageFormatToggleGroup;
     @FXML
     RadioButton png;
     @FXML
@@ -73,10 +73,10 @@ public class TourController {
     @FXML
     Label imagePath;
     @FXML
-    ImageView imageView;
+    ImageView tourMap;
 
     @FXML
-    Button save;
+    Button apply;
     @FXML
     Button back;
     @FXML
@@ -92,73 +92,67 @@ public class TourController {
     public void init(TourViewModel tourViewModel, ViewHandler viewHandler) throws FileNotFoundException {
         this.viewModel = tourViewModel;
         this.viewHandler = viewHandler;
-        loadConfiguration();
+        loadConfiguration(); // Remember settings after switching scenes // 2do: necessary?
 
         // Bind UI elements to view model
-        transportType.textProperty().bind(viewModel.getTransportType());
-        sessionID.textProperty().bind(viewModel.getSessionId());
-        imagePath.textProperty().bind(viewModel.getFinalImagePath());
-//        imageDirectory.textProperty().bind(viewModel.getImageDirectory());
-//        imageName.textProperty().bind(viewModel.getImageName());
-
+        // 2do: bidirectional binding nicht unbedingt notwendig
         // Tour Configuration Preview / Real-time UI updates
         nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setName(newValue);
         });
-        name.textProperty().bind(viewModel.getName());
+        name.textProperty().bindBidirectional(viewModel.getName());
 
         descriptionInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setDescription(newValue);
         });
-        description.textProperty().bind(viewModel.getDescription());
+        description.textProperty().bindBidirectional(viewModel.getDescription());
 
         originInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setOrigin(newValue);
         });
-        origin.textProperty().bind(viewModel.getOrigin());
+        origin.textProperty().bindBidirectional(viewModel.getOrigin());
 
         destinationInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setDestination(newValue);
         });
-        destination.textProperty().bind(viewModel.getDestination());
+        destination.textProperty().bindBidirectional(viewModel.getDestination());
 
         imageDirectoryInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setImageDirectory(newValue);
         });
-        imageDirectory.textProperty().bind(viewModel.getImageDirectory());
+        imageDirectory.textProperty().bindBidirectional(viewModel.getImageDirectory());
 
         imageNameInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setImageName(newValue);
         });
-        imageName.textProperty().bind(viewModel.getImageName());
+        imageName.textProperty().bindBidirectional(viewModel.getImageName());
 
-        formatToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
+        imageFormatToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            RadioButton selectedRadioButton = (RadioButton) imageFormatToggleGroup.getSelectedToggle();
             String selectedValue = selectedRadioButton.getText();
             viewModel.setImageFormat(selectedValue);
         });
-        imageFormat.textProperty().bind(viewModel.getImageFormat());
+        imageFormat.textProperty().bindBidirectional(viewModel.getImageFormat());
 
         transportTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             RadioButton selectedRadioButton = (RadioButton) transportTypeToggleGroup.getSelectedToggle();
             String selectedValue = selectedRadioButton.getText();
             viewModel.setTransportType(selectedValue);
         });
-        imageFormat.textProperty().bind(viewModel.getImageFormat());
+        transportType.textProperty().bindBidirectional(viewModel.getImageFormat());
 
-        Image image = new Image(new FileInputStream("images/tourImage_PLACEHOLDER.png")); //2do
-        imageView.setImage(image);
+        // Tour Creation Status (uneditable) - Retrieved from ViewModel / API
+        status.textProperty().bind(viewModel.getStatus());
+        sessionID.textProperty().bind(viewModel.getSessionId());
+        tourMap.imageProperty().bind(viewModel.getTourMap());
+        imagePath.textProperty().bind(viewModel.getFinalImagePath());
     }
 
     @FXML
-    public void handleSaveButton() throws IOException {
-        System.out.println("CLICKED SAVE BUTTON");
-        RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
-        Configuration.imageFormat = selectedRadioButton.getText();
-        Configuration.imageDirectory = imageDirectoryInput.getText();
-        Configuration.imageName = imageNameInput.getText();
+    public void handleApplyButton() throws IOException { // 2do: exception?
+        System.out.println("CLICKED APPLY BUTTON"); // 2do
 
-        // 2do: Create tour entity at this point instead and pass as argument?
+        // Check input, duplicate name, etc. (probably in view model)
         viewModel.createNewTour();
     }
 
@@ -166,7 +160,7 @@ public class TourController {
     private void handleUpdateImageButton() throws FileNotFoundException {
         System.out.println("updating image");
         Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
-        imageView.setImage(image);
+        viewModel.setTourMap(image);
     }
 
     @FXML
@@ -174,17 +168,49 @@ public class TourController {
         viewHandler.openView(Views.HOME.getFxmlFileName());
     }
 
-    private void loadConfiguration() {
-        formatToggleGroup = new ToggleGroup();
-        png.setToggleGroup(formatToggleGroup);
-        jpg.setToggleGroup(formatToggleGroup);
-        jpeg.setToggleGroup(formatToggleGroup);
-        imageName.setText(Configuration.imageName);
-        imageDirectory.setText(Configuration.imageDirectory);
-        switch (Configuration.imageFormat) {
-            case Constants.FILE_EXTENSION_PNG -> png.setSelected(true);
-            case Constants.FILE_EXTENSION_JPG -> jpg.setSelected(true);
-            default -> jpeg.setSelected(true);
+    private void loadConfiguration() throws FileNotFoundException {
+        // Set toggle groups
+        imageFormatToggleGroup = new ToggleGroup();
+        png.setToggleGroup(imageFormatToggleGroup);
+        jpg.setToggleGroup(imageFormatToggleGroup);
+        jpeg.setToggleGroup(imageFormatToggleGroup);
+        transportTypeToggleGroup = new ToggleGroup();
+        car.setToggleGroup(transportTypeToggleGroup);
+        bicycle.setToggleGroup(transportTypeToggleGroup);
+        walk.setToggleGroup(transportTypeToggleGroup);
+
+        // Set radio buttons based on last used/default settings
+        RadioButton selectedImageFormat = (RadioButton) imageFormatToggleGroup.getSelectedToggle();
+        RadioButton selectedTransportType = (RadioButton) transportTypeToggleGroup.getSelectedToggle();
+        imageDirectory.setText(ImageService.imageDirectory);
+        imageName.setText(ImageService.imageName);
+
+        switch (ImageService.imageFormat) {
+            case Constants.FILE_EXTENSION_PNG -> jpg.setSelected(true);
+            case Constants.FILE_EXTENSION_JPG -> jpeg.setSelected(true);
+            default -> png.setSelected(true);
         }
+        switch (selectedTransportType.getText()) {
+            case Constants.TRANSPORT_TYPE_CAR -> walk.setSelected(true);
+            case Constants.TRANSPORT_TYPE_BICYCLE -> bicycle.setSelected(true);
+            default -> car.setSelected(true);
+        }
+
+        // Set VieModel values (this is only necessary on first load up)
+        viewModel.setOrigin(originInput.getText());
+        viewModel.setDestination(destinationInput.getText());
+        viewModel.setName(nameInput.getText());
+        viewModel.setDescription(descriptionInput.getText());
+        viewModel.setTransportType(selectedTransportType.getText());
+        viewModel.setImageDirectory(imageDirectoryInput.getText());
+        viewModel.setImageName(imageNameInput.getText());
+        viewModel.setImageFormat(selectedImageFormat.getText());
+        viewModel.setTourMap(new Image(new FileInputStream(Constants.DEFUALT_TOUR_MAP_PLACEHOLDER_IMAGE)));
+        viewModel.setStatus("STATUSSSS");
+
+        System.out.println("YO DAS HIAWERFHAISOFHDSFAHSDFAIOSFAJSFASf");
+        System.out.println(viewModel.getTourMap());
+        System.out.println(viewModel.getTourMap());
+        tourMap.setImage(new Image(new FileInputStream(Constants.DEFUALT_TOUR_MAP_PLACEHOLDER_IMAGE)));
     }
 }

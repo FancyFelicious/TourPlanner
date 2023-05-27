@@ -1,16 +1,21 @@
 package org.fancylynx.application.viewmodel;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 import org.fancylynx.application.entity.Tour;
 import org.fancylynx.application.model.tour.TourModel;
+import org.fancylynx.application.service.ImageService;
 import org.springframework.stereotype.Component;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 @Component
 public class TourViewModel {
     private final TourModel tourModel;
-
-    // 2do: remove '' from variable/getter/setter names
     private final StringProperty imageDirectory;
     private final StringProperty imageName;
     private final StringProperty name;
@@ -21,6 +26,8 @@ public class TourViewModel {
     private final StringProperty imageFormat;
     private final StringProperty sessionId;
     private final StringProperty finalImagePath;
+    private final StringProperty status;
+    private final ObjectProperty<Image> tourMap;
 
     public TourViewModel(TourModel tourModel) {
         this.tourModel = tourModel;
@@ -34,15 +41,40 @@ public class TourViewModel {
         this.transportType = new SimpleStringProperty();
         this.sessionId = new SimpleStringProperty();
         this.finalImagePath = new SimpleStringProperty();
+        this.status = new SimpleStringProperty();
+        this.tourMap = new SimpleObjectProperty<>();
 
         tourModel.addPropertyChangeListener(evt -> {
             if (evt.getPropertyName().equals("sessionTokenRetrieved")) {
                 setSessionId(evt.getNewValue().toString());
+                setStatus("SESH TOKEN RECEIVED");
             } else if (evt.getPropertyName().equals("staticMapRetrieved")) {
                 setFinalImagePath(evt.getNewValue().toString());
-//                System.out.println(evt.getNewValue().toString());
+                setStatus("MAP RETRIEVED");
+                try {
+                    Image image = new Image(new FileInputStream(evt.getNewValue().toString())); //2do
+                    setTourMap(image);
+                } catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
+    }
+
+    public ObjectProperty<Image> getTourMap() {
+        return tourMap;
+    }
+
+    public void setTourMap(Image tourMap) {
+        this.tourMap.set(tourMap);
+    }
+
+    public StringProperty getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status.set(status);
     }
 
     public StringProperty getFinalImagePath() {
@@ -70,12 +102,28 @@ public class TourViewModel {
     }
 
     public void createNewTour() {
+        this.setStatus("PROCESSING REQUEST");
         Tour newTour = new Tour();
+        ImageService.imageFormat = imageFormat.get();
+        ImageService.imageDirectory = imageDirectory.get();
+        ImageService.imageName = imageName.get();
         newTour.setName(name.get());
         newTour.setDescription(description.get());
         newTour.setOrigin(origin.get());
         newTour.setDestination(destination.get());
         newTour.setTransportType(transportType.get());
+
+        System.out.println("XXXXXXXXXXXX DEBUG XXXXXXXXXXXXX");
+        System.out.println("Origin: " + newTour.getOrigin());
+        System.out.println("Destination: " + newTour.getDestination());
+        System.out.println("Name: " + newTour.getName());
+        System.out.println("Description: " + newTour.getDescription());
+        System.out.println("Transport Type: " + newTour.getTransportType());
+        System.out.println("IMG Directory: " + ImageService.imageDirectory);
+        System.out.println("IMG Name: " + ImageService.imageName);
+        System.out.println("IMG Format: " + ImageService.imageFormat);
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");
+
         tourModel.createNewTour(newTour);
     }
 

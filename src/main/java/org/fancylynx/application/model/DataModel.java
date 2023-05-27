@@ -11,11 +11,3 @@ public interface DataModel {
 
     void addPropertyChangeListener(PropertyChangeListener listener);
 }
-
-//    DoubleProperty xProperty();
-//
-//    DoubleProperty yProperty();
-//
-//    DoubleProperty zProperty();
-//
-//    StringProperty lastUpdateProperty();
