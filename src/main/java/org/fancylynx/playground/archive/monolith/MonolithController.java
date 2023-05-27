@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.fancylynx.application.config.Configuration;
 import org.fancylynx.application.config.Constants;
 
 import java.io.IOException;
@@ -44,23 +43,23 @@ public class MonolithController {
         this.primaryStage = primaryStage;
     }
 
-    @FXML
-    private void handleSaveButtonAction() {
-        RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
-//        Configuration.setImageFormat(png.getText());
-//        if (selectedRadioButton != null) {
-        Configuration.setImageFormat(selectedRadioButton.getText());
-//        }
-        Configuration.setImageName(imageName.getText());
-        Configuration.setImageDirectory(imageDirectory.getText());
-    }
+//    @FXML
+//    private void handleSaveButtonAction() {
+//        RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
+////        Configuration.setImageFormat(png.getText());
+////        if (selectedRadioButton != null) {
+//        Configuration.setImageFormat(selectedRadioButton.getText());
+////        }
+//        Configuration.setImageName(imageName.getText());
+//        Configuration.setImageDirectory(imageDirectory.getText());
+//    }
 
 
-    private void handleViewConfigurationButtonAction() {
-        System.out.println(Configuration.getImageDirectory());
-        System.out.println(Configuration.getImageName());
-        System.out.println(Configuration.getImageFormat());
-    }
+//    private void handleViewConfigurationButtonAction() {
+//        System.out.println(Configuration.getImageDirectory());
+//        System.out.println(Configuration.getImageName());
+//        System.out.println(Configuration.getImageFormat());
+//    }
 
     private void handleCreateTourButtonAction() {
         try {

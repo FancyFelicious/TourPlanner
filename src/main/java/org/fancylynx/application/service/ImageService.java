@@ -15,26 +15,25 @@ public class ImageService {
     }
 
     public static String saveImage(byte[] imageData) throws IOException {
-        System.out.println("KOMM ICH HIER REIN?");
         // Create the directory if it doesn't exist
-        String directory = Configuration.getImageDirectory();
-        System.out.println("1111111111111111111111111"); // 2do
+        String directory = Configuration.imageDirectory;// Constants.DEFAULT_IMAGE_SAVE_DIRECTORY;
+
+        System.out.println("directory: ");
         System.out.println(directory);
 
+
         Path imageDirectory = Paths.get(directory);
-        System.out.println("222222222222222222222222"); // 2do
+        System.out.println("imageDirectory: ");
+        System.out.println(imageDirectory);
 
         if (!Files.exists(imageDirectory)) {
             Files.createDirectories(imageDirectory);
         }
-        System.out.println("3333333333333333333333333"); // 2do
-
 
         // Generate a unique file name by appending a number suffix if necessary
-        String format = Configuration.getImageFormat();
-        String name = Configuration.getImageName();
+        String format = Configuration.imageFormat;
+        String name = Configuration.imageName;
         Path filePath = imageDirectory.resolve(name + format);
-        System.out.println("4444444444444444444444444444"); // 2do
 
         while (Files.exists(filePath)) {
             String fileName = name + "_" + suffix + format;
@@ -42,14 +41,13 @@ public class ImageService {
             suffix++;
         }
 
-        System.out.println("5555555555555555555555"); // 2do
-
         // Save image to local directory
         Files.write(filePath, imageData);
-        System.out.println("IMAGE SAVED OK NICE, HIER:"); // 2do
+
+        System.out.println("filePath: ");
         System.out.println(filePath);
 
-        return "lasdkf";
+        return filePath.toString();
     }
 
 //    public static void setDirectory(String directory) {

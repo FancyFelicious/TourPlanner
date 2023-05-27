@@ -43,7 +43,8 @@ public class Tour {
     @Column(name = "imagePath", columnDefinition = "TEXT")
     private String imagePath;
 
-    private String sessionId;
+
+//    private String sessionId;
 
 //    public Tour() {
 //    }

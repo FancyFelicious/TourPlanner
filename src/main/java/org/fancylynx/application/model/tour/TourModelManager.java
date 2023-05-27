@@ -24,15 +24,13 @@ public class TourModelManager implements TourModel {
     public void createNewTour(Tour tour) {
         try {
             String sessionId = tourService.getRoute(tour);
-            tour.setSessionId(sessionId);
+//            tour.setSessionId(sessionId);
             System.out.println("Session ID: " + sessionId);
             propertyChangeSupport.firePropertyChange("sessionTokenRetrieved", null, sessionId);
             try {
-//                String imagePath = tourService.getStaticMap(sessionId);
-//                System.out.println("Image path: " + imagePath);
-                propertyChangeSupport.firePropertyChange("staticMapRetrieved", null, "yohierimgpath");
-                System.out.println("HIER BIN IHC AUC H NOCHOFIASDJF");
-//                tourRepository.save(tour);
+                String imagePath = tourService.getStaticMap(sessionId);
+                propertyChangeSupport.firePropertyChange("staticMapRetrieved", null, imagePath);
+                tourRepository.save(tour);
             } catch (Exception e) { // 2do
                 System.out.println("Error parsing request - unable to retrieve static map:: " + e.getMessage());
             }

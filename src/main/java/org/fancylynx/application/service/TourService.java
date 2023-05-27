@@ -21,6 +21,8 @@ public class TourService {
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
         String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination(); //2do more options
 
+        System.out.println("HIER DAS IS URL: ");
+        System.out.println(requestUrl);
         WebClient.RequestHeadersUriSpec<?> requestSpec = WebClient.builder().baseUrl(requestUrl).build().get();
         String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
 
@@ -61,7 +63,6 @@ public class TourService {
 //        HttpHeaders testHeaders2 = okcool2.exchangeToMono(response -> Mono.just(response.headers().asHttpHeaders())).block();
 //        String responseBody = requestSpec.retrieve().bodyToMono(String.class).block();
 
-        System.out.println("UND DANACH ");
 
         // Convert the response body string to a byte array
 //        System.out.println(responseTest2);
@@ -70,11 +71,11 @@ public class TourService {
         try {
             System.out.println("ANFANG COM TRY BLOCKSDFJOSDFJ");
             imagePath = ImageService.saveImage(imageData);
+
         } catch (IOException e) {
-            // 2do
+            System.out.println("OOOH NOOOO");
             e.printStackTrace();
         }
-        System.out.println("OK UND HIER UACH NOCHAPFJSDKF OJASDFOÖJSFODSÖJF");
         return imagePath;
     }
 }

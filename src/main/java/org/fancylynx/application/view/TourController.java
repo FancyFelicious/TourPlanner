@@ -98,6 +98,8 @@ public class TourController {
         transportType.textProperty().bind(viewModel.getTransportType());
         sessionID.textProperty().bind(viewModel.getSessionId());
         imagePath.textProperty().bind(viewModel.getFinalImagePath());
+//        imageDirectory.textProperty().bind(viewModel.getImageDirectory());
+//        imageName.textProperty().bind(viewModel.getImageName());
 
         // Tour Configuration Preview / Real-time UI updates
         nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -152,9 +154,10 @@ public class TourController {
     public void handleSaveButton() throws IOException {
         System.out.println("CLICKED SAVE BUTTON");
         RadioButton selectedRadioButton = (RadioButton) formatToggleGroup.getSelectedToggle();
-        Configuration.setImageFormat(selectedRadioButton.getText());
-        Configuration.setImageDirectory(imageDirectory.getText());
-        Configuration.setImageName(imageName.getText());
+        Configuration.imageFormat = selectedRadioButton.getText();
+        Configuration.imageDirectory = imageDirectoryInput.getText();
+        Configuration.imageName = imageNameInput.getText();
+
         // 2do: Create tour entity at this point instead and pass as argument?
         viewModel.createNewTour();
     }
@@ -176,9 +179,9 @@ public class TourController {
         png.setToggleGroup(formatToggleGroup);
         jpg.setToggleGroup(formatToggleGroup);
         jpeg.setToggleGroup(formatToggleGroup);
-        imageName.setText(Configuration.getImageName());
-        imageDirectory.setText(Configuration.getImageDirectory());
-        switch (Configuration.getImageFormat()) {
+        imageName.setText(Configuration.imageName);
+        imageDirectory.setText(Configuration.imageDirectory);
+        switch (Configuration.imageFormat) {
             case Constants.FILE_EXTENSION_PNG -> png.setSelected(true);
             case Constants.FILE_EXTENSION_JPG -> jpg.setSelected(true);
             default -> jpeg.setSelected(true);

@@ -1,86 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ColorPicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.TourController">
-    <TextField fx:id="imageDirectoryInput" layoutX="475.0" layoutY="44.0" promptText="Image Directory" text="/images" />
-    <Button fx:id="back" layoutX="39.0" layoutY="666.0" mnemonicParsing="false" onAction="#handleBackButton" prefHeight="30.0" prefWidth="138.0" text="Go Back" />
-    <TextField fx:id="originInput" layoutX="60.0" layoutY="44.0" promptText="Vienna" />
-    <TextField fx:id="destinationInput" layoutX="256.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0" promptText="Madrid" />
-    <TextField fx:id="imageNameInput" layoutX="638.0" layoutY="44.0" promptText="TourInfo" text="TourInfo" />
-    <Label layoutX="89.0" layoutY="18.0" prefHeight="17.0" prefWidth="113.0" text="FROM" />
-    <Label layoutX="308.0" layoutY="6.0" prefHeight="25.0" prefWidth="55.0" text="TO" />
-    <RadioButton fx:id="jpg" layoutX="584.0" layoutY="86.0" mnemonicParsing="false" text=".jpg" />
-    <RadioButton fx:id="jpeg" layoutX="657.0" layoutY="86.0" mnemonicParsing="false" text=".jpeg" />
-    <Button fx:id="save" layoutX="276.0" layoutY="617.0" mnemonicParsing="false" onAction="#handleSaveButton" prefHeight="97.0" prefWidth="248.0" text="Apply 🚀" textFill="#ff00c8">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19"
+            fx:controller="org.fancylynx.application.view.TourController">
+    <TextField fx:id="imageDirectoryInput" layoutX="475.0" layoutY="44.0" promptText="Image Directory" text="images/"/>
+    <Button fx:id="back" layoutX="39.0" layoutY="666.0" mnemonicParsing="false" onAction="#handleBackButton"
+            prefHeight="30.0" prefWidth="138.0" text="Go Back"/>
+    <TextField fx:id="originInput" layoutX="60.0" layoutY="44.0" promptText="Vienna"/>
+    <TextField fx:id="destinationInput" layoutX="256.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0"
+               promptText="Madrid"/>
+    <TextField fx:id="imageNameInput" layoutX="638.0" layoutY="44.0" promptText="TourInfo" text="TourInfo"/>
+    <Label layoutX="89.0" layoutY="18.0" prefHeight="17.0" prefWidth="113.0" text="FROM"/>
+    <Label layoutX="308.0" layoutY="6.0" prefHeight="25.0" prefWidth="55.0" text="TO"/>
+    <RadioButton fx:id="jpg" layoutX="584.0" layoutY="86.0" mnemonicParsing="false" text=".jpg"/>
+    <RadioButton fx:id="jpeg" layoutX="657.0" layoutY="86.0" mnemonicParsing="false" text=".jpeg"/>
+    <Button fx:id="save" layoutX="276.0" layoutY="617.0" mnemonicParsing="false" onAction="#handleSaveButton"
+            prefHeight="97.0" prefWidth="248.0" text="Apply 🚀" textFill="#ff00c8">
         <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="36.0"/>
         </font>
     </Button>
-    <Label layoutX="667.0" layoutY="18.0" text="IMG NAME" />
-    <ImageView fx:id="imageView" fitHeight="345.0" fitWidth="376.0" layoutX="24.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true" />
-    <Button fx:id="updateImage" layoutX="134.0" layoutY="729.0" mnemonicParsing="false" onAction="#handleUpdateImageButton" prefHeight="39.0" prefWidth="160.0" text="update img">
+    <Label layoutX="667.0" layoutY="18.0" text="IMG NAME"/>
+    <ImageView fx:id="imageView" fitHeight="345.0" fitWidth="376.0" layoutX="24.0" layoutY="189.0" pickOnBounds="true"
+               preserveRatio="true"/>
+    <Button fx:id="updateImage" layoutX="134.0" layoutY="729.0" mnemonicParsing="false"
+            onAction="#handleUpdateImageButton" prefHeight="39.0" prefWidth="160.0" text="update img">
         <font>
-            <Font size="18.0" />
+            <Font size="18.0"/>
         </font>
     </Button>
-    <Label fx:id="status" contentDisplay="CENTER" layoutX="148.0" layoutY="541.0" prefHeight="64.0" prefWidth="128.0" text="STATUS" textAlignment="CENTER">
+    <Label fx:id="status" contentDisplay="CENTER" layoutX="148.0" layoutY="541.0" prefHeight="64.0" prefWidth="128.0"
+           text="STATUS" textAlignment="CENTER">
         <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="System Bold" size="18.0"/>
         </font>
     </Label>
-    <TextField fx:id="nameInput" layoutX="35.0" layoutY="144.0" promptText="My New Tour" />
-    <Accordion layoutX="609.0" layoutY="204.0" />
+    <TextField fx:id="nameInput" layoutX="35.0" layoutY="144.0" promptText="My New Tour"/>
+    <Accordion layoutX="609.0" layoutY="204.0"/>
     <VBox layoutX="411.0" layoutY="132.0" prefHeight="383.0" prefWidth="113.0">
         <children>
-            <Label prefHeight="34.0" prefWidth="102.0" text="From:" />
-            <Label prefHeight="34.0" prefWidth="102.0" text="To:" />
-            <Label prefHeight="33.0" prefWidth="119.0" text="Name:" />
-            <Label prefHeight="34.0" prefWidth="153.0" text="Description:" />
-            <Label prefHeight="33.0" prefWidth="113.0" text="Transport Type:" />
-            <Label prefHeight="34.0" prefWidth="98.0" text="Image Directory:" />
-            <Label prefHeight="34.0" prefWidth="153.0" text="Image Name:" />
-            <Label prefHeight="34.0" prefWidth="153.0" text="Image Format:" />
-            <Label prefHeight="34.0" prefWidth="153.0" text="..." />
-            <Label prefHeight="33.0" prefWidth="113.0" text="Session Token:" />
-            <Label prefHeight="33.0" prefWidth="113.0" text="Final IMG Path:" />
+            <Label prefHeight="34.0" prefWidth="102.0" text="From:"/>
+            <Label prefHeight="34.0" prefWidth="102.0" text="To:"/>
+            <Label prefHeight="33.0" prefWidth="119.0" text="Name:"/>
+            <Label prefHeight="34.0" prefWidth="153.0" text="Description:"/>
+            <Label prefHeight="33.0" prefWidth="113.0" text="Transport Type:"/>
+            <Label prefHeight="34.0" prefWidth="98.0" text="Image Directory:"/>
+            <Label prefHeight="34.0" prefWidth="153.0" text="Image Name:"/>
+            <Label prefHeight="34.0" prefWidth="153.0" text="Image Format:"/>
+            <Label prefHeight="34.0" prefWidth="153.0" text="..."/>
+            <Label prefHeight="33.0" prefWidth="113.0" text="Session Token:"/>
+            <Label prefHeight="33.0" prefWidth="113.0" text="Final IMG Path:"/>
         </children>
     </VBox>
     <VBox layoutX="526.0" layoutY="141.0" prefHeight="366.0" prefWidth="266.0">
         <children>
-            <Label fx:id="origin" prefHeight="34.0" prefWidth="102.0" text="-" />
-            <Label fx:id="destination" prefHeight="34.0" prefWidth="102.0" text="-" />
-            <Label fx:id="name" prefHeight="30.0" prefWidth="128.0" text="-" />
-            <Label fx:id="description" prefHeight="34.0" prefWidth="153.0" text="-" />
-            <Label fx:id="transportType" prefHeight="34.0" prefWidth="153.0" text="/images" />
-            <Label fx:id="imageDirectory" prefHeight="34.0" prefWidth="153.0" text="TourInfo" />
-            <Label fx:id="imageName" prefHeight="34.0" prefWidth="153.0" text="-" />
-            <Label fx:id="imageFormat" prefHeight="34.0" prefWidth="153.0" text="-" />
-            <Label prefHeight="34.0" prefWidth="153.0" text="-" />
-            <Label fx:id="sessionID" prefHeight="34.0" prefWidth="153.0" text="-" />
-            <Label fx:id="imagePath" prefHeight="34.0" prefWidth="153.0" text="-" />
+            <Label fx:id="origin" prefHeight="34.0" prefWidth="102.0" text="-"/>
+            <Label fx:id="destination" prefHeight="34.0" prefWidth="102.0" text="-"/>
+            <Label fx:id="name" prefHeight="30.0" prefWidth="128.0" text="-"/>
+            <Label fx:id="description" prefHeight="34.0" prefWidth="153.0" text="-"/>
+            <Label fx:id="transportType" prefHeight="34.0" prefWidth="153.0" text="Car"/>
+            <Label fx:id="imageDirectory" prefHeight="34.0" prefWidth="153.0" text="images/"/>
+            <Label fx:id="imageName" prefHeight="34.0" prefWidth="153.0" text="TourInfo"/>
+            <Label fx:id="imageFormat" prefHeight="34.0" prefWidth="153.0" text=".png"/>
+            <Label prefHeight="34.0" prefWidth="153.0" text="-"/>
+            <Label fx:id="sessionID" prefHeight="34.0" prefWidth="153.0" text="-"/>
+            <Label fx:id="imagePath" prefHeight="34.0" prefWidth="153.0" text="-"/>
         </children>
     </VBox>
-    <Label layoutX="40.0" layoutY="123.0" prefHeight="17.0" prefWidth="138.0" text="TOUR NAME HIER BITTE" />
-    <TextField fx:id="descriptionInput" layoutX="220.0" layoutY="144.0" promptText="My Tour Description" />
-    <Label layoutX="512.0" layoutY="14.0" prefHeight="25.0" prefWidth="55.0" text="IMG DIR" />
-    <Label layoutX="267.0" layoutY="119.0" prefHeight="25.0" prefWidth="55.0" text="dscrptn" />
-    <ColorPicker layoutX="542.0" layoutY="605.0" />
-    <RadioButton fx:id="png" layoutX="494.0" layoutY="86.0" mnemonicParsing="false" selected="true" text=".png" />
-   <RadioButton fx:id="car" layoutX="115.0" layoutY="86.0" mnemonicParsing="false" selected="true" text="Car">
-      <toggleGroup>
-         <ToggleGroup fx:id="transportTypeToggleGroup" />
-      </toggleGroup></RadioButton>
-   <RadioButton fx:id="walk" layoutX="284.0" layoutY="86.0" mnemonicParsing="false" text="Walk" toggleGroup="$transportTypeToggleGroup" />
-   <RadioButton fx:id="bicycle" layoutX="195.0" layoutY="86.0" mnemonicParsing="false" text="Bicycle" toggleGroup="$transportTypeToggleGroup" />
+    <Label layoutX="40.0" layoutY="123.0" prefHeight="17.0" prefWidth="138.0" text="TOUR NAME HIER BITTE"/>
+    <TextField fx:id="descriptionInput" layoutX="220.0" layoutY="144.0" promptText="My Tour Description"/>
+    <Label layoutX="512.0" layoutY="14.0" prefHeight="25.0" prefWidth="55.0" text="IMG DIR"/>
+    <Label layoutX="267.0" layoutY="119.0" prefHeight="25.0" prefWidth="55.0" text="dscrptn"/>
+    <ColorPicker layoutX="542.0" layoutY="605.0"/>
+    <RadioButton fx:id="png" layoutX="494.0" layoutY="86.0" mnemonicParsing="false" selected="true" text=".png"/>
+    <RadioButton fx:id="car" layoutX="115.0" layoutY="86.0" mnemonicParsing="false" selected="true" text="Car">
+        <toggleGroup>
+            <ToggleGroup fx:id="transportTypeToggleGroup"/>
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton fx:id="walk" layoutX="284.0" layoutY="86.0" mnemonicParsing="false" text="Walk"
+                 toggleGroup="$transportTypeToggleGroup"/>
+    <RadioButton fx:id="bicycle" layoutX="195.0" layoutY="86.0" mnemonicParsing="false" text="Bicycle"
+                 toggleGroup="$transportTypeToggleGroup"/>
 </AnchorPane>
