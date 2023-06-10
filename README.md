@@ -73,6 +73,25 @@ $ pg_ctl start/stop/status
 ---
 
 To Do:
+Unit Tests
+Logs (Log4J)
+PDF
+Validate User Input
+Tour Logs
+Delete / Modify Tours
+Tour Logs
+Docs / UML Diagramm
+UI schön machen
+
+Done:
+API Requests
+Save Image
+Create Tour
+Basic UI
+Persistence / DB
+JPA / OR-Mapper
+
+Docs To Do:
 
 - Application architecture and structure
 - Key decisions
