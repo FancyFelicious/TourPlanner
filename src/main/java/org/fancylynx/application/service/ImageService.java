@@ -26,7 +26,7 @@ public class ImageService {
         }
 
         // Generate a unique file name by appending a number suffix if necessary
-        Path filePath = directory.resolve(imageName + imageFormat);
+        Path filePath = directory.resolve(imageName + "." + imageFormat); //2do: add dot to imageFormat again at fxml
         while (Files.exists(filePath)) {
             String fileName = imageName + "_" + suffix + imageFormat;
             filePath = directory.resolve(fileName);

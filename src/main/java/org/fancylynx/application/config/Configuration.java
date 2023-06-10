@@ -3,7 +3,7 @@ package org.fancylynx.application.config;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Configuration {
-    // 2do: probabl delete forever from here
+    // 2do: probably delete forever
 //    public static String imageDirectory = Constants.DEFAULT_IMAGE_SAVE_DIRECTORY;
 //    public static String imageName = Constants.DEFAULT_IMAGE_NAME;
 //    public static String imageFormat = Constants.DEFAULT_IMAGE_FORMAT;

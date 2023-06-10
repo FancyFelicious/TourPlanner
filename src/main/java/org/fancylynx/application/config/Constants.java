@@ -4,20 +4,20 @@ package org.fancylynx.application.config;
 public final class Constants {
 
     // File extensions
-    public static final String FILE_EXTENSION_PNG = ".png";
-    public static final String FILE_EXTENSION_JPG = ".jpg";
-    public static final String FILE_EXTENSION_JPEG = ".jpeg";
+    public static final String FILE_EXTENSION_PNG = "png";
+    public static final String FILE_EXTENSION_JPG = "jpg";
+    public static final String FILE_EXTENSION_JPEG = "jpeg";
 
     // Default Image Settings (Tour Map)
     public static final String DEFAULT_IMAGE_SAVE_DIRECTORY = "images/";
     public static final String DEFAULT_IMAGE_NAME = "Tour Map";
     public static final String DEFAULT_IMAGE_FORMAT = FILE_EXTENSION_PNG;
-    public static final String DEFUALT_TOUR_MAP_PLACEHOLDER_IMAGE = "images/tourImage_PLACEHOLDER.png"; //2do
+    public static final String DEFAULT_TOUR_MAP_PLACEHOLDER_IMAGE = "images/tourImage_PLACEHOLDER.png"; //2do
 
     // Transport Types
     public static final String TRANSPORT_TYPE_CAR = "car";
     public static final String TRANSPORT_TYPE_BICYCLE = "bicycle";
-    public static final String TRANSPORT_TYPE_PEDESTRIAN = "walk";
+    public static final String TRANSPORT_TYPE_WALKING = "walking";
 
     // 2do: put into TourService class?
     // API Endpoints

@@ -62,7 +62,7 @@ public class TourController {
     @FXML
     RadioButton bicycle;
     @FXML
-    RadioButton walk;
+    RadioButton walking;
     @FXML
     Label transportType;
 
@@ -100,46 +100,46 @@ public class TourController {
         nameInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setName(newValue);
         });
-        name.textProperty().bindBidirectional(viewModel.getName());
+        name.textProperty().bind(viewModel.getName());
 
         descriptionInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setDescription(newValue);
         });
-        description.textProperty().bindBidirectional(viewModel.getDescription());
+        description.textProperty().bind(viewModel.getDescription());
 
         originInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setOrigin(newValue);
         });
-        origin.textProperty().bindBidirectional(viewModel.getOrigin());
+        origin.textProperty().bind(viewModel.getOrigin());
 
         destinationInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setDestination(newValue);
         });
-        destination.textProperty().bindBidirectional(viewModel.getDestination());
+        destination.textProperty().bind(viewModel.getDestination());
 
         imageDirectoryInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setImageDirectory(newValue);
         });
-        imageDirectory.textProperty().bindBidirectional(viewModel.getImageDirectory());
+        imageDirectory.textProperty().bind(viewModel.getImageDirectory());
 
         imageNameInput.textProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.setImageName(newValue);
         });
-        imageName.textProperty().bindBidirectional(viewModel.getImageName());
+        imageName.textProperty().bind(viewModel.getImageName());
 
         imageFormatToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             RadioButton selectedRadioButton = (RadioButton) imageFormatToggleGroup.getSelectedToggle();
             String selectedValue = selectedRadioButton.getText();
             viewModel.setImageFormat(selectedValue);
         });
-        imageFormat.textProperty().bindBidirectional(viewModel.getImageFormat());
+        imageFormat.textProperty().bind(viewModel.getImageFormat());
 
         transportTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             RadioButton selectedRadioButton = (RadioButton) transportTypeToggleGroup.getSelectedToggle();
             String selectedValue = selectedRadioButton.getText();
             viewModel.setTransportType(selectedValue);
         });
-        transportType.textProperty().bindBidirectional(viewModel.getImageFormat());
+        transportType.textProperty().bind(viewModel.getTransportType());
 
         // Tour Creation Status (uneditable) - Retrieved from ViewModel / API
         status.textProperty().bind(viewModel.getStatus());
@@ -150,7 +150,7 @@ public class TourController {
 
     @FXML
     public void handleApplyButton() throws IOException { // 2do: exception?
-        System.out.println("CLICKED APPLY BUTTON"); // 2do
+        System.out.println("DEBUG - CLICKED APPLY BUTTON"); // 2do
 
         // 2do: Check input, duplicate name, etc. (probably in view model)
         viewModel.createNewTour();
@@ -178,7 +178,7 @@ public class TourController {
         transportTypeToggleGroup = new ToggleGroup();
         car.setToggleGroup(transportTypeToggleGroup);
         bicycle.setToggleGroup(transportTypeToggleGroup);
-        walk.setToggleGroup(transportTypeToggleGroup);
+        walking.setToggleGroup(transportTypeToggleGroup);
 
         // Set image settings based on last used/default settings
         RadioButton selectedImageFormat = (RadioButton) imageFormatToggleGroup.getSelectedToggle();
@@ -186,12 +186,12 @@ public class TourController {
         imageDirectory.setText(ImageService.imageDirectory);
         imageName.setText(ImageService.imageName);
         switch (ImageService.imageFormat) {
-            case Constants.FILE_EXTENSION_PNG -> jpg.setSelected(true);
-            case Constants.FILE_EXTENSION_JPG -> jpeg.setSelected(true);
+            case Constants.FILE_EXTENSION_JPG -> jpg.setSelected(true);
+            case Constants.FILE_EXTENSION_JPEG -> jpeg.setSelected(true);
             default -> png.setSelected(true);
         }
         switch (selectedTransportType.getText()) {
-            case Constants.TRANSPORT_TYPE_CAR -> walk.setSelected(true);
+            case Constants.TRANSPORT_TYPE_WALKING -> walking.setSelected(true);
             case Constants.TRANSPORT_TYPE_BICYCLE -> bicycle.setSelected(true);
             default -> car.setSelected(true);
         }
@@ -205,7 +205,7 @@ public class TourController {
         viewModel.setImageDirectory(imageDirectoryInput.getText());
         viewModel.setImageName(imageNameInput.getText());
         viewModel.setImageFormat(selectedImageFormat.getText());
-        viewModel.setStatus("STATUS");
-        viewModel.setTourMap(new Image(new FileInputStream(Constants.DEFUALT_TOUR_MAP_PLACEHOLDER_IMAGE)));
+        viewModel.setStatus("Status: Waiting for new request...");
+        viewModel.setTourMap(new Image(new FileInputStream(Constants.DEFAULT_TOUR_MAP_PLACEHOLDER_IMAGE)));
     }
 }

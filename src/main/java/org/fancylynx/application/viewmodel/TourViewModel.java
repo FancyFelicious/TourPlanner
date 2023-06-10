@@ -47,20 +47,39 @@ public class TourViewModel {
         tourModel.addPropertyChangeListener(evt -> {
             if (evt.getPropertyName().equals("sessionTokenRetrieved")) {
                 setSessionId(evt.getNewValue().toString());
-                setStatus("SESH TOKEN RECEIVED");
-            } else if (evt.getPropertyName().equals("staticMapRetrieved")) {
+                setStatus("Session Token Retrieved");
+            }
+            if (evt.getPropertyName().equals("staticMapRetrieved")) {
                 setFinalImagePath(evt.getNewValue().toString());
-                setStatus("MAP RETRIEVED");
+                setStatus("Tour Map Retrieved");
                 try {
                     Image image = new Image(new FileInputStream(evt.getNewValue().toString())); //2do
                     setTourMap(image);
+                    setStatus("Tour Map Saved");
                 } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException(e); // 2do
                 }
             }
         });
     }
 
+    public void createNewTour() {
+        this.setStatus("Processing Request...");
+        Tour newTour = new Tour();
+        newTour.setName(name.get());
+        newTour.setDescription(description.get());
+        newTour.setOrigin(origin.get());
+        newTour.setDestination(destination.get());
+        newTour.setTransportType(transportType.get());
+        ImageService.imageFormat = imageFormat.get(); //2do: make service private again? / put all params into tour object?
+        ImageService.imageFormat = imageFormat.get(); //2do: make service private again? / put all params into tour object?
+        ImageService.imageDirectory = imageDirectory.get();
+        ImageService.imageName = imageName.get();
+
+        tourModel.createNewTour(newTour);
+    }
+
+    // 2do: order / standardize
     public ObjectProperty<Image> getTourMap() {
         return tourMap;
     }
@@ -100,32 +119,6 @@ public class TourViewModel {
 
     public void setTransportType(String transportType) {
         this.transportType.set(transportType);
-    }
-
-    public void createNewTour() {
-        this.setStatus("PROCESSING REQUEST");
-        Tour newTour = new Tour();
-        ImageService.imageFormat = imageFormat.get();
-        ImageService.imageDirectory = imageDirectory.get();
-        ImageService.imageName = imageName.get();
-        newTour.setName(name.get());
-        newTour.setDescription(description.get());
-        newTour.setOrigin(origin.get());
-        newTour.setDestination(destination.get());
-        newTour.setTransportType(transportType.get());
-
-        System.out.println("XXXXXXXXXXXX DEBUG XXXXXXXXXXXXX");
-        System.out.println("Origin: " + newTour.getOrigin());
-        System.out.println("Destination: " + newTour.getDestination());
-        System.out.println("Name: " + newTour.getName());
-        System.out.println("Description: " + newTour.getDescription());
-        System.out.println("Transport Type: " + newTour.getTransportType());
-        System.out.println("IMG Directory: " + ImageService.imageDirectory);
-        System.out.println("IMG Name: " + ImageService.imageName);
-        System.out.println("IMG Format: " + ImageService.imageFormat);
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");
-
-        tourModel.createNewTour(newTour);
     }
 
     public StringProperty getImageDirectory() {
@@ -184,3 +177,14 @@ public class TourViewModel {
         this.sessionId.set(sessionId);
     }
 }
+
+//        System.out.println("XXXXXXXXXXXX DEBUG XXXXXXXXXXXXX");
+//        System.out.println("Origin: " + newTour.getOrigin());
+//        System.out.println("Destination: " + newTour.getDestination());
+//        System.out.println("Name: " + newTour.getName());
+//        System.out.println("Description: " + newTour.getDescription());
+//        System.out.println("Transport Type: " + newTour.getTransportType());
+//        System.out.println("IMG Directory: " + ImageService.imageDirectory);
+//        System.out.println("IMG Name: " + ImageService.imageName);
+//        System.out.println("IMG Format: " + ImageService.imageFormat);
+//        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX");

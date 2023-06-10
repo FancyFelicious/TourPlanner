@@ -11,17 +11,18 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+
+// 2do: handle erros based on response status code
 @Service
 public class TourService {
     // 2do put endpoint & api keys here?
 
     public String getRoute(Tour tour) {
         // 2do: implement .png / transport type options
-
         // Generate request URL
         String endpoint = Constants.MAP_QUEST_ENDPOINT_DIRECTIONS;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
-        String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination(); //2do more options
+        String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination() + "&transportMode=" + tour.getTransportType(); //2do more options
 
         System.out.println("DEBUG - GENERATED REQUEST URL:");
         System.out.println(requestUrl);
@@ -51,7 +52,7 @@ public class TourService {
     public String getStaticMap(String sessionId) {
         String endpoint = Constants.MAP_QUEST_ENDPOINT_STATICMAP;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
-        String requestUrl = endpoint + "?format=png&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
+        String requestUrl = endpoint + "?format=" + ImageService.imageFormat + "&key=" + URLEncoder.encode(apiKey, StandardCharsets.UTF_8) + "&session=" + URLEncoder.encode(sessionId, StandardCharsets.UTF_8);
 
         System.out.println("DEBUG - GENERATED REQUEST URL:");
         System.out.println(requestUrl);
