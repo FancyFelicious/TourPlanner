@@ -45,6 +45,8 @@ public class ViewHandler {
         }
 
         scene = new Scene(root);
+        String css = getClass().getResource("styles.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
     }
