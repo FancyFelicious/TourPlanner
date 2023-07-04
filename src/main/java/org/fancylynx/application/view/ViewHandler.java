@@ -10,6 +10,12 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+
+/**
+ * Creates the views, loads the fxml files and sets the css,
+ * responsible for changing the views, initializes the controllers
+ */
+
 @Component
 public class ViewHandler {
     private final Stage stage;
@@ -21,7 +27,7 @@ public class ViewHandler {
     }
 
     public void start() throws Exception {
-        openView(Views.HOME.getFxmlFileName());
+        openView(Views.MAIN.getFxmlFileName());
     }
 
     public void openView(String viewToOpen) throws IOException {
@@ -39,7 +45,12 @@ public class ViewHandler {
             TourController view = fxmlLoader.getController();
             view.init(viewModelFactory.getTourModelView(), this);
             stage.setTitle(Constants.STAGE_TITLE_CREATE_TOUR);
-        } else {
+        } else if (Views.MAIN.getFxmlFileName().equals(viewToOpen)) {
+            MainController view = fxmlLoader.getController();
+            view.init(viewModelFactory.getMainViewModel(), this);
+            stage.setTitle(Constants.STAGE_TITLE_MAIN);
+        }
+        else {
             // 2do
             throw new IllegalArgumentException("View '" + viewToOpen + "' does not exist");
         }

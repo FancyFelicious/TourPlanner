@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Entity(name="tour_log")
 @Table(name="tour_log")
@@ -30,8 +28,8 @@ public class TourLog {
     @Column(name="difficulty", columnDefinition="INT")
     private int difficulty;
 
-    @Column(name="total_time", columnDefinition="TIME")
-    private LocalTime totalTime;
+    @Column(name="total_time", columnDefinition="DOUBLE")
+    private double totalTime;
 
     @Column(name="rating", columnDefinition="INT")
     private int rating;

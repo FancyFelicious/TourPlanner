@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * Check input etc
+ */
+
 @Component
 public class TourViewModel {
     private final TourModel tourModel;

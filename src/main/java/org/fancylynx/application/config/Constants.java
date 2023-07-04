@@ -28,6 +28,8 @@ public final class Constants {
     public static final String STAGE_TITLE_HOME = "Home";
     public static final String STAGE_TITLE_CREATE_TOUR = "Create New Tour";
 
+    public static final String STAGE_TITLE_MAIN = "Main";
+
     // 2do: put paths into constants or overkill?
 //    public static final String VIEW_FXML_FILE_HOME = "HomeView.fxml";
 //    public static final String VIEW_FXML_FILE_CREATE_TOUR = "TourView.fxml";

@@ -1,2 +1,33 @@
 .root {
+    -fx-background-color: #4f5b5d;
+}
+
+#appTitle {
+    -fx-font-size: 2em;
+    -fx-text-fill: #ffffff;
+    -fx-text-alignment: center;
+}
+
+#newTourBtn {
+    -fx-background-color: #114247;
+    -fx-text-fill: #ffffff;
+}
+
+#newTourBtn:hover {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #4f5b5d;
+}
+
+#tourSearch {
+    -fx-background-color: transparent;
+    -fx-text-fill: #000000;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #ffffff;
+}
+
+#tourList {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #ffffff;
 }

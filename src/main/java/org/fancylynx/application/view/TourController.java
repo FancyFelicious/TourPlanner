@@ -166,7 +166,7 @@ public class TourController {
 
     @FXML
     public void handleBackButton() throws IOException {
-        viewHandler.openView(Views.HOME.getFxmlFileName());
+        viewHandler.openView(Views.MAIN.getFxmlFileName());
     }
 
     private void loadConfiguration() throws FileNotFoundException {
