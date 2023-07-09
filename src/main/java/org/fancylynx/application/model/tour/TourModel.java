@@ -1,6 +1,6 @@
 package org.fancylynx.application.model.tour;
 
-import org.fancylynx.application.entity.Tour;
+import org.fancylynx.application.DAL.entity.Tour;
 
 import java.beans.PropertyChangeListener;
 

@@ -1,42 +1,23 @@
 package org.fancylynx.application.viewmodel;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
-import org.fancylynx.application.entity.TourLog;
+import javafx.beans.property.*;
 import org.fancylynx.application.model.tourlog.TourLogModel;
+import org.fancylynx.application.service.TourLogService;
 
 import java.time.LocalDateTime;
 
-@SuppressWarnings("ALL")
 public class TourLogViewModel {
-/*
-    private final LongProperty tourID;
-    private final LongProperty tourLogID;
-    private final ObjectProperty<LocalDateTime> date;
-    private final StringProperty comment;
-    private final ObjectProperty<Integer> difficulty;
-    private final DoubleProperty totalTime;
-    private final ObjectProperty<Integer> rating;
+    private final LongProperty tourLogID = new SimpleLongProperty();
+    private final ObjectProperty<LocalDateTime> date = new SimpleObjectProperty<>();
+    private final StringProperty comment = new SimpleStringProperty();
+    private final ObjectProperty<Integer> difficulty = new SimpleObjectProperty<>();
+    private final DoubleProperty totalTime = new SimpleDoubleProperty();
+    private final ObjectProperty<Integer> rating = new SimpleObjectProperty<>();
+    private final TourLogService tourLogService;
 
-
-    public TourLogViewModel(TourLogModel tourLog) {
-        //this.tourID = new LongProperty(tourLog.);
+    public TourLogViewModel(TourLogService tourLogService) {
+        this.tourLogService = tourLogService;
     }
-
-    public long getTourID() {
-        return tourID.get();
-    }
-
-    public LongProperty tourIDProperty() {
-        return tourID;
-    }
-
-    public void setTourID(long tourID) {
-        this.tourID.set(tourID);
-    }
-
     public long getTourLogID() {
         return tourLogID.get();
     }
@@ -107,5 +88,9 @@ public class TourLogViewModel {
 
     public void setRating(Integer rating) {
         this.rating.set(rating);
-    }*/
+    }
+
+    public void setTourLogModel(TourLogModel tourLogModel) {
+
+    }
 }

@@ -1,7 +1,7 @@
 package org.fancylynx.application.model.tour;
 
-import org.fancylynx.application.entity.Tour;
-import org.fancylynx.application.repository.TourRepository;
+import org.fancylynx.application.DAL.entity.Tour;
+import org.fancylynx.application.DAL.repository.TourRepository;
 import org.fancylynx.application.service.TourService;
 import org.springframework.stereotype.Repository;
 

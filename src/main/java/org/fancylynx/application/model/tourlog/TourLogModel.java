@@ -1,12 +1,23 @@
 package org.fancylynx.application.model.tourlog;
 
-import org.fancylynx.application.entity.TourLog;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 // 2do
-public interface TourLogModel {
-    void createNewTourLog(TourLog tourLog);
-
-    List<TourLog> getTourLogsForTour(Long tourId);
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class TourLogModel {
+    private long tourLogId;
+    private String name;
+    private LocalDateTime date;
+    private String comment;
+    private int difficulty;
+    private double totalTime;
+    private int rating;
 }

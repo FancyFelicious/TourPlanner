@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import org.fancylynx.application.entity.Tour;
+import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.model.tour.TourModel;
 import org.fancylynx.application.service.ImageService;
 import org.springframework.stereotype.Component;

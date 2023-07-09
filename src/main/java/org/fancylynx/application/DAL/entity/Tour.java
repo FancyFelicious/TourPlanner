@@ -1,4 +1,4 @@
-package org.fancylynx.application.entity;
+package org.fancylynx.application.DAL.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

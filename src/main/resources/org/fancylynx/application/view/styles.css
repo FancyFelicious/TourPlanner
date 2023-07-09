@@ -31,3 +31,24 @@
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #ffffff;
 }
+
+#tabPane {
+    -fx-background-color: #4f5b5d;
+    -fx-tab-min-width: 100px;
+    -fx-tab-min-height: 25px;
+}
+
+.tab {
+    -fx-background-color: #8e9798;
+    -fx-text-fill: #ffffff;
+
+}
+
+.tab:selected {
+    -fx-background-color: #569099;
+    -fx-text-fill: #4f5b5d;
+}
+
+.tab-pane *.tab-header-background {
+    -fx-background-color: #4f5b5d;
+}
