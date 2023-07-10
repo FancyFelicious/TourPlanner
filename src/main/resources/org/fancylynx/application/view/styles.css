@@ -52,3 +52,8 @@
 .tab-pane *.tab-header-background {
     -fx-background-color: #4f5b5d;
 }
+
+#detailsBox {
+    -fx-background-color: #0b2d3d;
+    -fx-text-fill: #ffffff;
+}

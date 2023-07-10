@@ -2,6 +2,8 @@ package org.fancylynx;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.fancylynx.application.config.Configuration;
 import org.fancylynx.application.factory.ModelFactory;
@@ -13,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Random;
 
 @SpringBootApplication
@@ -27,12 +30,21 @@ public class TourPlanner extends Application {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(TourPlanner.class);
 
         // Dependency Injection
-        ViewHandler viewHandler = applicationContext.getBean(ViewHandler.class);
-        viewHandler.start();
+        //ViewHandler viewHandler = applicationContext.getBean(ViewHandler.class);
+        //viewHandler.start();
+
+        Parent root = FXMLDependencyInjection.load(
+                "MainView.fxml",
+                Locale.GERMAN,
+                applicationContext);  // Locale.GERMANY, Locale.ENGLISH
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
         // 2do: remove later - testing / simulating changes to db
-        ModelFactory modelFactory = applicationContext.getBean(ModelFactory.class);
-        runAutoUpdate((DataModelManager) modelFactory.getDataModel());
+        //ModelFactory modelFactory = applicationContext.getBean(ModelFactory.class);
+        //runAutoUpdate((DataModelManager) modelFactory.getDataModel());
     }
 
     private void runAutoUpdate(DataModelManager dataModelManager) {

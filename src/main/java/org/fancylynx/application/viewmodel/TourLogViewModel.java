@@ -3,9 +3,11 @@ package org.fancylynx.application.viewmodel;
 import javafx.beans.property.*;
 import org.fancylynx.application.model.tourlog.TourLogModel;
 import org.fancylynx.application.service.TourLogService;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+@Component
 public class TourLogViewModel {
     private final LongProperty tourLogID = new SimpleLongProperty();
     private final ObjectProperty<LocalDateTime> date = new SimpleObjectProperty<>();

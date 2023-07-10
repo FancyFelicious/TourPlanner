@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import org.fancylynx.application.viewmodel.HomeViewModel;
 import org.fancylynx.application.viewmodel.MainViewModel;
 
@@ -16,11 +17,16 @@ public class MainController {
     private TabPane tabPane;
     @FXML
     private Tab contentTab;
+    @FXML
+    private TourLogController tourLogController;
     private ViewHandler viewHandler;
-    private MainViewModel viewModel;
+    private final MainViewModel viewModel;
 
-    public void init(MainViewModel mainViewModel, ViewHandler viewHandler) throws IOException {
-        this.viewModel = mainViewModel;
+    public MainController(MainViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void init(ViewHandler viewHandler) throws IOException {
         this.viewHandler = viewHandler;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TourDetails.fxml"));
         AnchorPane content = loader.load();
@@ -31,8 +37,8 @@ public class MainController {
         detailsAnchor.prefHeightProperty().bind(tabPane.heightProperty());
     }
 
-    public void handleCreateTourButton() throws IOException {
+   /* public void handleCreateTourButton() throws IOException {
         viewHandler.openView(Views.CREATETOUR.getFxmlFileName());
-    }
+    }*/
 
 }

@@ -5,7 +5,8 @@ package org.fancylynx.application.view;
 public enum Views {
     HOME("HomeView.fxml"),
     CREATETOUR("TourView.fxml"),
-    MAIN("MainView.fxml");
+    MAIN("MainView.fxml"),
+    CREATETOURLOG("AddTourLog.fxml");
 
 
     private final String fxmlFile;

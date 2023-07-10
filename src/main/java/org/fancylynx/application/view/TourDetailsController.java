@@ -1,4 +1,4 @@
 package org.fancylynx.application.view;
 
-public class TourDetails {
+public class TourDetailsController {
 }

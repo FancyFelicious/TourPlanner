@@ -47,7 +47,7 @@ public class ViewHandler {
             stage.setTitle(Constants.STAGE_TITLE_CREATE_TOUR);
         } else if (Views.MAIN.getFxmlFileName().equals(viewToOpen)) {
             MainController view = fxmlLoader.getController();
-            view.init(viewModelFactory.getMainViewModel(), this);
+            //view.init(viewModelFactory.getMainViewModel(), this);
             stage.setTitle(Constants.STAGE_TITLE_MAIN);
         }
         else {
@@ -60,5 +60,11 @@ public class ViewHandler {
         scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void openTourLogView(String viewToOpen) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource(viewToOpen));
+
     }
 }

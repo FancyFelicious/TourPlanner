@@ -2,9 +2,11 @@ package org.fancylynx.application.service;
 
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class TourLogServiceImpl implements TourLogService{
     private final TourLogRepository tourLogRepository;
 
