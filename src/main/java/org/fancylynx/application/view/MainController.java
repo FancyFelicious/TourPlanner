@@ -19,15 +19,15 @@ public class MainController {
     private Tab contentTab;
     @FXML
     private TourLogController tourLogController;
-    private ViewHandler viewHandler;
+    //private ViewHandler viewHandler;
     private final MainViewModel viewModel;
 
     public MainController(MainViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
-    public void init(ViewHandler viewHandler) throws IOException {
-        this.viewHandler = viewHandler;
+    public void init() throws IOException {
+        //this.viewHandler = viewHandler;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("TourDetails.fxml"));
         AnchorPane content = loader.load();
         contentTab.setContent(content);

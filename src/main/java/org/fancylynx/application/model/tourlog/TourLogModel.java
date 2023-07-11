@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // 2do
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class TourLogModel {
     private long tourLogId;
     private String name;
-    private LocalDateTime date;
+    private LocalDate date;
     private String comment;
     private String difficulty;
     private double totalTime;

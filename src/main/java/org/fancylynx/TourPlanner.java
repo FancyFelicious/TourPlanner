@@ -1,5 +1,6 @@
 package org.fancylynx;
 
+import atlantafx.base.theme.PrimerDark;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -28,6 +29,7 @@ public class TourPlanner extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         ConfigurableApplicationContext applicationContext = SpringApplication.run(TourPlanner.class);
+        Application.setUserAgentStylesheet(new PrimerDark().getUserAgentStylesheet());
 
         // Dependency Injection
         //ViewHandler viewHandler = applicationContext.getBean(ViewHandler.class);

@@ -37,6 +37,7 @@ public class TourLogController implements Initializable {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+
             stage.setTitle("Add Tour Log");
             stage.setScene(scene);
             stage.show();

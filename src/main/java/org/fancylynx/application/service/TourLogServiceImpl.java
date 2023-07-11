@@ -28,6 +28,9 @@ public class TourLogServiceImpl implements TourLogService{
     public Boolean createNewTourLog(TourLog tourLog) {
         try {
             tourLogRepository.save(tourLog);
+            System.out.println("Tour log saved to database");
+            // print the tourlog to the console
+            System.out.println(tourLog.toString());
             return true;
         } catch (Exception e) {
             System.out.println("Error saving tour log to database: " + e.getMessage());

@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name="tour_log")
@@ -17,11 +18,8 @@ public class TourLog implements Serializable {
     @Column(name="id", unique=true, updatable=false, nullable=false, columnDefinition="BIGINT")
     private long id;
 
-    @Column(name="name", unique=true, nullable=false, columnDefinition="TEXT")
-    private String name;
-
-    @Column(name="date", columnDefinition="DATETIME")
-    private LocalDateTime date;
+    @Column(name="date", columnDefinition="DATE")
+    private LocalDate date;
 
     @Column(name="comment", columnDefinition="TEXT")
     private String comment;

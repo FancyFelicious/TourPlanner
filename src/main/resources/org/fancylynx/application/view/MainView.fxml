@@ -17,7 +17,7 @@
 
     <left>
         <VBox prefHeight="400.0" prefWidth="186.0" spacing="10">
-            <Label id="appTitle" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" stylesheets="@styles.css" text="Tour Planner">
+            <Label id="appTitle" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" text="Tour Planner">
                 <VBox.margin>
                     <Insets top="10" />
                 </VBox.margin>
@@ -31,7 +31,7 @@
                     <Insets />
                 </VBox.margin></Button>-->
             <ScrollPane prefWidth="150.0" visible="false" VBox.vgrow="ALWAYS">
-                <VBox id="tourList" fx:id="tourList" prefHeight="2.0" prefWidth="135.0" spacing="10" stylesheets="@styles.css">
+                <VBox id="tourList" fx:id="tourList" prefHeight="2.0" prefWidth="135.0" spacing="10">
                     <!-- Dynamic list of tour buttons -->
                 </VBox>
             </ScrollPane>
