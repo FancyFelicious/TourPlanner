@@ -26,8 +26,8 @@ public class TourLog implements Serializable {
     @Column(name="comment", columnDefinition="TEXT")
     private String comment;
 
-    @Column(name="difficulty", columnDefinition="INT")
-    private int difficulty;
+    @Column(name="difficulty", columnDefinition="TEXT")
+    private String difficulty;
 
     @Column(name="total_time", columnDefinition="DOUBLE")
     private double totalTime;
