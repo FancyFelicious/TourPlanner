@@ -2,6 +2,7 @@ package org.fancylynx.application.service;
 
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
+import org.fancylynx.application.model.tourlog.TourLogModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,9 +16,20 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public List<TourLog> getAllTourLogs(long tourId) {
+    public List<TourLogModel> getAllTourLogs(long tourId) {
         try {
-            return tourLogRepository.findByTourId(tourId);
+            return tourLogRepository.findByTourId(tourId)
+                    .stream().map(
+                            tourLog -> new TourLogModel(
+                                    tourLog.getId(),
+                                    tourLog.getDate(),
+                                    tourLog.getComment(),
+                                    tourLog.getDifficulty(),
+                                    tourLog.getTotalTime(),
+                                    tourLog.getRating()
+                            )
+                    ).toList();
+
         } catch (Exception e) {
             System.out.println("Error retrieving tour logs from database: " + e.getMessage());
         }

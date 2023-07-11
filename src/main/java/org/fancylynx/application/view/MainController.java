@@ -1,12 +1,14 @@
 package org.fancylynx.application.view;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import org.fancylynx.application.viewmodel.HomeViewModel;
+import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.viewmodel.MainViewModel;
 
 import java.io.IOException;
@@ -17,6 +19,8 @@ public class MainController {
     private TabPane tabPane;
     @FXML
     private Tab contentTab;
+    @FXML
+    private ListView<Tour> tourList;
     @FXML
     private TourLogController tourLogController;
     //private ViewHandler viewHandler;
@@ -35,6 +39,10 @@ public class MainController {
         AnchorPane detailsAnchor = (AnchorPane) content.lookup("#detailsAnchor");
         detailsAnchor.prefWidthProperty().bind(tabPane.widthProperty());
         detailsAnchor.prefHeightProperty().bind(tabPane.heightProperty());
+
+        tourList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            viewModel.selectTour(new SimpleObjectProperty<>(newValue));
+        });
     }
 
    /* public void handleCreateTourButton() throws IOException {

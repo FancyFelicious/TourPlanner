@@ -62,4 +62,9 @@ public class AddTourLogController implements Initializable {
     public void handleAddTourLogButton() {
         tourLogViewModel.saveTourLog();
     }
+
+    @FXML
+    public void handleDeleteTourLogButton() {
+        tourLogViewModel.deleteTourLog();
+    }
 }

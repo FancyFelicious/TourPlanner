@@ -1,6 +1,9 @@
 package org.fancylynx.application.viewmodel;
 
 import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 import org.fancylynx.application.DAL.entity.Tour;
@@ -10,9 +13,12 @@ import org.fancylynx.application.service.TourLogService;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class TourLogViewModel {
+
     @Getter
     private final LongProperty tourLogID = new SimpleLongProperty();
     @Getter
@@ -29,10 +35,25 @@ public class TourLogViewModel {
 
     @Getter
     @Setter
-    private Tour tour;
+    private ObjectProperty<Tour> tour = new SimpleObjectProperty<>();
+
+    private ObservableList<TourLogModel> tourLogModels = FXCollections.observableArrayList();
 
     public TourLogViewModel(TourLogService tourLogService) {
         this.tourLogService = tourLogService;
+    }
+
+    public ObservableList<TourLogModel> getObservableTourLogs() {
+        return tourLogModels;
+    }
+
+    public List<TourLogModel> getTourLogModels(Tour tour) {
+        return tourLogService.getAllTourLogs(tour.getId());
+    }
+
+    public void setTourLogs(List<TourLogModel> tourLogs) {
+        tourLogModels.clear();
+        tourLogModels.addAll(tourLogs);
     }
 
     public void setTourLogModel(TourLogModel tourLogModel) {
@@ -46,6 +67,10 @@ public class TourLogViewModel {
         tourLog.setTotalTime(totalTime.get());
         tourLog.setRating(rating.get());
         tourLogService.createNewTourLog(tourLog);
+    }
+
+    public void deleteTourLog() {
+        tourLogService.deleteTourLog(tourLogID.get());
     }
 
     public LongProperty tourLogIDProperty() {
@@ -70,5 +95,9 @@ public class TourLogViewModel {
 
     public IntegerProperty ratingProperty() {
         return rating;
+    }
+
+    public ObjectProperty<Tour> tourProperty() {
+        return tour;
     }
 }

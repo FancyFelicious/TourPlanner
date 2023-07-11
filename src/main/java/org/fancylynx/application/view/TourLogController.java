@@ -5,19 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import org.fancylynx.FXMLDependencyInjection;
+import org.fancylynx.application.DAL.entity.Tour;
+import org.fancylynx.application.model.tourlog.TourLogModel;
 import org.fancylynx.application.viewmodel.TourLogViewModel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TourLogController implements Initializable {
     @FXML
-    public VBox tourLogTitle;
+    public ListView<TourLogModel> tourLogTitle;
 
 
     private final TourLogViewModel tourLogViewModel;
@@ -49,5 +52,14 @@ public class TourLogController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("TourLogController initialized");
+        tourLogTitle.setItems(tourLogViewModel.getObservableTourLogs());
+        tourLogViewModel.tourProperty().addListener((observable, oldValue, newValue) -> updateTourLogs(newValue));
+    }
+
+    private void updateTourLogs(Tour tour) {
+        if (tour != null) {
+            List<TourLogModel> tourLogs = tourLogViewModel.getTourLogModels(tour);
+            tourLogViewModel.setTourLogs(tourLogs);
+        }
     }
 }

@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TourLogModel {
     private long tourLogId;
-    private String name;
     private LocalDate date;
     private String comment;
     private String difficulty;
