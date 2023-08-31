@@ -1,19 +1,17 @@
 package org.fancylynx.application.viewmodel;
 
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.entity.TourLog;
-import org.fancylynx.application.model.tourlog.TourLogModel;
-import org.fancylynx.application.service.TourLogService;
+import org.fancylynx.application.BL.model.tourlog.TourLogModel;
+import org.fancylynx.application.BL.service.TourLogService;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component

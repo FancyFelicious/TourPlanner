@@ -3,7 +3,7 @@ package org.fancylynx;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
-import org.fancylynx.application.factory.ControllerFactory;
+import org.fancylynx.application.view.ControllerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;

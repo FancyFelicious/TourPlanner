@@ -1,8 +1,8 @@
 package org.fancylynx.application.factory;
 
-import org.fancylynx.application.model.DataModel;
-import org.fancylynx.application.model.tour.TourModel;
-import org.fancylynx.application.model.tour.TourModelManager;
+import org.fancylynx.application.BL.model.DataModel;
+import org.fancylynx.application.BL.model.tour.TourModel;
+import org.fancylynx.application.BL.model.tour.TourModelManager;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,6 +1,6 @@
 package org.fancylynx.playground.archive;
 
-import org.fancylynx.application.model.DataModelManager;
+import org.fancylynx.application.BL.model.DataModelManager;
 
 import java.util.Random;
 

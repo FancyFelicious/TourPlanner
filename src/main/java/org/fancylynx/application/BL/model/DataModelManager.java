@@ -1,4 +1,4 @@
-package org.fancylynx.application.model;
+package org.fancylynx.application.BL.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;

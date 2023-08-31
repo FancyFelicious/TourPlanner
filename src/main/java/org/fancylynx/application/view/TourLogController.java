@@ -7,9 +7,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import lombok.Getter;
 import org.fancylynx.FXMLDependencyInjection;
 import org.fancylynx.application.DAL.entity.Tour;
-import org.fancylynx.application.model.tourlog.TourLogModel;
+import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.viewmodel.TourLogViewModel;
 
 import java.io.IOException;
@@ -23,14 +24,11 @@ public class TourLogController implements Initializable {
     public ListView<TourLogModel> tourLogTitle;
 
 
+    @Getter
     private final TourLogViewModel tourLogViewModel;
 
     public TourLogController(TourLogViewModel tourLogViewModel) {
         this.tourLogViewModel = tourLogViewModel;
-    }
-
-    public TourLogViewModel getTourLogViewModel() {
-        return tourLogViewModel;
     }
 
     public void handleCreateTourLog() {

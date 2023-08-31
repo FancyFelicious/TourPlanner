@@ -1,24 +1,27 @@
-package org.fancylynx.application.factory;
+package org.fancylynx.application.view;
 
+import org.fancylynx.application.BL.service.TourLogService;
+import org.fancylynx.application.BL.service.TourServiceImpl;
+import org.fancylynx.application.BL.service.TourServiceNew;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
-import org.fancylynx.application.service.TourLogServiceImpl;
-import org.fancylynx.application.view.AddTourLogController;
-import org.fancylynx.application.view.MainController;
-import org.fancylynx.application.view.TourLogController;
+import org.fancylynx.application.BL.service.TourLogServiceImpl;
 import org.fancylynx.application.viewmodel.MainViewModel;
 import org.fancylynx.application.viewmodel.TourLogViewModel;
+import org.fancylynx.application.viewmodel.TourViewModel;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class ControllerFactory {
     private final MainViewModel mainViewModel;
     private final TourLogViewModel tourLogViewModel;
-    //private final TourViewModel tourViewModel;
+    private final TourViewModel tourViewModel;
 
     public ControllerFactory(ConfigurableApplicationContext applicationContext) {
-        TourLogServiceImpl tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
+        TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
+        TourServiceNew tourService = new TourServiceImpl();
+
         this.tourLogViewModel = new TourLogViewModel(tourLogService);
-        this.mainViewModel = new MainViewModel(tourLogViewModel);
-        //this.tourViewModel = new TourViewModel();
+        this.tourViewModel = new TourViewModel(tourService);
+        this.mainViewModel = new MainViewModel(tourViewModel, tourLogViewModel);
     }
 
     public Object create(Class<?> controllerClass) {
@@ -26,7 +29,10 @@ public class ControllerFactory {
             return new MainController(mainViewModel);
         } else if (controllerClass == TourLogController.class) {
             return new TourLogController(tourLogViewModel);
-        } else if (controllerClass == AddTourLogController.class) {
+        } else if (controllerClass == TourController.class) {
+            return new TourController(tourViewModel);
+        }
+        else if (controllerClass == AddTourLogController.class) {
             AddTourLogController addTourLogController = new AddTourLogController();
             addTourLogController.setTourLogViewModel(tourLogViewModel);
             return addTourLogController;

@@ -1,4 +1,4 @@
-package org.fancylynx.application.service;
+package org.fancylynx.application.BL.service;
 
 import org.fancylynx.application.config.Constants;
 

@@ -1,8 +1,8 @@
-package org.fancylynx.application.service;
+package org.fancylynx.application.BL.service;
 
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
-import org.fancylynx.application.model.tourlog.TourLogModel;
+import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
