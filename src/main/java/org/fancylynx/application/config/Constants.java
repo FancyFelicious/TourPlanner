@@ -31,7 +31,6 @@ public final class Constants {
     public static final String STAGE_TITLE_MAIN = "Main";
 
     // 2do: put paths into constants or overkill?
-//    public static final String VIEW_FXML_FILE_HOME = "HomeView.fxml";
 //    public static final String VIEW_FXML_FILE_CREATE_TOUR = "TourView.fxml";
 
     // Prevents other classes from creating instances of 'Constants' (this is supposed to be a collection of constant values rather than an object with a state)

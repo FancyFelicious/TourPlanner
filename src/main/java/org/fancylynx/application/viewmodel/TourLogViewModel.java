@@ -1,111 +1,103 @@
 package org.fancylynx.application.viewmodel;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
-import org.fancylynx.application.entity.TourLog;
-import org.fancylynx.application.model.tourlog.TourLogModel;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import lombok.Getter;
+import lombok.Setter;
+import org.fancylynx.application.DAL.entity.Tour;
+import org.fancylynx.application.DAL.entity.TourLog;
+import org.fancylynx.application.BL.model.tourlog.TourLogModel;
+import org.fancylynx.application.BL.service.TourLogService;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 
-@SuppressWarnings("ALL")
+@Component
 public class TourLogViewModel {
-/*
-    private final LongProperty tourID;
-    private final LongProperty tourLogID;
-    private final ObjectProperty<LocalDateTime> date;
-    private final StringProperty comment;
-    private final ObjectProperty<Integer> difficulty;
-    private final DoubleProperty totalTime;
-    private final ObjectProperty<Integer> rating;
 
+    @Getter
+    private final LongProperty tourLogID = new SimpleLongProperty();
+    @Getter
+    private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
+    @Getter
+    private final StringProperty comment = new SimpleStringProperty();
+    @Getter
+    private final StringProperty difficulty = new SimpleStringProperty("");
+    @Getter
+    private final DoubleProperty totalTime = new SimpleDoubleProperty();
+    @Getter
+    private final IntegerProperty rating = new SimpleIntegerProperty();
+    private final TourLogService tourLogService;
 
-    public TourLogViewModel(TourLogModel tourLog) {
-        //this.tourID = new LongProperty(tourLog.);
+    @Getter
+    @Setter
+    private ObjectProperty<Tour> tour = new SimpleObjectProperty<>();
+
+    private ObservableList<TourLogModel> tourLogModels = FXCollections.observableArrayList();
+
+    public TourLogViewModel(TourLogService tourLogService) {
+        this.tourLogService = tourLogService;
     }
 
-    public long getTourID() {
-        return tourID.get();
+    public ObservableList<TourLogModel> getObservableTourLogs() {
+        return tourLogModels;
     }
 
-    public LongProperty tourIDProperty() {
-        return tourID;
+    public List<TourLogModel> getTourLogModels(Tour tour) {
+        return tourLogService.getAllTourLogs(tour.getId());
     }
 
-    public void setTourID(long tourID) {
-        this.tourID.set(tourID);
+    public void setTourLogs(List<TourLogModel> tourLogs) {
+        tourLogModels.clear();
+        tourLogModels.addAll(tourLogs);
     }
 
-    public long getTourLogID() {
-        return tourLogID.get();
+    public void setTourLogModel(TourLogModel tourLogModel) {
+    }
+
+    public void saveTourLog() {
+        TourLog tourLog = new TourLog();
+        tourLog.setDate(date.get());
+        tourLog.setComment(comment.get());
+        tourLog.setDifficulty(difficulty.get());
+        tourLog.setTotalTime(totalTime.get());
+        tourLog.setRating(rating.get());
+
+        TourLogModel tourLogM = tourLogService.createNewTourLog(tourLog);
+        tourLogModels.add(tourLogM);
+    }
+
+    public void deleteTourLog() {
+        tourLogService.deleteTourLog(tourLogID.get());
     }
 
     public LongProperty tourLogIDProperty() {
         return tourLogID;
     }
 
-    public void setTourLogID(long tourLogID) {
-        this.tourLogID.set(tourLogID);
-    }
-
-    public LocalDateTime getDate() {
-        return date.get();
-    }
-
-    public ObjectProperty<LocalDateTime> dateProperty() {
+    public ObjectProperty<LocalDate> dateProperty() {
         return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date.set(date);
-    }
-
-    public String getComment() {
-        return comment.get();
     }
 
     public StringProperty commentProperty() {
         return comment;
     }
 
-    public void setComment(String comment) {
-        this.comment.set(comment);
-    }
-
-    public Integer getDifficulty() {
-        return difficulty.get();
-    }
-
-    public ObjectProperty<Integer> difficultyProperty() {
+    public StringProperty difficultyProperty() {
         return difficulty;
-    }
-
-    public void setDifficulty(Integer difficulty) {
-        this.difficulty.set(difficulty);
-    }
-
-    public double getTotalTime() {
-        return totalTime.get();
     }
 
     public DoubleProperty totalTimeProperty() {
         return totalTime;
     }
 
-    public void setTotalTime(double totalTime) {
-        this.totalTime.set(totalTime);
-    }
-
-    public Integer getRating() {
-        return rating.get();
-    }
-
-    public ObjectProperty<Integer> ratingProperty() {
+    public IntegerProperty ratingProperty() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
-        this.rating.set(rating);
-    }*/
+    public ObjectProperty<Tour> tourProperty() {
+        return tour;
+    }
 }

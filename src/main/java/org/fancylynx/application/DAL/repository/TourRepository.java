@@ -1,6 +1,6 @@
-package org.fancylynx.application.repository;
+package org.fancylynx.application.DAL.repository;
 
-import org.fancylynx.application.entity.Tour;
+import org.fancylynx.application.DAL.entity.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

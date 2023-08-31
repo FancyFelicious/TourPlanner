@@ -3,35 +3,69 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.MainController">
+<BorderPane prefHeight="400.0" prefWidth="700.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.MainController">
 
     <left>
-        <VBox spacing="10">
-            <Label id="appTitle" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" stylesheets="@styles.css" text="Tour Planner">
+        <VBox prefHeight="400.0" prefWidth="186.0" spacing="10">
+            <Label id="appTitle" alignment="CENTER" prefHeight="35.0" prefWidth="149.0" text="Tour Planner">
                 <VBox.margin>
                     <Insets top="10" />
                 </VBox.margin>
             </Label>
             <TextField id="tourSearch" focusTraversable="false" promptText="Search Tours.." />
-            <Button id="newTourBtn" onAction="#handleCreateTourButton" prefHeight="46.0" prefWidth="150.0" stylesheets="@styles.css" text="Create new Tour" textFill="WHITE">
-            <font>
-               <Font size="17.0" />
-            </font></Button>
+         <Button mnemonicParsing="false" onAction="#handleAddNewTour" prefHeight="54.0" prefWidth="190.0" text="Add new Tour" />
+            <!--<Button id="newTourBtn" onAction="#handleCreateTourButton" prefHeight="46.0" prefWidth="209.0" stylesheets="@styles.css" text="Create new Tour" textFill="WHITE">
+                <font>
+                    <Font size="17.0" />
+                </font>
+                <VBox.margin>
+                    <Insets />
+                </VBox.margin></Button>-->
             <ScrollPane prefWidth="150.0" visible="false" VBox.vgrow="ALWAYS">
-                <VBox id="tourList" fx:id="tourList" prefHeight="2.0" prefWidth="135.0" spacing="10" stylesheets="@styles.css">
-                    <!-- Dynamic list of tour buttons -->
-                </VBox>
+            <content>
+               <ListView id="tourList" fx:id="tourList" prefHeight="307.0" prefWidth="186.0" />
+            </content>
             </ScrollPane>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
         </VBox>
     </left>
     <center>
         <!-- Main window content -->
+    </center>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Pane maxHeight="-Infinity" prefHeight="51.0" prefWidth="414.0" />
+                <TabPane id="tabPane" fx:id="tabPane" prefHeight="348.0" prefWidth="414.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                        <Tab fx:id="contentTab" text="Details">
+                            <content>
+                                <AnchorPane>
+                                    <!--<fx:include fx:id="tourDetails" source="TourDetails.fxml" />-->
+                                </AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Tour Logs">
+                            <content>
+                                <fx:include fx:id="tourLogs" source="TourLogsView.fxml" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </VBox>
     </center>
 
 </BorderPane>

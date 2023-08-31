@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.fancylynx.application.config.Constants;
-import org.fancylynx.application.service.ImageService;
+import org.fancylynx.application.BL.service.ImageService;
 import org.fancylynx.application.viewmodel.TourViewModel;
 
 import java.io.FileInputStream;
@@ -83,15 +83,14 @@ public class TourController {
     Button updateImage;
 
     private TourViewModel viewModel;
-    private ViewHandler viewHandler;
 
-    public TourController() {
+    public TourController(TourViewModel tourViewModel) {
+        this.viewModel = tourViewModel;
     }
 
     // Note: Init method needed because constructor of controller must be empty
-    public void init(TourViewModel tourViewModel, ViewHandler viewHandler) throws FileNotFoundException {
-        this.viewModel = tourViewModel;
-        this.viewHandler = viewHandler;
+    @FXML
+    public void initialize() throws FileNotFoundException {
         loadConfiguration(); // Remember settings after switching scenes // 2do: necessary?
 
         // Bind UI elements to view model
@@ -156,17 +155,13 @@ public class TourController {
         viewModel.createNewTour();
     }
 
+
     // 2do: delete
     @FXML
     private void handleUpdateImageButton() throws FileNotFoundException {
         System.out.println("updating image");
         Image image = new Image(new FileInputStream("images/tourImage_TEST.png")); //2do
         viewModel.setTourMap(image);
-    }
-
-    @FXML
-    public void handleBackButton() throws IOException {
-        viewHandler.openView(Views.MAIN.getFxmlFileName());
     }
 
     private void loadConfiguration() throws FileNotFoundException {

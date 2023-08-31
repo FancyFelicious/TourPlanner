@@ -1,22 +1,16 @@
-package org.fancylynx.application.service;
+package org.fancylynx.application.BL.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.config.Constants;
-import org.fancylynx.application.entity.Tour;
-import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-
-// 2do: handle erros based on response status code
-@Service
-public class TourService {
-    // 2do put endpoint & api keys here?
-
+public class RouteServiceImpl {
     public String getRoute(Tour tour) {
         // 2do: implement .png / transport type options
         // Generate request URL

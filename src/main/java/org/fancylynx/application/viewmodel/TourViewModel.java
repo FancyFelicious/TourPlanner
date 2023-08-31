@@ -5,9 +5,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
-import org.fancylynx.application.entity.Tour;
-import org.fancylynx.application.model.tour.TourModel;
-import org.fancylynx.application.service.ImageService;
+import lombok.Getter;
+import org.fancylynx.application.BL.service.TourServiceNew;
+import org.fancylynx.application.DAL.entity.Tour;
+import org.fancylynx.application.BL.model.tour.TourModel;
+import org.fancylynx.application.BL.service.ImageService;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
@@ -19,53 +21,39 @@ import java.io.FileNotFoundException;
 
 @Component
 public class TourViewModel {
-    private final TourModel tourModel;
-    private final StringProperty imageDirectory;
-    private final StringProperty imageName;
-    private final StringProperty name;
-    private final StringProperty origin;
-    private final StringProperty destination;
-    private final StringProperty description;
-    private final StringProperty transportType;
-    private final StringProperty imageFormat;
-    private final StringProperty sessionId;
-    private final StringProperty finalImagePath;
-    private final StringProperty status;
-    private final ObjectProperty<Image> tourMap;
+    @Getter
+    private final StringProperty imageDirectory = new SimpleStringProperty();
+    @Getter
+    private final StringProperty imageName = new SimpleStringProperty();
+    @Getter
+    private final StringProperty name = new SimpleStringProperty();
+    @Getter
+    private final StringProperty origin = new SimpleStringProperty();
+    @Getter
+    private final StringProperty destination = new SimpleStringProperty();
+    @Getter
+    private final StringProperty description = new SimpleStringProperty();
+    // 2do
+    @Getter
+    private final StringProperty transportType = new SimpleStringProperty();
+    @Getter
+    private final StringProperty imageFormat = new SimpleStringProperty();
+    @Getter
+    private final StringProperty sessionId = new SimpleStringProperty();
+    @Getter
+    private final StringProperty finalImagePath = new SimpleStringProperty();
+    @Getter
+    private final StringProperty status = new SimpleStringProperty();
+    // 2do: order / standardize
+    @Getter
+    private final ObjectProperty<Image> tourMap = new SimpleObjectProperty<>();
 
-    public TourViewModel(TourModel tourModel) {
-        this.tourModel = tourModel;
-        this.imageDirectory = new SimpleStringProperty();
-        this.imageName = new SimpleStringProperty();
-        this.imageFormat = new SimpleStringProperty();
-        this.name = new SimpleStringProperty();
-        this.description = new SimpleStringProperty();
-        this.origin = new SimpleStringProperty();
-        this.destination = new SimpleStringProperty();
-        this.transportType = new SimpleStringProperty();
-        this.sessionId = new SimpleStringProperty();
-        this.finalImagePath = new SimpleStringProperty();
-        this.status = new SimpleStringProperty();
-        this.tourMap = new SimpleObjectProperty<>();
+    private TourServiceNew tourServiceNew;
 
-        tourModel.addPropertyChangeListener(evt -> {
-            if (evt.getPropertyName().equals("sessionTokenRetrieved")) {
-                setSessionId(evt.getNewValue().toString());
-                setStatus("Session Token Retrieved");
-            }
-            if (evt.getPropertyName().equals("staticMapRetrieved")) {
-                setFinalImagePath(evt.getNewValue().toString());
-                setStatus("Tour Map Retrieved");
-                try {
-                    Image image = new Image(new FileInputStream(evt.getNewValue().toString())); //2do
-                    setTourMap(image);
-                    setStatus("Tour Map Saved");
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException(e); // 2do
-                }
-            }
-        });
+    public TourViewModel(TourServiceNew tourService) {
+        this.tourServiceNew = tourService;
     }
+
 
     public void createNewTour() {
         this.setStatus("Processing Request...");
@@ -80,101 +68,51 @@ public class TourViewModel {
         ImageService.imageDirectory = imageDirectory.get();
         ImageService.imageName = imageName.get();
 
-        tourModel.createNewTour(newTour);
-    }
-
-    // 2do: order / standardize
-    public ObjectProperty<Image> getTourMap() {
-        return tourMap;
+        //tourModel.createNewTour(newTour);
     }
 
     public void setTourMap(Image tourMap) {
         this.tourMap.set(tourMap);
     }
 
-    public StringProperty getStatus() {
-        return status;
-    }
-
     public void setStatus(String status) {
         this.status.set(status);
-    }
-
-    public StringProperty getFinalImagePath() {
-        return finalImagePath;
     }
 
     public void setFinalImagePath(String finalImagePath) {
         this.finalImagePath.set(finalImagePath);
     }
 
-    public StringProperty getImageFormat() {
-        return imageFormat;
-    }
-
     public void setImageFormat(String imageFormat) {
         this.imageFormat.set(imageFormat);
-    }
-
-    // 2do
-    public StringProperty getTransportType() {
-        return transportType;
     }
 
     public void setTransportType(String transportType) {
         this.transportType.set(transportType);
     }
 
-    public StringProperty getImageDirectory() {
-        return imageDirectory;
-    }
-
     public void setImageDirectory(String imageDirectory) {
         this.imageDirectory.set(imageDirectory);
-    }
-
-    public StringProperty getImageName() {
-        return imageName;
     }
 
     public void setImageName(String imageName) {
         this.imageName.set(imageName);
     }
 
-    public StringProperty getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public StringProperty getDescription() {
-        return description;
     }
 
     public void setDescription(String description) {
         this.description.set(description);
     }
 
-    public StringProperty getOrigin() {
-        return origin;
-    }
-
     public void setOrigin(String origin) {
         this.origin.set(origin);
     }
 
-    public StringProperty getDestination() {
-        return destination;
-    }
-
     public void setDestination(String destination) {
         this.destination.set(destination);
-    }
-
-    public StringProperty getSessionId() {
-        return sessionId;
     }
 
     public void setSessionId(String sessionId) {

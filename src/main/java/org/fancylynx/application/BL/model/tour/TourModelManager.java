@@ -1,8 +1,8 @@
-package org.fancylynx.application.model.tour;
+package org.fancylynx.application.BL.model.tour;
 
-import org.fancylynx.application.entity.Tour;
-import org.fancylynx.application.repository.TourRepository;
-import org.fancylynx.application.service.TourService;
+import org.fancylynx.application.DAL.entity.Tour;
+import org.fancylynx.application.DAL.repository.TourRepository;
+import org.fancylynx.application.BL.service.TourService;
 import org.springframework.stereotype.Repository;
 
 import java.beans.PropertyChangeListener;

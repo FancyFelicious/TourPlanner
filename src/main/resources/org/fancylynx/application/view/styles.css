@@ -3,7 +3,7 @@
 }
 
 #appTitle {
-    -fx-font-size: 2em;
+    -fx-font-size: 1.7em;
     -fx-text-fill: #ffffff;
     -fx-text-alignment: center;
 }
@@ -30,4 +30,30 @@
     -fx-text-fill: #ffffff;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: #ffffff;
+}
+
+#tabPane {
+    -fx-background-color: #4f5b5d;
+    -fx-tab-min-width: 100px;
+    -fx-tab-min-height: 25px;
+}
+
+.tab {
+    -fx-background-color: #8e9798;
+    -fx-text-fill: #ffffff;
+
+}
+
+.tab:selected {
+    -fx-background-color: #569099;
+    -fx-text-fill: #4f5b5d;
+}
+
+.tab-pane *.tab-header-background {
+    -fx-background-color: #4f5b5d;
+}
+
+#detailsBox {
+    -fx-background-color: #0b2d3d;
+    -fx-text-fill: #ffffff;
 }

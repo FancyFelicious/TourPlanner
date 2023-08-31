@@ -9,8 +9,6 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19"
             fx:controller="org.fancylynx.application.view.TourController">
     <TextField fx:id="imageDirectoryInput" layoutX="475.0" layoutY="44.0" promptText="Image Directory" text="images/"/>
-    <Button fx:id="back" layoutX="39.0" layoutY="666.0" mnemonicParsing="false" onAction="#handleBackButton"
-            prefHeight="30.0" prefWidth="138.0" text="Go Back"/>
     <TextField fx:id="originInput" layoutX="60.0" layoutY="44.0" promptText="Vienna" text="Vienna"/>
     <TextField fx:id="destinationInput" layoutX="256.0" layoutY="44.0" prefHeight="25.0" prefWidth="160.0"
                promptText="Madrid" text="Mekka"/>
