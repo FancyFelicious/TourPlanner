@@ -64,7 +64,9 @@ public class TourLogViewModel {
         tourLog.setDifficulty(difficulty.get());
         tourLog.setTotalTime(totalTime.get());
         tourLog.setRating(rating.get());
-        tourLogService.createNewTourLog(tourLog);
+
+        TourLogModel tourLogM = tourLogService.createNewTourLog(tourLog);
+        tourLogModels.add(tourLogM);
     }
 
     public void deleteTourLog() {

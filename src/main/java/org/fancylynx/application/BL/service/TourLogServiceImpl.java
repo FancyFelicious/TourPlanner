@@ -37,17 +37,25 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public Boolean createNewTourLog(TourLog tourLog) {
+    public TourLogModel createNewTourLog(TourLog tourLog) {
         try {
             tourLogRepository.save(tourLog);
             System.out.println("Tour log saved to database");
             // print the tourlog to the console
             System.out.println(tourLog.toString());
-            return true;
+
+            return new TourLogModel(
+                    tourLog.getId(),
+                    tourLog.getDate(),
+                    tourLog.getComment(),
+                    tourLog.getDifficulty(),
+                    tourLog.getTotalTime(),
+                    tourLog.getRating()
+            );
         } catch (Exception e) {
             System.out.println("Error saving tour log to database: " + e.getMessage());
         }
-        return false;
+        return null;
     }
 
     @Override
