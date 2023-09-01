@@ -42,7 +42,7 @@ public class TourLogServiceImpl implements TourLogService{
             tourLogRepository.save(tourLog);
             System.out.println("Tour log saved to database");
             // print the tourlog to the console
-            System.out.println(tourLog.toString());
+            System.out.println(tourLog);
 
             return new TourLogModel(
                     tourLog.getId(),
@@ -59,9 +59,9 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public Boolean deleteTourLog(long tourLogId) {
+    public Boolean deleteTourLog(TourLogModel tourLog) {
         try {
-            tourLogRepository.deleteById(tourLogId);
+            tourLogRepository.deleteById(tourLog.getTourLogId());
             return true;
         } catch (Exception e) {
             System.out.println("Error deleting tour log from database: " + e.getMessage());

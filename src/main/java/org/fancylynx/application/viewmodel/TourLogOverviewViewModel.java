@@ -15,20 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Component
-public class TourLogViewModel {
-
-    @Getter
-    private final LongProperty tourLogID = new SimpleLongProperty();
-    @Getter
-    private final ObjectProperty<LocalDate> date = new SimpleObjectProperty<>();
-    @Getter
-    private final StringProperty comment = new SimpleStringProperty();
-    @Getter
-    private final StringProperty difficulty = new SimpleStringProperty("");
-    @Getter
-    private final DoubleProperty totalTime = new SimpleDoubleProperty();
-    @Getter
-    private final IntegerProperty rating = new SimpleIntegerProperty();
+public class TourLogOverviewViewModel {
     private final TourLogService tourLogService;
 
     @Getter
@@ -37,7 +24,7 @@ public class TourLogViewModel {
 
     private ObservableList<TourLogModel> tourLogModels = FXCollections.observableArrayList();
 
-    public TourLogViewModel(TourLogService tourLogService) {
+    public TourLogOverviewViewModel(TourLogService tourLogService) {
         this.tourLogService = tourLogService;
     }
 
@@ -59,43 +46,21 @@ public class TourLogViewModel {
 
     public void saveTourLog() {
         TourLog tourLog = new TourLog();
-        tourLog.setDate(date.get());
+        /*tourLog.setDate(date.get());
         tourLog.setComment(comment.get());
         tourLog.setDifficulty(difficulty.get());
         tourLog.setTotalTime(totalTime.get());
-        tourLog.setRating(rating.get());
+        tourLog.setRating(rating.get());*/
 
         TourLogModel tourLogM = tourLogService.createNewTourLog(tourLog);
         tourLogModels.add(tourLogM);
     }
 
-    public void deleteTourLog() {
-        tourLogService.deleteTourLog(tourLogID.get());
+    public void deleteTourLog(TourLogModel tourLog) {
+       tourLogService.deleteTourLog(tourLog);
+       tourLogModels.remove(tourLog);
     }
 
-    public LongProperty tourLogIDProperty() {
-        return tourLogID;
-    }
-
-    public ObjectProperty<LocalDate> dateProperty() {
-        return date;
-    }
-
-    public StringProperty commentProperty() {
-        return comment;
-    }
-
-    public StringProperty difficultyProperty() {
-        return difficulty;
-    }
-
-    public DoubleProperty totalTimeProperty() {
-        return totalTime;
-    }
-
-    public IntegerProperty ratingProperty() {
-        return rating;
-    }
 
     public ObjectProperty<Tour> tourProperty() {
         return tour;

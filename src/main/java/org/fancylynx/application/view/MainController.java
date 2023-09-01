@@ -1,6 +1,5 @@
 package org.fancylynx.application.view;
 
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +26,7 @@ public class MainController {
     @FXML
     private ListView<Tour> tourList;
     @FXML
-    private TourLogController tourLogController;
+    private TourLogOverviewController tourLogController;
     //private ViewHandler viewHandler;
     private final MainViewModel viewModel;
 

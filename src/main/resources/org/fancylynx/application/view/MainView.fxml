@@ -10,10 +10,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="400.0" prefWidth="700.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.MainController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.MainController">
 
     <left>
         <VBox prefHeight="400.0" prefWidth="186.0" spacing="10">
@@ -23,7 +24,7 @@
                 </VBox.margin>
             </Label>
             <TextField id="tourSearch" focusTraversable="false" promptText="Search Tours.." />
-         <Button mnemonicParsing="false" onAction="#handleAddNewTour" prefHeight="54.0" prefWidth="190.0" text="Add new Tour" />
+         <Button maxHeight="-Infinity" mnemonicParsing="false" onAction="#handleAddNewTour" prefHeight="40.0" prefWidth="190.0" text="Add new Tour" />
             <!--<Button id="newTourBtn" onAction="#handleCreateTourButton" prefHeight="46.0" prefWidth="209.0" stylesheets="@styles.css" text="Create new Tour" textFill="WHITE">
                 <font>
                     <Font size="17.0" />
@@ -58,9 +59,11 @@
                             </content>
                         </Tab>
                         <Tab text="Tour Logs">
-                            <content>
-                                <fx:include fx:id="tourLogs" source="TourLogsView.fxml" />
-                            </content>
+
+                            <HBox>
+                                <fx:include fx:id="mediaOverview" source="TourLogOverview.fxml" />
+                                <fx:include fx:id="mediaDetails" source="TourLogDetails.fxml" />
+                            </HBox>
                         </Tab>
                     </tabs>
                 </TabPane>

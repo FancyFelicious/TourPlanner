@@ -8,7 +8,7 @@ import java.util.List;
 public interface TourLogService {
     List<TourLogModel> getAllTourLogs(long tourId);
     TourLogModel createNewTourLog(TourLog tourLog);
-    Boolean deleteTourLog(long tourLogId);
+    Boolean deleteTourLog(TourLogModel tourLog);
     TourLog updateTourLog(TourLog tourLog);
     TourLog getTourLog(long tourLogId);
 }
