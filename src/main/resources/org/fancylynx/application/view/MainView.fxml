@@ -24,19 +24,20 @@
                 </VBox.margin>
             </Label>
             <TextField id="tourSearch" focusTraversable="false" promptText="Search Tours.." />
-         <Button maxHeight="-Infinity" mnemonicParsing="false" onAction="#handleAddNewTour" prefHeight="40.0" prefWidth="190.0" text="Add new Tour" />
-            <!--<Button id="newTourBtn" onAction="#handleCreateTourButton" prefHeight="46.0" prefWidth="209.0" stylesheets="@styles.css" text="Create new Tour" textFill="WHITE">
+      <!--   <Button maxHeight="-Infinity" mnemonicParsing="false" onAction="#handleAddNewTour" prefHeight="40.0" prefWidth="190.0" text="Add new Tour" />
+            <Button id="newTourBtn" onAction="#handleCreateTourButton" prefHeight="46.0" prefWidth="209.0" stylesheets="@styles.css" text="Create new Tour" textFill="WHITE">
                 <font>
                     <Font size="17.0" />
                 </font>
                 <VBox.margin>
                     <Insets />
-                </VBox.margin></Button>-->
+                </VBox.margin></Button>
             <ScrollPane prefWidth="150.0" visible="false" VBox.vgrow="ALWAYS">
             <content>
                <ListView id="tourList" fx:id="tourList" prefHeight="307.0" prefWidth="186.0" />
             </content>
-            </ScrollPane>
+            </ScrollPane>-->
+            <fx:include fx:id="tourOverview" source="TourOverview.fxml" />
          <BorderPane.margin>
             <Insets />
          </BorderPane.margin>

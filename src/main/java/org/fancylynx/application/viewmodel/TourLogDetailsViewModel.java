@@ -4,9 +4,11 @@ import javafx.beans.property.*;
 import lombok.Getter;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 public class TourLogDetailsViewModel {
 
     @Getter
@@ -29,35 +31,17 @@ public class TourLogDetailsViewModel {
         this.tourLogService = tourLogService;
     }
 
-    public void saveTourLog() {
-
+    public void setTourLogModel(TourLogModel tourLogModel) {
+        this.tourLogModel = tourLogModel;
+        tourLogID.set(tourLogModel.getTourLogId());
+        date.set(tourLogModel.getDate());
+        comment.set(tourLogModel.getComment());
+        difficulty.set(tourLogModel.getDifficulty());
+        totalTime.set(tourLogModel.getTotalTime());
+        rating.set(tourLogModel.getRating());
     }
 
     public void updateTourLog() {
 
-    }
-
-    public LongProperty tourLogIDProperty() {
-        return tourLogID;
-    }
-
-    public ObjectProperty<LocalDate> dateProperty() {
-        return date;
-    }
-
-    public StringProperty commentProperty() {
-        return comment;
-    }
-
-    public StringProperty difficultyProperty() {
-        return difficulty;
-    }
-
-    public DoubleProperty totalTimeProperty() {
-        return totalTime;
-    }
-
-    public IntegerProperty ratingProperty() {
-        return rating;
     }
 }

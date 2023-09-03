@@ -8,18 +8,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainViewModel {
     private TourViewModel tourViewModel;
+    private TourOverviewViewModel tourOverviewViewModel;
     private TourLogOverviewViewModel tourLogOverviewViewModel;
+    private TourLogDetailsViewModel tourLogDetailsViewModel;
 
 
-    public MainViewModel(TourViewModel tourViewModel, TourLogOverviewViewModel tourLogOverviewViewModel) {
+    public MainViewModel(TourViewModel tourViewModel, TourOverviewViewModel tourOverviewViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel) {
         this.tourViewModel = tourViewModel;
+        this.tourOverviewViewModel = tourOverviewViewModel;
         this.tourLogOverviewViewModel = tourLogOverviewViewModel;
+        this.tourLogDetailsViewModel = tourLogDetailsViewModel;
 
         this.tourLogOverviewViewModel.addSelectionChangedListener(this::selectTourLog);
     }
 
     public void selectTourLog(TourLogModel tourLogModel) {
-        tourLogOverviewViewModel.setTourLogModel(tourLogModel);
+        tourLogDetailsViewModel.setTourLogModel(tourLogModel);
     }
 
     public void selectTour(TourModelNew tour){

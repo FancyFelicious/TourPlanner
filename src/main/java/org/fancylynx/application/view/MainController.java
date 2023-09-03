@@ -23,8 +23,8 @@ public class MainController {
     private TabPane tabPane;
     @FXML
     private Tab contentTab;
-    @FXML
-    private ListView<Tour> tourList;
+    //@FXML
+    //private ListView<Tour> tourList;
     @FXML
     private TourLogOverviewController tourLogController;
     //private ViewHandler viewHandler;
