@@ -1,5 +1,7 @@
 package org.fancylynx.application.BL.service;
 
+import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
@@ -37,7 +39,21 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public TourLogModel createNewTourLog(TourLog tourLog) {
+    public TourLogModel createNewTourLog(TourModelNew tourModel) {
+        Tour tour = new Tour(
+                tourModel.getTourId(),
+                tourModel.getName(),
+                tourModel.getDescription(),
+                tourModel.getFrom(),
+                tourModel.getTo(),
+                tourModel.getTransportType(),
+                tourModel.getDistance(),
+                tourModel.getEstimatedTime(),
+                tourModel.getImagePath()
+        );
+
+        TourLog tourLog = new TourLog(tour);
+
         try {
             tourLogRepository.save(tourLog);
             System.out.println("Tour log saved to database");
@@ -55,6 +71,7 @@ public class TourLogServiceImpl implements TourLogService{
         } catch (Exception e) {
             System.out.println("Error saving tour log to database: " + e.getMessage());
         }
+
         return null;
     }
 

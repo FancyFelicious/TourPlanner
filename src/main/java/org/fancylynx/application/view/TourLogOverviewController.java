@@ -20,8 +20,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TourLogOverviewController implements Initializable {
-    //@FXML
-    //public ListView<TourLogModel> tourLogTitle;
+    @FXML
+    public ListView<TourLogModel> tourLogList;
 
 
     @Getter
@@ -35,11 +35,13 @@ public class TourLogOverviewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("TourLogController initialized");
-        //tourLogTitle.setItems(tourLogOverviewViewModel.getObservableTourLogs());
-        tourLogOverviewViewModel.tourProperty().addListener((observable, oldValue, newValue) -> updateTourLogs(newValue));
+        tourLogList.setItems(tourLogOverviewViewModel.getObservableTourLogs());
+        tourLogList.getSelectionModel().selectedItemProperty().addListener(tourLogOverviewViewModel.getChangeListener());
+        //tourLogOverviewViewModel.tourProperty().addListener((observable, oldValue, newValue) -> updateTourLogs(newValue));
     }
 
     public void handleCreateTourLog() {
+        tourLogOverviewViewModel.addTourLog();
     }
 
     public void deleteTourLog() {

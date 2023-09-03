@@ -22,7 +22,7 @@ public class ControllerFactory {
         TourServiceNew tourService = new TourServiceImpl();
 
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
-        this.tourLogDetailsViewModel = new TourLogDetailsViewModel();
+        this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
         this.tourViewModel = new TourViewModel(tourService);
         this.mainViewModel = new MainViewModel(tourViewModel, tourLogOverviewViewModel);
     }
@@ -36,8 +36,7 @@ public class ControllerFactory {
             return new TourController(tourViewModel);
         } else if (controllerClass == TourLogDetailsController.class) {
             return new TourLogDetailsController(tourLogDetailsViewModel);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
         }
     }

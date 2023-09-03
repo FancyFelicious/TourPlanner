@@ -6,13 +6,17 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity(name="tour_log")
 @Table(name="tour_log")
 @Data
 @Repository
 public class TourLog implements Serializable {
+
+    public TourLog(Tour tour) {
+        this.tour = tour;
+    }
+
     @Id
     @GeneratedValue
     @Column(name="id", unique=true, updatable=false, nullable=false, columnDefinition="BIGINT")
@@ -36,4 +40,8 @@ public class TourLog implements Serializable {
     @ManyToOne
     @JoinColumn(name="tour_id", referencedColumnName="id", nullable=false)
     private Tour tour;
+
+    public TourLog() {
+
+    }
 }

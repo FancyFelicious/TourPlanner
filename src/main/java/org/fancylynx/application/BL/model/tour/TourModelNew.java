@@ -16,7 +16,7 @@ public class TourModelNew {
     private String from;
     private String to;
     private String transportType;
-    private double tourDistance;
+    private double distance;
     private String estimatedTime;
     private String imagePath;
 }

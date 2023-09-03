@@ -40,8 +40,8 @@ public class TourPlanner extends Application {
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setMinWidth(800);
-        stage.setMinHeight(450);
+        stage.setMinWidth(820);
+        stage.setMinHeight(470);
         stage.show();
 
         // 2do: remove later - testing / simulating changes to db

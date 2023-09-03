@@ -15,9 +15,8 @@
         <Pane HBox.hgrow="ALWAYS" />
         <Button onAction="#handleCreateTourLog" text="+" />
         <Button fx:id="deleteButton" onAction="#deleteTourLog" text="-" />
-        <Button text="..." />
     </ToolBar>
-    <ListView fx:id="mediaItemList" VBox.vgrow="ALWAYS" />
+    <ListView fx:id="tourLogList" VBox.vgrow="ALWAYS" />
    <padding>
       <Insets left="10.0" top="13.0" />
    </padding>

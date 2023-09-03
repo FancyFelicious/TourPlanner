@@ -46,9 +46,9 @@ public class MainController {
         detailsAnchor.prefHeightProperty().bind(tabPane.heightProperty());
 
         //tourList.setItems();
-        tourList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        /*tourList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             viewModel.selectTour(new SimpleObjectProperty<>(newValue));
-        });
+        });*/
     }
 
     public void handleAddNewTour() {

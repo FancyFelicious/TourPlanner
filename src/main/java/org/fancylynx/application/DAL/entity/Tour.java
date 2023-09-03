@@ -1,13 +1,17 @@
 package org.fancylynx.application.DAL.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 // 2do
 //, uniqueConstraints = {
 //        @UniqueConstraint(name = "tour_unique_name", columnNames = "test_name2")
 //})
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "tour")
 @Table(name = "tour")
 @Data
@@ -19,28 +23,28 @@ public class Tour {
     @Column(name = "id", unique = true, updatable = false, nullable = false, columnDefinition = "BIGINT")
     private long id; // note: best practice to use long for id, not really necessary regarding the scope of this project
 
-    @Column(name = "name", unique = true, nullable = false, columnDefinition = "TEXT")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "origin", columnDefinition = "TEXT")
+    @Column(name = "origin")
     private String origin;
 
-    @Column(name = "destination", columnDefinition = "TEXT")
+    @Column(name = "destination")
     private String destination;
 
-    @Column(name = "transport_type", columnDefinition = "TEXT")
+    @Column(name = "transport_type")
     private String transportType; // 2do: make enum?
 
-    @Column(name = "distance", columnDefinition = "TEXT")
-    private String distance; // 2do: float?
+    @Column(name = "distance")
+    private Double distance; // 2do: float?
 
-    @Column(name = "estimated_time", columnDefinition = "TEXT")
+    @Column(name = "estimated_time")
     private String estimatedTime; // 2do: time?
 
-    @Column(name = "image_path", columnDefinition = "TEXT")
+    @Column(name = "image_path")
     private String imagePath;
 }
 

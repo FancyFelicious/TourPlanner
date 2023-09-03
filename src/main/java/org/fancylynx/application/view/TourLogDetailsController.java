@@ -23,19 +23,16 @@ public class TourLogDetailsController implements Initializable {
     @FXML
     private TextField tourLogTime;
     @FXML
-    private ChoiceBox<String> tourLogRating;
+    private ChoiceBox<Integer> tourLogRating;
     @FXML
     private TextArea tourLogComment;
 
 
     private final ObservableList<String> diffList = FXCollections.observableArrayList("EASY", "MEDIUM", "HARD");
+    private final ObservableList<Integer> ratingList = FXCollections.observableArrayList(1, 2, 3, 4, 5);
     private TourLogDetailsViewModel tourLogDetailsViewModel;
 
     public TourLogDetailsController() {
-    }
-
-    public void setTourLogDetailsViewModel(TourLogDetailsViewModel tourLogDetailsViewModel) {
-        this.tourLogDetailsViewModel = tourLogDetailsViewModel;
     }
 
     public TourLogDetailsController(TourLogDetailsViewModel tourLogDetailsViewModel) {
@@ -49,13 +46,15 @@ public class TourLogDetailsController implements Initializable {
         bindProperties();
         diffChoiceBox.getItems().addAll(diffList);
         diffChoiceBox.getSelectionModel().selectFirst();
+        tourLogRating.getItems().addAll(ratingList);
+        tourLogRating.getSelectionModel().selectFirst();
     }
 
     private void bindProperties() {
         tourLogDate.valueProperty().bindBidirectional(tourLogDetailsViewModel.getDate());
         diffChoiceBox.valueProperty().bindBidirectional(tourLogDetailsViewModel.getDifficulty());
         tourLogTime.textProperty().bindBidirectional(tourLogDetailsViewModel.getTotalTime(), new NumberStringConverter());
-        tourLogRating.valueProperty().bindBidirectional(tourLogDetailsViewModel.getRating());
+        tourLogRating.valueProperty().bindBidirectional(tourLogDetailsViewModel.getRating().asObject());
         tourLogComment.textProperty().bindBidirectional(tourLogDetailsViewModel.getComment());
     }
 }

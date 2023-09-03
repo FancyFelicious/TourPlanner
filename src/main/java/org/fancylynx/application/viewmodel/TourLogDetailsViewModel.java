@@ -2,6 +2,8 @@ package org.fancylynx.application.viewmodel;
 
 import javafx.beans.property.*;
 import lombok.Getter;
+import org.fancylynx.application.BL.model.tourlog.TourLogModel;
+import org.fancylynx.application.BL.service.TourLogService;
 
 import java.time.LocalDate;
 
@@ -18,11 +20,22 @@ public class TourLogDetailsViewModel {
     @Getter
     private final DoubleProperty totalTime = new SimpleDoubleProperty();
     @Getter
-    private final StringProperty rating = new SimpleStringProperty("");
+    private final IntegerProperty rating = new SimpleIntegerProperty();
 
-    public TourLogDetailsViewModel() {
+    private TourLogService tourLogService;
+    private TourLogModel tourLogModel;
+
+    public TourLogDetailsViewModel(TourLogService tourLogService) {
+        this.tourLogService = tourLogService;
     }
 
+    public void saveTourLog() {
+
+    }
+
+    public void updateTourLog() {
+
+    }
 
     public LongProperty tourLogIDProperty() {
         return tourLogID;
@@ -44,7 +57,7 @@ public class TourLogDetailsViewModel {
         return totalTime;
     }
 
-    public StringProperty ratingProperty() {
+    public IntegerProperty ratingProperty() {
         return rating;
     }
 }
