@@ -42,8 +42,8 @@ public class TourLogDetailsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("TourLogDetailsController initialized");
         bindProperties();
+
         diffChoiceBox.getItems().addAll(diffList);
         diffChoiceBox.getSelectionModel().selectFirst();
         tourLogRating.getItems().addAll(ratingList);

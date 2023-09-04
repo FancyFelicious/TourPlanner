@@ -6,6 +6,7 @@ import org.fancylynx.application.DAL.repository.TourRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TourServiceImpl implements TourServiceNew {
@@ -55,6 +56,22 @@ public class TourServiceImpl implements TourServiceNew {
                 tour.getEstimatedTime(),
                 tour.getImagePath()
         );
+    }
+
+    @Override
+    public void updateTour(TourModelNew tourModel) {
+        Optional<Tour> tourOptional = tourRepository.findById(tourModel.getTourId());
+        tourOptional.ifPresent(tour -> {
+            tour.setName(tourModel.getName());
+            tour.setDescription(tourModel.getDescription());
+            tour.setOrigin(tourModel.getFrom());
+            tour.setDestination(tourModel.getTo());
+            tour.setTransportType(tourModel.getTransportType());
+            tour.setDistance(tourModel.getDistance());
+            tour.setEstimatedTime(tourModel.getEstimatedTime());
+            tour.setImagePath(tourModel.getImagePath());
+            tourRepository.saveAndFlush(tour);
+        });
     }
 
     @Override

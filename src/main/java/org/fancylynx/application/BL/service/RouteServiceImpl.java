@@ -2,21 +2,24 @@ package org.fancylynx.application.BL.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.config.Constants;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-public class RouteServiceImpl {
-    public String getRoute(Tour tour) {
+@Component
+public class RouteServiceImpl implements RouteService {
+    public String getRoute(TourModelNew tour) {
         // 2do: implement .png / transport type options
         // Generate request URL
         String endpoint = Constants.MAP_QUEST_ENDPOINT_DIRECTIONS;
         String apiKey = System.getProperty("MAP_QUEST_API_KEY");
-        String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getOrigin() + "&to=" + tour.getDestination() + "&transportMode=" + tour.getTransportType(); //2do more options
+        String requestUrl = endpoint + "?key=" + apiKey + "&from=" + tour.getFrom() + "&to=" + tour.getTo() + "&transportMode=" + tour.getTransportType(); //2do more options
 
         System.out.println("DEBUG - GENERATED REQUEST URL:");
         System.out.println(requestUrl);

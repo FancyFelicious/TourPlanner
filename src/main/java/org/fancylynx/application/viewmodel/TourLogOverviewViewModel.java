@@ -25,7 +25,6 @@ public class TourLogOverviewViewModel {
     private List<SelectionChangedListener> listeners = new ArrayList<>();
 
     @Getter
-    @Setter
     private TourModelNew tour;
     private final TourLogService tourLogService;
 
@@ -56,6 +55,12 @@ public class TourLogOverviewViewModel {
             listener.changeSelection(newValue);
         }
     }
+
+    public void setTour(TourModelNew tour) {
+        this.tour = tour;
+        setTourLogs(tourLogService.getAllTourLogs(tour.getTourId()));
+    }
+
     public void setTourLogs(List<TourLogModel> tourLogs) {
         tourLogModels.clear();
         tourLogModels.addAll(tourLogs);

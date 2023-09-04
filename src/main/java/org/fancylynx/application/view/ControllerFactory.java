@@ -1,10 +1,7 @@
 package org.fancylynx.application.view;
 
-import org.fancylynx.application.BL.service.TourLogService;
-import org.fancylynx.application.BL.service.TourServiceImpl;
-import org.fancylynx.application.BL.service.TourServiceNew;
+import org.fancylynx.application.BL.service.*;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
-import org.fancylynx.application.BL.service.TourLogServiceImpl;
 import org.fancylynx.application.DAL.repository.TourRepository;
 import org.fancylynx.application.viewmodel.*;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -20,13 +17,14 @@ public class ControllerFactory {
     public ControllerFactory(ConfigurableApplicationContext applicationContext) {
         TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
         TourServiceNew tourService = new TourServiceImpl(applicationContext.getBean(TourRepository.class));
+        RouteService routeService = new RouteServiceImpl();
 
         this.tourOverviewViewModel = new TourOverviewViewModel(tourService);
-        this.tourDetailsViewModel = new TourDetailsViewModel(tourService);
+        this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService);
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
         this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
         this.tourViewModel = new TourViewModel(tourService);
-        this.mainViewModel = new MainViewModel(tourViewModel, tourOverviewViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel);
+        this.mainViewModel = new MainViewModel(tourViewModel, tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel);
     }
 
     public Object create(Class<?> controllerClass) {
@@ -35,7 +33,7 @@ public class ControllerFactory {
         } else if (controllerClass == TourOverviewController.class) {
             return new TourOverviewController(tourOverviewViewModel);
         } else if (controllerClass == TourDetailsController.class) {
-            return new TourDetailsController();
+            return new TourDetailsController(tourDetailsViewModel);
         } else if (controllerClass == TourLogOverviewController.class) {
             return new TourLogOverviewController(tourLogOverviewViewModel);
         } else if (controllerClass == TourController.class) {

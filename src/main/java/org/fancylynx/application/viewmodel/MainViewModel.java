@@ -9,13 +9,15 @@ import org.springframework.stereotype.Component;
 public class MainViewModel {
     private TourViewModel tourViewModel;
     private TourOverviewViewModel tourOverviewViewModel;
+    private TourDetailsViewModel tourDetailsViewModel;
     private TourLogOverviewViewModel tourLogOverviewViewModel;
     private TourLogDetailsViewModel tourLogDetailsViewModel;
 
 
-    public MainViewModel(TourViewModel tourViewModel, TourOverviewViewModel tourOverviewViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel) {
+    public MainViewModel(TourViewModel tourViewModel, TourOverviewViewModel tourOverviewViewModel, TourDetailsViewModel tourDetailsViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel) {
         this.tourViewModel = tourViewModel;
         this.tourOverviewViewModel = tourOverviewViewModel;
+        this.tourDetailsViewModel = tourDetailsViewModel;
         this.tourLogOverviewViewModel = tourLogOverviewViewModel;
         this.tourLogDetailsViewModel = tourLogDetailsViewModel;
 
@@ -29,5 +31,6 @@ public class MainViewModel {
 
     public void selectTour(TourModelNew tour){
         tourLogOverviewViewModel.setTour(tour);
+        tourDetailsViewModel.setTour(tour);
     }
 }
