@@ -23,7 +23,8 @@ public class TourOverviewViewModel {
     public TourOverviewViewModel(TourServiceNew tourServiceNew) {
         this.tourServiceNew = tourServiceNew;
         setTours(this.tourServiceNew.getAllTours());
-
+        List<TourModelNew> t1 = tourServiceNew.getAllTours();
+        System.out.println("\n\n\nt1: " + t1);
     }
 
     public void setTours(List<TourModelNew> tourModels) {

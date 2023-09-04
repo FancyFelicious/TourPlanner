@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="org.fancylynx.application.view.TourOverviewController"
             prefHeight="400.0" prefWidth="600.0">
     <ToolBar>
-        <Label text="%MediaOverview_Items" />
+        <Label text="%TourOverview" />
         <Pane HBox.hgrow="ALWAYS" />
         <Button onAction="#createTour" text="+" />
         <Button fx:id="deleteTourButton" onAction="#deleteTour" text="-" />
     </ToolBar>
     <ListView fx:id="tourList" VBox.vgrow="ALWAYS" />
-</AnchorPane>
+</VBox>

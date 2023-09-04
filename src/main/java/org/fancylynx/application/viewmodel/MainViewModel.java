@@ -19,6 +19,7 @@ public class MainViewModel {
         this.tourLogOverviewViewModel = tourLogOverviewViewModel;
         this.tourLogDetailsViewModel = tourLogDetailsViewModel;
 
+        this.tourOverviewViewModel.addSelectionChangedListener(this::selectTour);
         this.tourLogOverviewViewModel.addSelectionChangedListener(this::selectTourLog);
     }
 
@@ -28,5 +29,6 @@ public class MainViewModel {
 
     public void selectTour(TourModelNew tour){
         tourLogOverviewViewModel.setTour(tour);
+
     }
 }

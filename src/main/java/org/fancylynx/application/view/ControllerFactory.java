@@ -32,6 +32,8 @@ public class ControllerFactory {
             return new MainController(mainViewModel);
         } else if (controllerClass == TourOverviewController.class) {
             return new TourOverviewController(tourOverviewViewModel);
+        } else if (controllerClass == TourDetailsController.class) {
+            return new TourDetailsController();
         } else if (controllerClass == TourLogOverviewController.class) {
             return new TourLogOverviewController(tourLogOverviewViewModel);
         } else if (controllerClass == TourController.class) {

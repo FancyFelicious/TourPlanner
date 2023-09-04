@@ -37,13 +37,13 @@ public class MainController {
     @FXML
     public void initialize() throws IOException {
         //this.viewHandler = viewHandler;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TourDetails.fxml"));
+        /*FXMLLoader loader = new FXMLLoader(getClass().getResource("TourDetails.fxml"));
         AnchorPane content = loader.load();
         contentTab.setContent(content);
 
         AnchorPane detailsAnchor = (AnchorPane) content.lookup("#detailsAnchor");
         detailsAnchor.prefWidthProperty().bind(tabPane.widthProperty());
-        detailsAnchor.prefHeightProperty().bind(tabPane.heightProperty());
+        detailsAnchor.prefHeightProperty().bind(tabPane.heightProperty());*/
 
         //tourList.setItems();
         /*tourList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -51,7 +51,7 @@ public class MainController {
         });*/
     }
 
-    public void handleAddNewTour() {
+    /*public void handleAddNewTour() {
         try {
             FXMLLoader loader = FXMLDependencyInjection.getLoader("TourView.fxml", Locale.GERMAN, null);
             Parent root = loader.load();
@@ -65,7 +65,7 @@ public class MainController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
    /* public void handleCreateTourButton() throws IOException {
         viewHandler.openView(Views.CREATETOUR.getFxmlFileName());

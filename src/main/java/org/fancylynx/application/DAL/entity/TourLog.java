@@ -31,7 +31,7 @@ public class TourLog implements Serializable {
     @Column(name="difficulty", columnDefinition="TEXT")
     private String difficulty;
 
-    @Column(name="total_time", columnDefinition="DOUBLE")
+    @Column(name="total_time", columnDefinition="FLOAT")
     private double totalTime;
 
     @Column(name="rating", columnDefinition="INT")

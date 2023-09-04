@@ -39,7 +39,7 @@ public class Tour {
     private String transportType; // 2do: make enum?
 
     @Column(name = "distance")
-    private Double distance; // 2do: float?
+    private String distance; // 2do: float?
 
     @Column(name = "estimated_time")
     private String estimatedTime; // 2do: time?
