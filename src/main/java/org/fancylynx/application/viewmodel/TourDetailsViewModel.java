@@ -1,12 +1,17 @@
 package org.fancylynx.application.viewmodel;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.image.Image;
 import lombok.Getter;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.service.RouteService;
 import org.fancylynx.application.BL.service.TourServiceNew;
 import org.springframework.stereotype.Component;
+
+import java.nio.file.Paths;
 
 @Component
 public class TourDetailsViewModel {
@@ -26,6 +31,8 @@ public class TourDetailsViewModel {
     private final StringProperty estimatedTime = new SimpleStringProperty();
     @Getter
     private final StringProperty imagePath = new SimpleStringProperty();
+    @Getter
+    private final ObjectProperty<Image> tourMap = new SimpleObjectProperty<>();
 
     private TourServiceNew tourServiceNew;
     private RouteService routeService;
@@ -38,7 +45,7 @@ public class TourDetailsViewModel {
 
     public void setTour(TourModelNew tourModelNew) {
         if (tourModelNew == null) {
-            name.setValue("");
+            resetValues();
             return;
         }
 
@@ -51,6 +58,13 @@ public class TourDetailsViewModel {
         distance.set(tourModelNew.getDistance());
         estimatedTime.set(tourModelNew.getEstimatedTime());
         imagePath.set(tourModelNew.getImagePath());
+
+        if (tourModelNew.getImagePath() != null) {
+            String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+            tourMap.set(new Image(path));
+        } else {
+            tourMap.set(null);
+        }
     }
 
     public void saveTour() {
@@ -59,8 +73,24 @@ public class TourDetailsViewModel {
         String sessionId = routeService.getRoute(tourModelNew);
         String imagePath = routeService.getStaticMap(sessionId);
         tourModelNew.setImagePath(imagePath);
+        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+        tourMap.set(new Image(path));
+        System.out.println("DEBUG - GENERATED IMAGE URL:");
+        System.out.println(path);
 
         tourServiceNew.updateTour(tourModelNew);
+    }
+
+    public void resetValues() {
+        name.set("");
+        description.set("");
+        from.set("");
+        to.set("");
+        type.set("CAR");
+        distance.set("");
+        estimatedTime.set("");
+        imagePath.set("");
+        tourMap.set(null);
     }
 
     public void setValues() {

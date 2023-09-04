@@ -32,7 +32,13 @@ public class TourLogDetailsViewModel {
     }
 
     public void setTourLogModel(TourLogModel tourLogModel) {
+        if (tourLogModel == null) {
+            resetValues();
+            return;
+        }
+
         this.tourLogModel = tourLogModel;
+
         tourLogID.set(tourLogModel.getTourLogId());
         date.set(tourLogModel.getDate());
         comment.set(tourLogModel.getComment());
@@ -41,6 +47,24 @@ public class TourLogDetailsViewModel {
         rating.set(tourLogModel.getRating());
     }
 
-    public void updateTourLog() {
+    public void saveTourLog() {
+        setValues();
+        tourLogService.updateTourLog(tourLogModel);
+    }
+
+    public void resetValues() {
+        date.set(LocalDate.now());
+        comment.set("");
+        difficulty.set("EASY");
+        totalTime.set(0);
+        rating.set(1);
+    }
+
+    public void setValues() {
+        tourLogModel.setDate(date.get());
+        tourLogModel.setComment(comment.get());
+        tourLogModel.setDifficulty(difficulty.get());
+        tourLogModel.setTotalTime(totalTime.get());
+        tourLogModel.setRating(rating.get());
     }
 }

@@ -39,7 +39,7 @@
       <TextArea fx:id="tourLogComment" prefHeight="89.0" prefWidth="309.0" promptText="Comment" GridPane.columnIndex="2" GridPane.rowIndex="7" />
       <Label text="Rating" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <ChoiceBox fx:id="tourLogRating" prefHeight="46.0" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" text="Save Tourlog" GridPane.columnIndex="2" GridPane.rowIndex="8">
+      <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" text="Save Tourlog" onAction="#saveTourLog" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="10.0" top="10.0" />
          </GridPane.margin>

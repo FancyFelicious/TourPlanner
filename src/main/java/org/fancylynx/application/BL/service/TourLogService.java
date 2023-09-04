@@ -11,6 +11,6 @@ public interface TourLogService {
     List<TourLogModel> getAllTourLogs(long tourId);
     TourLogModel createNewTourLog(TourModelNew tour);
     Boolean deleteTourLog(TourLogModel tourLog);
-    TourLog updateTourLog(TourLog tourLog);
+    void updateTourLog(TourLogModel tourLog);
     TourLog getTourLog(long tourLogId);
 }

@@ -50,6 +50,10 @@ public class TourLogDetailsController implements Initializable {
         tourLogRating.getSelectionModel().selectFirst();
     }
 
+    public void saveTourLog() {
+        tourLogDetailsViewModel.saveTourLog();
+    }
+
     private void bindProperties() {
         tourLogDate.valueProperty().bindBidirectional(tourLogDetailsViewModel.getDate());
         diffChoiceBox.valueProperty().bindBidirectional(tourLogDetailsViewModel.getDifficulty());

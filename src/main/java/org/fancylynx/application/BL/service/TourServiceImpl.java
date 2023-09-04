@@ -40,8 +40,8 @@ public class TourServiceImpl implements TourServiceNew {
     public TourModelNew createNewTour() {
         // TODO Auto-generated method stub
         Tour tour = new Tour();
-        tourRepository.saveAndFlush(tour);
-        tour.setName("Tour " + tour.getId());
+        //tourRepository.saveAndFlush(tour);
+        //tour.setName("Tour " + tour.getId());
         tourRepository.saveAndFlush(tour);
         System.out.println("Tour saved to database" + tour.getId());
 

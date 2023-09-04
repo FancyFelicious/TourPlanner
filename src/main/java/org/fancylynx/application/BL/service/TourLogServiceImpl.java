@@ -8,6 +8,7 @@ import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TourLogServiceImpl implements TourLogService{
@@ -87,13 +88,17 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public TourLog updateTourLog(TourLog tourLog) {
-        try {
-            return tourLogRepository.save(tourLog);
-        } catch (Exception e) {
-            System.out.println("Error updating tour log in database: " + e.getMessage());
-        }
-        return null;
+    public void updateTourLog(TourLogModel tourLog) {
+        Optional<TourLog> tourLogOpt = tourLogRepository.findById(tourLog.getTourLogId());
+        tourLogOpt.ifPresent(tourLogEntity -> {
+            tourLogEntity.setDate(tourLog.getDate());
+            tourLogEntity.setComment(tourLog.getComment());
+            tourLogEntity.setDifficulty(tourLog.getDifficulty());
+            tourLogEntity.setTotalTime(tourLog.getTotalTime());
+            tourLogEntity.setRating(tourLog.getRating());
+            tourLogRepository.saveAndFlush(tourLogEntity);
+        });
+
     }
 
     @Override

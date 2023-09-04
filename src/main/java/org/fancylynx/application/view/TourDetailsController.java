@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import org.fancylynx.application.viewmodel.TourDetailsViewModel;
 
 import java.net.URL;
@@ -27,6 +28,8 @@ public class TourDetailsController implements Initializable {
     private TextField imagePath;
     @FXML
     private ChoiceBox<String> transportType;
+    @FXML
+    private ImageView tourMap;
 
     private final ObservableList<String> transList = FXCollections.observableArrayList("CAR", "WALK", "CYCLE");
     private TourDetailsViewModel tourDetailsViewModel;
@@ -57,5 +60,6 @@ public class TourDetailsController implements Initializable {
         tourDesc.textProperty().bindBidirectional(tourDetailsViewModel.getDescription());
         imagePath.textProperty().bindBidirectional(tourDetailsViewModel.getImagePath());
         transportType.valueProperty().bindBidirectional(tourDetailsViewModel.getType());
+        tourMap.imageProperty().bindBidirectional(tourDetailsViewModel.getTourMap());
     }
 }

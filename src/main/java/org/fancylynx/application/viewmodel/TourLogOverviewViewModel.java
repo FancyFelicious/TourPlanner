@@ -57,6 +57,10 @@ public class TourLogOverviewViewModel {
     }
 
     public void setTour(TourModelNew tour) {
+        if (tour == null) {
+            return;
+        }
+
         this.tour = tour;
         setTourLogs(tourLogService.getAllTourLogs(tour.getTourId()));
     }
