@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.MainController">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="954.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.MainController">
 
     <left>
         <VBox prefHeight="400.0" prefWidth="186.0" spacing="10">
@@ -47,12 +43,12 @@
         <!-- Main window content -->
     </center>
     <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+        <VBox prefHeight="400.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
                 <Pane maxHeight="-Infinity" prefHeight="51.0" prefWidth="414.0" />
-                <TabPane id="tabPane" fx:id="tabPane" prefHeight="348.0" prefWidth="414.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane id="tabPane" fx:id="tabPane" prefHeight="450.0" prefWidth="603.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                        <Tab fx:id="contentTab" text="Details">
+                        <Tab text="Details">
                             <HBox>
                                 <fx:include fx:id="tourDetails" source="TourDetails.fxml" />
                             </HBox>

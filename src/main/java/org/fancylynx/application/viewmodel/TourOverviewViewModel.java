@@ -32,6 +32,16 @@ public class TourOverviewViewModel {
         this.tourModels.addAll(tourModels);
     }
 
+    public void addNewTour() {
+        var tour = tourServiceNew.createNewTour();
+        tourModels.add(tour);
+    }
+
+    public void deleteTour(TourModelNew tourModel) {
+        tourServiceNew.deleteTour(tourModel);
+        tourModels.remove(tourModel);
+    }
+
     public ObservableList<TourModelNew> getObservableTours() {
         return tourModels;
     }

@@ -29,6 +29,5 @@ public class MainViewModel {
 
     public void selectTour(TourModelNew tour){
         tourLogOverviewViewModel.setTour(tour);
-
     }
 }

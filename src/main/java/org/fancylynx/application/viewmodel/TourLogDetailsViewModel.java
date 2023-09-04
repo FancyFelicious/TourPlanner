@@ -42,6 +42,5 @@ public class TourLogDetailsViewModel {
     }
 
     public void updateTourLog() {
-
     }
 }

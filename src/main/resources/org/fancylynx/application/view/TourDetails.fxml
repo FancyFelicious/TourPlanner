@@ -27,6 +27,28 @@
       <ColumnConstraints maxWidth="223.20003662109374" minWidth="83.20003204345704" prefWidth="119.20000457763672" />
       <ColumnConstraints maxWidth="377.59996795654297" minWidth="236.79996337890626" prefWidth="342.3999954223633" />
    </columnConstraints>
+   <children>
+      <TextField fx:id="tourLogTime" prefHeight="31.0" prefWidth="378.0" promptText="Estimated Time" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Description" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="To" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Label text="Estimated Time" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <ChoiceBox fx:id="tourLogRating" prefHeight="30.0" prefWidth="223.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+      <TextField promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <Label text="Transport Type" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Label text="From" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <TextField promptText="From" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TextField promptText="To" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <TextField promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <TextField promptText="Image Path" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+      <Label text="Image Path" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="129.0" text="Save Tour" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+      <Label text="Distance" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <TextField promptText="Distance" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+   </children>
+   <padding>
+      <Insets left="20.0" right="10.0" top="10.0" />
+   </padding>
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
@@ -39,29 +61,7 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
    </rowConstraints>
-   <children>
-      <TextField fx:id="tourLogTime" prefHeight="31.0" prefWidth="378.0" promptText="Estimated Time" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-      <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Label text="Description" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Label text="To" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Label text="Estimated Time" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <ChoiceBox fx:id="tourLogRating" prefHeight="30.0" prefWidth="223.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-      <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" text="Save Tour" GridPane.columnIndex="2" GridPane.rowIndex="10">
-         <GridPane.margin>
-            <Insets bottom="10.0" top="10.0" />
-         </GridPane.margin>
-      </Button>
-      <TextField promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Label text="Transport Type" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label text="From" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <TextField promptText="From" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <TextField promptText="To" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-      <TextField promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField promptText="Image Path" GridPane.columnIndex="2" GridPane.rowIndex="9" />
-      <Label text="Image Path" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-   </children>
-   <padding>
-      <Insets left="20.0" right="10.0" top="10.0" />
-   </padding>
 </GridPane>

@@ -45,7 +45,7 @@ public class TourLogOverviewController implements Initializable {
     }
 
     public void deleteTourLog() {
-        //tourLogOverviewViewModel.deleteTourLog(tourLogTitle.getSelectionModel().getSelectedItem());
+        tourLogOverviewViewModel.deleteTourLog(tourLogList.getSelectionModel().getSelectedItem());
     }
     private void updateTourLogs(Tour tour) {
         if (tour != null) {

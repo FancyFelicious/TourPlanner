@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // 2do
 //, uniqueConstraints = {
 //        @UniqueConstraint(name = "tour_unique_name", columnNames = "test_name2")
@@ -23,7 +26,7 @@ public class Tour {
     @Column(name = "id", unique = true, updatable = false, nullable = false, columnDefinition = "BIGINT")
     private long id; // note: best practice to use long for id, not really necessary regarding the scope of this project
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Column(name = "description")
@@ -46,6 +49,7 @@ public class Tour {
 
     @Column(name = "image_path")
     private String imagePath;
+
 }
 
 

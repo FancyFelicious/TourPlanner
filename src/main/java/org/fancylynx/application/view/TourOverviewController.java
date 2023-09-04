@@ -36,21 +36,10 @@ public class TourOverviewController implements Initializable {
     }
 
     public void createTour() {
-        try {
-            FXMLLoader loader = FXMLDependencyInjection.getLoader("TourView.fxml", Locale.GERMAN, null);
-            Parent root = loader.load();
-
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-
-            stage.setTitle("Add Tour");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        tourOverviewViewModel.addNewTour();
+        tourList.getSelectionModel().selectLast();
     }
     public void deleteTour() {
-
+        tourOverviewViewModel.deleteTour(tourList.getSelectionModel().getSelectedItem());
     }
 }

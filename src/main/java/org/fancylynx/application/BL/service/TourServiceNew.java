@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface TourServiceNew {
     List<TourModelNew> getAllTours();
-    void createNewTour(Tour tour);
-
+    TourModelNew createNewTour();
+    void deleteTour(TourModelNew tourModelNew);
 
 
 }

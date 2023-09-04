@@ -12,6 +12,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class ControllerFactory {
     private final MainViewModel mainViewModel;
     private final TourOverviewViewModel tourOverviewViewModel;
+    private final TourDetailsViewModel tourDetailsViewModel;
     private final TourLogOverviewViewModel tourLogOverviewViewModel;
     private final TourLogDetailsViewModel tourLogDetailsViewModel;
     private final TourViewModel tourViewModel;
@@ -21,6 +22,7 @@ public class ControllerFactory {
         TourServiceNew tourService = new TourServiceImpl(applicationContext.getBean(TourRepository.class));
 
         this.tourOverviewViewModel = new TourOverviewViewModel(tourService);
+        this.tourDetailsViewModel = new TourDetailsViewModel(tourService);
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
         this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
         this.tourViewModel = new TourViewModel(tourService);
