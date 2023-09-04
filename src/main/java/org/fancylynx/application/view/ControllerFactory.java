@@ -12,7 +12,6 @@ public class ControllerFactory {
     private final TourDetailsViewModel tourDetailsViewModel;
     private final TourLogOverviewViewModel tourLogOverviewViewModel;
     private final TourLogDetailsViewModel tourLogDetailsViewModel;
-    private final TourViewModel tourViewModel;
 
     public ControllerFactory(ConfigurableApplicationContext applicationContext) {
         TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
@@ -23,8 +22,7 @@ public class ControllerFactory {
         this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService);
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
         this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
-        this.tourViewModel = new TourViewModel(tourService);
-        this.mainViewModel = new MainViewModel(tourViewModel, tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel);
+        this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel);
     }
 
     public Object create(Class<?> controllerClass) {
@@ -36,8 +34,6 @@ public class ControllerFactory {
             return new TourDetailsController(tourDetailsViewModel);
         } else if (controllerClass == TourLogOverviewController.class) {
             return new TourLogOverviewController(tourLogOverviewViewModel);
-        } else if (controllerClass == TourController.class) {
-            return new TourController(tourViewModel);
         } else if (controllerClass == TourLogDetailsController.class) {
             return new TourLogDetailsController(tourLogDetailsViewModel);
         } else {

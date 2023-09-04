@@ -3,7 +3,6 @@ package org.fancylynx.application.BL.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
-import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.config.Constants;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

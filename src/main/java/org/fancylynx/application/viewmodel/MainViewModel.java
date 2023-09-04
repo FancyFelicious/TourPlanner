@@ -7,15 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MainViewModel {
-    private TourViewModel tourViewModel;
     private TourOverviewViewModel tourOverviewViewModel;
     private TourDetailsViewModel tourDetailsViewModel;
     private TourLogOverviewViewModel tourLogOverviewViewModel;
     private TourLogDetailsViewModel tourLogDetailsViewModel;
 
 
-    public MainViewModel(TourViewModel tourViewModel, TourOverviewViewModel tourOverviewViewModel, TourDetailsViewModel tourDetailsViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel) {
-        this.tourViewModel = tourViewModel;
+    public MainViewModel(TourOverviewViewModel tourOverviewViewModel, TourDetailsViewModel tourDetailsViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel) {
         this.tourOverviewViewModel = tourOverviewViewModel;
         this.tourDetailsViewModel = tourDetailsViewModel;
         this.tourLogOverviewViewModel = tourLogOverviewViewModel;
