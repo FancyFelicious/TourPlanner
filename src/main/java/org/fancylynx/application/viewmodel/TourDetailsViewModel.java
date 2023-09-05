@@ -10,11 +10,14 @@ import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.service.RouteService;
 import org.fancylynx.application.BL.service.TourServiceNew;
 import org.springframework.stereotype.Component;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Paths;
 
 @Component
 public class TourDetailsViewModel {
+    private static final Logger logger = LogManager.getLogger(TourDetailsViewModel.class);
     @Getter
     private final StringProperty name = new SimpleStringProperty();
     @Getter
@@ -34,8 +37,8 @@ public class TourDetailsViewModel {
     @Getter
     private final ObjectProperty<Image> tourMap = new SimpleObjectProperty<>();
 
-    private TourServiceNew tourServiceNew;
-    private RouteService routeService;
+    private final TourServiceNew tourServiceNew;
+    private final RouteService routeService;
     private TourModelNew tourModelNew;
 
     public TourDetailsViewModel(TourServiceNew tourServiceNew, RouteService routeService) {
@@ -50,6 +53,24 @@ public class TourDetailsViewModel {
         }
 
         this.tourModelNew = tourModelNew;
+        retrieveValues(tourModelNew);
+    }
+
+    public void saveTour() {
+        setValues();
+
+        String sessionId = routeService.getRoute(tourModelNew);
+        String imagePath = routeService.getStaticMap(sessionId);
+
+        tourModelNew.setImagePath(imagePath);
+
+        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+        tourMap.set(new Image(path));
+
+        tourServiceNew.updateTour(tourModelNew);
+    }
+
+    public void retrieveValues(TourModelNew tourModelNew) {
         name.set(tourModelNew.getName());
         description.set(tourModelNew.getDescription());
         from.set(tourModelNew.getFrom());
@@ -65,20 +86,6 @@ public class TourDetailsViewModel {
         } else {
             tourMap.set(null);
         }
-    }
-
-    public void saveTour() {
-        setValues();
-
-        String sessionId = routeService.getRoute(tourModelNew);
-        String imagePath = routeService.getStaticMap(sessionId);
-        tourModelNew.setImagePath(imagePath);
-        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
-        tourMap.set(new Image(path));
-        System.out.println("DEBUG - GENERATED IMAGE URL:");
-        System.out.println(path);
-
-        tourServiceNew.updateTour(tourModelNew);
     }
 
     public void resetValues() {

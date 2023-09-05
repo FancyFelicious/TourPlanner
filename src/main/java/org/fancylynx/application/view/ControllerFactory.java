@@ -12,6 +12,7 @@ public class ControllerFactory {
     private final TourDetailsViewModel tourDetailsViewModel;
     private final TourLogOverviewViewModel tourLogOverviewViewModel;
     private final TourLogDetailsViewModel tourLogDetailsViewModel;
+    private final SearchBarViewModel searchBarViewModel;
 
     public ControllerFactory(ConfigurableApplicationContext applicationContext) {
         TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
@@ -22,7 +23,8 @@ public class ControllerFactory {
         this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService);
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
         this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
-        this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel);
+        this.searchBarViewModel = new SearchBarViewModel();
+        this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel, searchBarViewModel);
     }
 
     public Object create(Class<?> controllerClass) {
@@ -36,6 +38,8 @@ public class ControllerFactory {
             return new TourLogOverviewController(tourLogOverviewViewModel);
         } else if (controllerClass == TourLogDetailsController.class) {
             return new TourLogDetailsController(tourLogDetailsViewModel);
+        } else if (controllerClass == SearchBarController.class) {
+            return new SearchBarController(searchBarViewModel);
         } else {
             throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
         }

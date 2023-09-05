@@ -19,20 +19,7 @@
                     <Insets top="10" />
                 </VBox.margin>
             </Label>
-            <TextField id="tourSearch" focusTraversable="false" promptText="Search Tours.." />
-            <!--   <Button maxHeight="-Infinity" mnemonicParsing="false" onAction="#handleAddNewTour" prefHeight="40.0" prefWidth="190.0" text="Add new Tour" />
-            <Button id="newTourBtn" onAction="#handleCreateTourButton" prefHeight="46.0" prefWidth="209.0" stylesheets="@styles.css" text="Create new Tour" textFill="WHITE">
-                <font>
-                    <Font size="17.0" />
-                </font>
-                <VBox.margin>
-                    <Insets />
-                </VBox.margin></Button>
-            <ScrollPane prefWidth="150.0" visible="false" VBox.vgrow="ALWAYS">
-            <content>
-               <ListView id="tourList" fx:id="tourList" prefHeight="307.0" prefWidth="186.0" />
-            </content>
-            </ScrollPane>-->
+            <fx:include fx:id="tourSearch" source="SearchBar.fxml" />
             <fx:include fx:id="tourOverview" source="TourOverview.fxml" />
          <BorderPane.margin>
             <Insets />
@@ -40,7 +27,6 @@
         </VBox>
     </left>
     <center>
-        <!-- Main window content -->
     </center>
     <center>
         <VBox prefHeight="400.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -54,7 +40,6 @@
                             </HBox>
                         </Tab>
                         <Tab text="Tour Logs">
-
                             <HBox>
                                 <fx:include fx:id="mediaOverview" source="TourLogOverview.fxml" />
                                 <fx:include fx:id="mediaDetails" source="TourLogDetails.fxml" />

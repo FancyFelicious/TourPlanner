@@ -34,10 +34,8 @@ public class TourLogOverviewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("TourLogController initialized");
         tourLogList.setItems(tourLogOverviewViewModel.getObservableTourLogs());
         tourLogList.getSelectionModel().selectedItemProperty().addListener(tourLogOverviewViewModel.getChangeListener());
-        //tourLogOverviewViewModel.tourProperty().addListener((observable, oldValue, newValue) -> updateTourLogs(newValue));
     }
 
     public void handleCreateTourLog() {
@@ -46,11 +44,5 @@ public class TourLogOverviewController implements Initializable {
 
     public void deleteTourLog() {
         tourLogOverviewViewModel.deleteTourLog(tourLogList.getSelectionModel().getSelectedItem());
-    }
-    private void updateTourLogs(Tour tour) {
-        if (tour != null) {
-            List<TourLogModel> tourLogs = tourLogOverviewViewModel.getTourLogModels(tour);
-            tourLogOverviewViewModel.setTourLogs(tourLogs);
-        }
     }
 }

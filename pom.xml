@@ -29,7 +29,7 @@
         <postgresql.version>42.5.4</postgresql.version>
         <hikaricp.version>5.0.1</hikaricp.version>
         <mybatis.version>3.5.13</mybatis.version>
-        <log4j.version>2.17.1</log4j.version>
+        <log4j.version>2.20.0</log4j.version>
 
         <!-- 2do: remove -->
         <maven.plugin.validation>VERBOSE</maven.plugin.validation>
@@ -103,10 +103,14 @@
 
         <!-- Log4j -->
         <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
-            <scope>provided</scope>
         </dependency>
 
         <!-- JUnit Jupiter -->

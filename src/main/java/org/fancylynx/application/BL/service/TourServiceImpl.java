@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Component
 public class TourServiceImpl implements TourServiceNew {
-
     private final TourRepository tourRepository;
 
     public TourServiceImpl(TourRepository tourRepository) {
@@ -38,12 +37,8 @@ public class TourServiceImpl implements TourServiceNew {
 
     @Override
     public TourModelNew createNewTour() {
-        // TODO Auto-generated method stub
         Tour tour = new Tour();
-        //tourRepository.saveAndFlush(tour);
-        //tour.setName("Tour " + tour.getId());
         tourRepository.saveAndFlush(tour);
-        System.out.println("Tour saved to database" + tour.getId());
 
         return new TourModelNew(
                 tour.getId(),

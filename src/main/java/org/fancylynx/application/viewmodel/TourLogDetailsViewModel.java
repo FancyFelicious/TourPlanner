@@ -5,11 +5,14 @@ import lombok.Getter;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.springframework.stereotype.Component;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 
 @Component
 public class TourLogDetailsViewModel {
+    private static final Logger logger = LogManager.getLogger(TourLogDetailsViewModel.class);
 
     @Getter
     private final LongProperty tourLogID = new SimpleLongProperty();
@@ -24,7 +27,7 @@ public class TourLogDetailsViewModel {
     @Getter
     private final IntegerProperty rating = new SimpleIntegerProperty();
 
-    private TourLogService tourLogService;
+    private final TourLogService tourLogService;
     private TourLogModel tourLogModel;
 
     public TourLogDetailsViewModel(TourLogService tourLogService) {

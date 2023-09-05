@@ -39,7 +39,7 @@ public class Tour {
     private String destination;
 
     @Column(name = "transport_type")
-    private String transportType; // 2do: make enum?
+    private String transportType;
 
     @Column(name = "distance")
     private String distance; // 2do: float?
@@ -50,6 +50,20 @@ public class Tour {
     @Column(name = "image_path")
     private String imagePath;
 
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<TourLog> tourLogs = new ArrayList<>();
+
+    public Tour(long id, String name, String description, String origin, String destination, String transportType, String distance, String estimatedTime, String imagePath) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.origin = origin;
+        this.destination = destination;
+        this.transportType = transportType;
+        this.distance = distance;
+        this.estimatedTime = estimatedTime;
+        this.imagePath = imagePath;
+    }
 }
 
 

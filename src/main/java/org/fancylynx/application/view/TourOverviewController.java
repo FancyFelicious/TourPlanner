@@ -30,7 +30,6 @@ public class TourOverviewController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("TourOverviewController initialized");
         tourList.setItems(tourOverviewViewModel.getObservableTours());
         tourList.getSelectionModel().selectedItemProperty().addListener(tourOverviewViewModel.getChangeListener());
     }
