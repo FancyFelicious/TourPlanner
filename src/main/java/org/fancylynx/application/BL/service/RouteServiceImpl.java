@@ -2,18 +2,22 @@ package org.fancylynx.application.BL.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.fancylynx.application.BL.model.tour.RouteModel;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.config.Constants;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 @Component
 public class RouteServiceImpl implements RouteService {
-    public String getRoute(TourModelNew tour) {
+    public RouteModel getRoute(TourModelNew tour) {
         // 2do: implement .png / transport type options
         // Generate request URL
         String endpoint = Constants.MAP_QUEST_ENDPOINT_DIRECTIONS;
@@ -32,17 +36,23 @@ public class RouteServiceImpl implements RouteService {
 
         // 2do: error handling
 //        if statusCode >= 400 throw exception // 2do
-
         // Extract session ID
         String sessionId = " - ";
+        Double distance;
+        long time;
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(responseBody);
             sessionId = jsonNode.get("route").get("sessionId").asText();
+            distance = jsonNode.get("route").get("distance").asDouble();
+            time = jsonNode.get("route").get("time").asLong();
+
+            return new RouteModel(sessionId, distance, time);
         } catch (Exception e) {
             System.out.println("ok nicht cool: " + e.getMessage()); // 2do
         }
-        return sessionId;
+
+        return null;
     }
 
     public String getStaticMap(String sessionId) {

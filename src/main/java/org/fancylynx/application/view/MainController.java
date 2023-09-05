@@ -9,6 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.fancylynx.FXMLDependencyInjection;
 import org.fancylynx.application.DAL.entity.Tour;
@@ -20,10 +22,7 @@ import java.util.Locale;
 public class MainController {
 
     @FXML
-    private TabPane tabPane;
-    @FXML
-    private TourLogOverviewController tourLogController;
-    //private ViewHandler viewHandler;
+    private BorderPane mainScene;
     private final MainViewModel viewModel;
 
     public MainController(MainViewModel viewModel) {
@@ -32,6 +31,27 @@ public class MainController {
 
     @FXML
     public void initialize() throws IOException {
+    }
+
+    @FXML
+    public void importTour(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Tour File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Tour Files", "*.json"));
+
+        var file = fileChooser.showOpenDialog(mainScene.getScene().getWindow());
+
+    }
+
+    @FXML
+    public void exportTour() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Tour File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Tour Files", "*.json"));
+
+        var file = fileChooser.showSaveDialog(mainScene.getScene().getWindow());
     }
 
 }

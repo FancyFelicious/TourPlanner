@@ -1,11 +1,9 @@
 package org.fancylynx.application.viewmodel;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import lombok.Getter;
+import org.fancylynx.application.BL.model.tour.RouteModel;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.service.RouteService;
 import org.fancylynx.application.BL.service.TourServiceNew;
@@ -29,9 +27,9 @@ public class TourDetailsViewModel {
     @Getter
     private final StringProperty type = new SimpleStringProperty();
     @Getter
-    private final StringProperty distance = new SimpleStringProperty();
+    private final DoubleProperty distance = new SimpleDoubleProperty();
     @Getter
-    private final StringProperty estimatedTime = new SimpleStringProperty();
+    private final LongProperty estimatedTime = new SimpleLongProperty();
     @Getter
     private final StringProperty imagePath = new SimpleStringProperty();
     @Getter
@@ -59,13 +57,17 @@ public class TourDetailsViewModel {
     public void saveTour() {
         setValues();
 
-        String sessionId = routeService.getRoute(tourModelNew);
-        String imagePath = routeService.getStaticMap(sessionId);
+        RouteModel route = routeService.getRoute(tourModelNew);
+        String imagePath = routeService.getStaticMap(route.getSessionId());
 
+        tourModelNew.setEstimatedTime(route.getTime());
+        tourModelNew.setDistance(route.getDistance());
         tourModelNew.setImagePath(imagePath);
 
         String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
         tourMap.set(new Image(path));
+        distance.set(route.getDistance());
+        estimatedTime.set(route.getTime());
 
         tourServiceNew.updateTour(tourModelNew);
     }
@@ -76,7 +78,6 @@ public class TourDetailsViewModel {
         from.set(tourModelNew.getFrom());
         to.set(tourModelNew.getTo());
         type.set(tourModelNew.getTransportType());
-        distance.set(tourModelNew.getDistance());
         estimatedTime.set(tourModelNew.getEstimatedTime());
         imagePath.set(tourModelNew.getImagePath());
 
@@ -86,6 +87,12 @@ public class TourDetailsViewModel {
         } else {
             tourMap.set(null);
         }
+
+        if (tourModelNew.getDistance() != null) {
+            distance.set(tourModelNew.getDistance());
+        } else {
+            distance.set(0);
+        }
     }
 
     public void resetValues() {
@@ -94,8 +101,8 @@ public class TourDetailsViewModel {
         from.set("");
         to.set("");
         type.set("CAR");
-        distance.set("");
-        estimatedTime.set("");
+        distance.set(0);
+        estimatedTime.set(0);
         imagePath.set("");
         tourMap.set(null);
     }

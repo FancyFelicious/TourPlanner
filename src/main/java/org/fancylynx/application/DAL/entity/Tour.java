@@ -42,10 +42,10 @@ public class Tour {
     private String transportType;
 
     @Column(name = "distance")
-    private String distance; // 2do: float?
+    private Double distance; // 2do: float?
 
     @Column(name = "estimated_time")
-    private String estimatedTime; // 2do: time?
+    private long estimatedTime; // 2do: time?
 
     @Column(name = "image_path")
     private String imagePath;
@@ -53,7 +53,7 @@ public class Tour {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     private List<TourLog> tourLogs = new ArrayList<>();
 
-    public Tour(long id, String name, String description, String origin, String destination, String transportType, String distance, String estimatedTime, String imagePath) {
+    public Tour(long id, String name, String description, String origin, String destination, String transportType, Double distance, long estimatedTime, String imagePath) {
         this.id = id;
         this.name = name;
         this.description = description;

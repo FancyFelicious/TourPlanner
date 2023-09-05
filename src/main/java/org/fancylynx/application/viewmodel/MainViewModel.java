@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+
 
 @Component
 public class MainViewModel {
@@ -34,7 +36,6 @@ public class MainViewModel {
         logger.info("Perform search with searchString=[{}]", searchString);
     }
 
-
     public void selectTourLog(TourLogModel tourLogModel) {
         tourLogDetailsViewModel.setTourLogModel(tourLogModel);
     }
@@ -42,5 +43,9 @@ public class MainViewModel {
     public void selectTour(TourModelNew tour){
         tourLogOverviewViewModel.setTour(tour);
         tourDetailsViewModel.setTour(tour);
+    }
+
+    public void exportTour(File file) {
+
     }
 }

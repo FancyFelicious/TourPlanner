@@ -31,7 +31,7 @@
       <ColumnConstraints maxWidth="377.59996795654297" minWidth="236.79996337890626" prefWidth="342.3999954223633" />
    </columnConstraints>
    <children>
-      <TextField fx:id="tourEstTime" editable="false" prefHeight="31.0" prefWidth="378.0" promptText="Estimated Time" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+      <Label fx:id="tourEstTime" prefHeight="31.0" prefWidth="378.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
       <Label text="Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Description" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label text="To" GridPane.columnIndex="1" GridPane.rowIndex="5" />
@@ -43,11 +43,11 @@
       <TextField fx:id="from" promptText="From" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <TextField fx:id="to" promptText="To" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       <TextField fx:id="tourDesc" promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-      <TextField fx:id="imagePath" promptText="Image Path" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+      <Label fx:id="imagePath" GridPane.columnIndex="2" GridPane.rowIndex="10" />
       <Label text="Image Path" GridPane.columnIndex="1" GridPane.rowIndex="10" />
       <Button fx:id="saveTour" mnemonicParsing="false" onAction="#saveTour" prefHeight="35.0" prefWidth="129.0" text="Save Tour" GridPane.columnIndex="2" GridPane.rowIndex="11" />
       <Label text="Distance" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <TextField editable="false" promptText="Distance" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+      <Label fx:id="distance" GridPane.columnIndex="2" GridPane.rowIndex="8" />
    </children>
    <padding>
       <Insets left="20.0" right="10.0" top="10.0" />
