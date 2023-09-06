@@ -80,5 +80,8 @@ public class TourLogOverviewViewModel {
        tourLogModels.remove(tourLog);
     }
 
+    public void importTourLog(TourLogModel tourLogModel, TourModelNew tourModel) {
+        tourLogService.importTourLog(tourLogModel, tourModel);
+    }
 
 }

@@ -38,13 +38,17 @@ public class TourOverviewViewModel {
         tourModels.add(tour);
     }
 
-    public void addTour(TourModelNew tourModel) {
-        tourModels.add(tourModel);
+    public TourModelNew importTour(TourModelNew tourModel) {
+        return tourServiceNew.importTour(tourModel);
     }
 
     public void deleteTour(TourModelNew tourModel) {
         tourServiceNew.deleteTour(tourModel);
         tourModels.remove(tourModel);
+    }
+
+    public void addTourToList(TourModelNew tourModel) {
+        tourModels.add(tourModel);
     }
 
     public ObservableList<TourModelNew> getObservableTours() {

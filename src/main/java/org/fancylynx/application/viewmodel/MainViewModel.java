@@ -52,7 +52,13 @@ public class MainViewModel {
     public void importTour(File file) {
         try {
             TourModelNew tour = JsonConverter.readFromJsonFile(file);
-            tourOverviewViewModel.addTour(tour);
+            TourModelNew importedTour = tourOverviewViewModel.importTour(tour);
+
+            for (TourLogModel tourLog : tour.getTourLogs()) {
+                tourLogOverviewViewModel.importTourLog(tourLog, importedTour);
+            }
+
+            tourOverviewViewModel.addTourToList(importedTour);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

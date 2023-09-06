@@ -43,6 +43,15 @@ public class TourServiceImpl implements TourServiceNew {
     }
 
     @Override
+    public TourModelNew importTour(TourModelNew tourModel) {
+        Tour tour = new Tour();
+        setValues(tour, tourModel);
+        tourRepository.saveAndFlush(tour);
+
+        return setValues(tour);
+    }
+
+    @Override
     public void deleteTour(TourModelNew tourModelNew) {
         tourRepository.deleteById(tourModelNew.getTourId());
     }
