@@ -1,23 +1,12 @@
 package org.fancylynx.application.view;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import org.fancylynx.FXMLDependencyInjection;
-import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.viewmodel.MainViewModel;
 
 import java.io.IOException;
-import java.util.Locale;
 
 public class MainController {
 
@@ -42,16 +31,24 @@ public class MainController {
 
         var file = fileChooser.showOpenDialog(mainScene.getScene().getWindow());
 
+        if (file != null) {
+            viewModel.importTour(file);
+        } else {
+            System.out.println("No File selected");
+        }
     }
 
     @FXML
     public void exportTour() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save Tour File");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Tour Files", "*.json"));
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Export Tour");
+        var directory = directoryChooser.showDialog(mainScene.getScene().getWindow());
 
-        var file = fileChooser.showSaveDialog(mainScene.getScene().getWindow());
+        if (directory != null) {
+            viewModel.exportTour(directory);
+        } else {
+            System.out.println("No Directory selected");
+        }
     }
 
 }

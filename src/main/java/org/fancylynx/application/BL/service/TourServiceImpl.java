@@ -21,17 +21,7 @@ public class TourServiceImpl implements TourServiceNew {
 
         return tourRepository.findAll()
                 .stream().map(
-                        tour -> new TourModelNew(
-                                tour.getId(),
-                                tour.getName(),
-                                tour.getDescription(),
-                                tour.getOrigin(),
-                                tour.getDestination(),
-                                tour.getTransportType(),
-                                tour.getDistance(),
-                                tour.getEstimatedTime(),
-                                tour.getImagePath()
-                        )
+                        this::setValues
                 ).toList();
     }
 
@@ -40,6 +30,35 @@ public class TourServiceImpl implements TourServiceNew {
         Tour tour = new Tour();
         tourRepository.saveAndFlush(tour);
 
+        return setValues(tour);
+    }
+
+    @Override
+    public void updateTour(TourModelNew tourModel) {
+        Optional<Tour> tourOptional = tourRepository.findById(tourModel.getTourId());
+        tourOptional.ifPresent(tour -> {
+            setValues(tour, tourModel);
+            tourRepository.saveAndFlush(tour);
+        });
+    }
+
+    @Override
+    public void deleteTour(TourModelNew tourModelNew) {
+        tourRepository.deleteById(tourModelNew.getTourId());
+    }
+
+    public void setValues(Tour tour, TourModelNew tourModel) {
+        tour.setName(tourModel.getName());
+        tour.setDescription(tourModel.getDescription());
+        tour.setOrigin(tourModel.getFrom());
+        tour.setDestination(tourModel.getTo());
+        tour.setTransportType(tourModel.getTransportType());
+        tour.setDistance(tourModel.getDistance());
+        tour.setEstimatedTime(tourModel.getEstimatedTime());
+        tour.setImagePath(tourModel.getImagePath());
+    }
+
+    public TourModelNew setValues(Tour tour) {
         return new TourModelNew(
                 tour.getId(),
                 tour.getName(),
@@ -51,26 +70,5 @@ public class TourServiceImpl implements TourServiceNew {
                 tour.getEstimatedTime(),
                 tour.getImagePath()
         );
-    }
-
-    @Override
-    public void updateTour(TourModelNew tourModel) {
-        Optional<Tour> tourOptional = tourRepository.findById(tourModel.getTourId());
-        tourOptional.ifPresent(tour -> {
-            tour.setName(tourModel.getName());
-            tour.setDescription(tourModel.getDescription());
-            tour.setOrigin(tourModel.getFrom());
-            tour.setDestination(tourModel.getTo());
-            tour.setTransportType(tourModel.getTransportType());
-            tour.setDistance(tourModel.getDistance());
-            tour.setEstimatedTime(tourModel.getEstimatedTime());
-            tour.setImagePath(tourModel.getImagePath());
-            tourRepository.saveAndFlush(tour);
-        });
-    }
-
-    @Override
-    public void deleteTour(TourModelNew tourModelNew) {
-        tourRepository.deleteById(tourModelNew.getTourId());
     }
 }

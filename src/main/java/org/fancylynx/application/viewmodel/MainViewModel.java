@@ -2,11 +2,13 @@ package org.fancylynx.application.viewmodel;
 
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
+import org.fancylynx.application.utility.JsonConverter;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.List;
 
 
 @Component
@@ -17,6 +19,7 @@ public class MainViewModel {
     private final TourLogOverviewViewModel tourLogOverviewViewModel;
     private final TourLogDetailsViewModel tourLogDetailsViewModel;
     private final SearchBarViewModel searchBarViewModel;
+    private TourModelNew selectedTour;
 
 
     public MainViewModel(TourOverviewViewModel tourOverviewViewModel, TourDetailsViewModel tourDetailsViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel, SearchBarViewModel searchBarViewModel) {
@@ -41,11 +44,33 @@ public class MainViewModel {
     }
 
     public void selectTour(TourModelNew tour){
+        this.selectedTour = tour;
         tourLogOverviewViewModel.setTour(tour);
         tourDetailsViewModel.setTour(tour);
     }
 
-    public void exportTour(File file) {
+    public void importTour(File file) {
+        try {
+            TourModelNew tour = JsonConverter.readFromJsonFile(file);
+            tourOverviewViewModel.addTour(tour);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
+        logger.info("Import tour from file=[{}]", file);
     }
+
+    public void exportTour(File directory) {
+        List<TourLogModel> tourLogs = tourLogOverviewViewModel.getTourLogs(selectedTour.getTourId());
+        selectedTour.setTourLogs(tourLogs);
+
+        try {
+            JsonConverter.writeToJsonFile(selectedTour, directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        logger.info("Export tour to directory=[{}]", directory);
+    }
+
 }

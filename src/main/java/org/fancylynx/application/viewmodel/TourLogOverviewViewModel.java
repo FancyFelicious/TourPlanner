@@ -4,17 +4,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import lombok.Setter;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
-import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +44,6 @@ public class TourLogOverviewViewModel {
     public TourLogOverviewViewModel(TourLogService tourLogService) {
         this.tourLogService = tourLogService;
     }
-    public List<TourLogModel> getTourLogModels(Tour tour) {
-        return tourLogService.getAllTourLogs(tour.getId());
-    }
 
     private void notifyListeners(TourLogModel newValue) {
         for ( var listener : listeners ) {
@@ -65,7 +58,11 @@ public class TourLogOverviewViewModel {
         }
 
         this.tour = tour;
-        setTourLogs(tourLogService.getAllTourLogs(tour.getTourId()));
+        setTourLogs(getTourLogs(tour.getTourId()));
+    }
+
+    public List<TourLogModel> getTourLogs(long tourId) {
+        return tourLogService.getAllTourLogs(tourId);
     }
 
     public void setTourLogs(List<TourLogModel> tourLogs) {
