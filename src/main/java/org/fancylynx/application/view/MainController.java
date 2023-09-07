@@ -51,4 +51,13 @@ public class MainController {
         }
     }
 
+    @FXML
+    public void createTourReport() {
+        viewModel.tourReport();
+    }
+
+    @FXML
+    public void createSummaryReport() {
+        viewModel.summaryReport();
+    }
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.fancylynx.application.BL.model.tour.RouteModel;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.service.RouteService;
+import org.fancylynx.application.BL.service.TourLogService;
 import org.fancylynx.application.BL.service.TourServiceNew;
 import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
@@ -34,14 +35,20 @@ public class TourDetailsViewModel {
     private final StringProperty imagePath = new SimpleStringProperty();
     @Getter
     private final ObjectProperty<Image> tourMap = new SimpleObjectProperty<>();
+    @Getter
+    private final StringProperty popularity = new SimpleStringProperty();
+    @Getter
+    private final StringProperty childFriendly = new SimpleStringProperty();
 
     private final TourServiceNew tourServiceNew;
     private final RouteService routeService;
+    private final TourLogService tourLogService;
     private TourModelNew tourModelNew;
 
-    public TourDetailsViewModel(TourServiceNew tourServiceNew, RouteService routeService) {
+    public TourDetailsViewModel(TourServiceNew tourServiceNew, RouteService routeService, TourLogService tourLogService) {
         this.tourServiceNew = tourServiceNew;
         this.routeService = routeService;
+        this.tourLogService = tourLogService;
     }
 
     public void setTour(TourModelNew tourModelNew) {
@@ -52,9 +59,14 @@ public class TourDetailsViewModel {
 
         this.tourModelNew = tourModelNew;
         retrieveValues(tourModelNew);
+        calculatePopularity();
     }
 
     public void saveTour() {
+        if (!validInput()) {
+            return;
+        }
+
         setValues();
 
         RouteModel route = routeService.getRoute(tourModelNew);
@@ -95,12 +107,26 @@ public class TourDetailsViewModel {
         }
     }
 
+    public void calculatePopularity() {
+        int tourLogs = tourLogService.getAllTourLogs(tourModelNew.getTourId()).size();
+
+        if (tourLogs > 15) {
+            popularity.set("Very popular: " + tourLogs + " logs");
+        } else if (tourLogs > 10) {
+            popularity.set("Popular: " + tourLogs + " logs");
+        } else if (tourLogs > 5) {
+            popularity.set("Average: " + tourLogs + " logs");
+        } else {
+            popularity.set("Not popular: " + tourLogs + " logs");
+        }
+    }
+
     public void resetValues() {
         name.set("");
         description.set("");
         from.set("");
         to.set("");
-        type.set("CAR");
+        type.set("AUTO");
         distance.set(0);
         estimatedTime.set(0);
         imagePath.set("");
@@ -118,4 +144,7 @@ public class TourDetailsViewModel {
         tourModelNew.setImagePath(imagePath.get());
     }
 
+    public Boolean validInput() {
+        return true;
+    }
 }

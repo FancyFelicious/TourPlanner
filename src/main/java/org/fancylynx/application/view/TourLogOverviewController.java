@@ -26,6 +26,10 @@ public class TourLogOverviewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tourLogList.setItems(tourLogOverviewViewModel.getObservableTourLogs());
+
+        if (!tourLogList.getItems().isEmpty())
+            tourLogList.getSelectionModel().selectFirst();
+
         tourLogList.getSelectionModel().selectedItemProperty().addListener(tourLogOverviewViewModel.getChangeListener());
     }
 

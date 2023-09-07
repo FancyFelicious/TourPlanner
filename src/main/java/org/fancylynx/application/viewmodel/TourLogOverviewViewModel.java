@@ -58,6 +58,7 @@ public class TourLogOverviewViewModel {
         }
 
         this.tour = tour;
+        tour.setTourLogs(getTourLogs(tour.getTourId()));
         setTourLogs(getTourLogs(tour.getTourId()));
     }
 
@@ -79,9 +80,4 @@ public class TourLogOverviewViewModel {
        tourLogService.deleteTourLog(tourLog);
        tourLogModels.remove(tourLog);
     }
-
-    public void importTourLog(TourLogModel tourLogModel, TourModelNew tourModel) {
-        tourLogService.importTourLog(tourLogModel, tourModel);
-    }
-
 }

@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import org.controlsfx.control.Rating?>
+<?import javafx.scene.control.Slider?>
 <GridPane layoutX="1.0" layoutY="1.0" prefHeight="300.0" prefWidth="500.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.TourLogDetailsController">
    <columnConstraints>
       <ColumnConstraints />
@@ -34,11 +36,12 @@
       <Label text="Date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Label text="Comment" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       <Label text="Difficulty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <ChoiceBox fx:id="diffChoiceBox" prefHeight="46.0" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Slider fx:id="difficulty" blockIncrement="1.0" majorTickUnit="2.0" max="10.0" minorTickCount="1"
+              showTickLabels="true" showTickMarks="true" snapToTicks="true" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Label text="Total Time" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <TextArea fx:id="tourLogComment" prefHeight="89.0" prefWidth="309.0" promptText="Comment" GridPane.columnIndex="2" GridPane.rowIndex="7" />
       <Label text="Rating" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <ChoiceBox fx:id="tourLogRating" prefHeight="46.0" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      <Rating fx:id="tourLogRating" prefWidth="231.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
       <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="166.0" text="Save Tourlog" onAction="#saveTourLog" GridPane.columnIndex="2" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="10.0" top="10.0" />

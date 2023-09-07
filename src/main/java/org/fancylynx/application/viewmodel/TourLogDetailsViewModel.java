@@ -21,7 +21,7 @@ public class TourLogDetailsViewModel {
     @Getter
     private final StringProperty comment = new SimpleStringProperty();
     @Getter
-    private final StringProperty difficulty = new SimpleStringProperty("");
+    private final IntegerProperty difficulty = new SimpleIntegerProperty();
     @Getter
     private final DoubleProperty totalTime = new SimpleDoubleProperty();
     @Getter
@@ -34,20 +34,20 @@ public class TourLogDetailsViewModel {
         this.tourLogService = tourLogService;
     }
 
-    public void setTourLogModel(TourLogModel tourLogModel) {
-        if (tourLogModel == null) {
+    public void setTourLogModel(TourLogModel tourLog) {
+        if (tourLog == null) {
             resetValues();
             return;
         }
 
-        this.tourLogModel = tourLogModel;
+        this.tourLogModel = tourLog;
 
-        tourLogID.set(tourLogModel.getTourLogId());
-        date.set(tourLogModel.getDate());
-        comment.set(tourLogModel.getComment());
-        difficulty.set(tourLogModel.getDifficulty());
-        totalTime.set(tourLogModel.getTotalTime());
-        rating.set(tourLogModel.getRating());
+        tourLogID.set(tourLog.getTourLogId());
+        date.set(tourLog.getDate());
+        comment.set(tourLog.getComment());
+        difficulty.set(tourLog.getDifficulty());
+        totalTime.set(tourLog.getTotalTime());
+        rating.set(tourLog.getRating());
     }
 
     public void saveTourLog() {
@@ -58,7 +58,7 @@ public class TourLogDetailsViewModel {
     public void resetValues() {
         date.set(LocalDate.now());
         comment.set("");
-        difficulty.set("EASY");
+        difficulty.set(5);
         totalTime.set(0);
         rating.set(1);
     }

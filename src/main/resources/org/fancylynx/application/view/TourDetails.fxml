@@ -11,24 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<!--<AnchorPane fx:id="detailsAnchor" prefHeight="326.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.TourDetailsController">
-   <children>
-      <Pane layoutX="14.0" layoutY="14.0" prefHeight="214.0" prefWidth="207.0" style="-fx-background-color: black;" />
-      <Button layoutX="14.0" layoutY="253.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="207.0" style="-fx-background-color: #569099;" text="Generate Report" textFill="WHITE">
-         <font>
-            <Font size="23.0" />
-         </font>
-      </Button>
-      <Pane layoutX="235.0" layoutY="14.0" prefHeight="290.0" prefWidth="242.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="18.599999999999994" />
-   </children>
-</AnchorPane>-->
-
 <HBox layoutX="1.0" layoutY="1.0" prefHeight="300.0" prefWidth="751.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.fancylynx.application.view.TourDetailsController">
    <GridPane prefWidth="451.0" vgap="5.0">
    <columnConstraints>
       <ColumnConstraints />
-      <ColumnConstraints maxWidth="223.20003662109374" minWidth="83.20003204345704" prefWidth="119.20000457763672" />
-      <ColumnConstraints maxWidth="377.59996795654297" minWidth="236.79996337890626" prefWidth="342.3999954223633" />
+      <ColumnConstraints maxWidth="223.20003662109374" minWidth="83.20003204345704" prefWidth="111.60000610351562" />
+      <ColumnConstraints maxWidth="377.59996795654297" minWidth="236.79996337890626" prefWidth="298.79999389648435" />
    </columnConstraints>
    <children>
       <Label fx:id="tourEstTime" prefHeight="31.0" prefWidth="378.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
@@ -45,9 +33,16 @@
       <TextField fx:id="tourDesc" promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Label fx:id="imagePath" GridPane.columnIndex="2" GridPane.rowIndex="10" />
       <Label text="Image Path" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Button fx:id="saveTour" mnemonicParsing="false" onAction="#saveTour" prefHeight="35.0" prefWidth="129.0" text="Save Tour" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+      <Button fx:id="saveTour" mnemonicParsing="false" onAction="#saveTour" prefHeight="35.0" prefWidth="129.0" text="Save Tour" GridPane.columnIndex="2" GridPane.rowIndex="13">
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets></Button>
       <Label text="Distance" GridPane.columnIndex="1" GridPane.rowIndex="8" />
       <Label fx:id="distance" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+         <Label text="Popularity" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+         <Label fx:id="popularity" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+         <Label text="Child Friendliness" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+         <Label fx:id="childFriendly" GridPane.columnIndex="2" GridPane.rowIndex="12" />
    </children>
    <padding>
       <Insets left="20.0" right="10.0" top="10.0" />
@@ -66,9 +61,11 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
    </rowConstraints>
    </GridPane>
-   <ImageView fx:id="tourMap" fitHeight="248.0" fitWidth="311.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="tourMap" fitHeight="211.0" fitWidth="284.0" pickOnBounds="true" preserveRatio="true">
       <HBox.margin>
          <Insets top="14.0" />
       </HBox.margin>

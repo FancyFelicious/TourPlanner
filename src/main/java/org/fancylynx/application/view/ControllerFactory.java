@@ -18,13 +18,14 @@ public class ControllerFactory {
         TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
         TourServiceNew tourService = new TourServiceImpl(applicationContext.getBean(TourRepository.class));
         RouteService routeService = new RouteServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
 
         this.tourOverviewViewModel = new TourOverviewViewModel(tourService);
-        this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService);
+        this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService, tourLogService);
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
         this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
         this.searchBarViewModel = new SearchBarViewModel();
-        this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel, searchBarViewModel);
+        this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel, searchBarViewModel, tourService, tourLogService, reportService);
     }
 
     public Object create(Class<?> controllerClass) {

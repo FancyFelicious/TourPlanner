@@ -38,10 +38,6 @@ public class TourOverviewViewModel {
         tourModels.add(tour);
     }
 
-    public TourModelNew importTour(TourModelNew tourModel) {
-        return tourServiceNew.importTour(tourModel);
-    }
-
     public void deleteTour(TourModelNew tourModel) {
         tourServiceNew.deleteTour(tourModel);
         tourModels.remove(tourModel);

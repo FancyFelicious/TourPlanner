@@ -64,6 +64,12 @@
                 <MenuItem onAction="#exportTour" mnemonicParsing="false" text="Export Tour" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Misc">
+                <items>
+                    <MenuItem onAction="#createTourReport" mnemonicParsing="false" text="Create Tour Report" />
+                    <MenuItem onAction="#createSummaryReport" mnemonicParsing="false" text="Create Summary Report" />
+                </items>
+            </Menu>
         </menus>
       </MenuBar>
    </top>

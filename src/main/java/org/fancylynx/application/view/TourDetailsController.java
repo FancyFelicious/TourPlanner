@@ -31,11 +31,15 @@ public class TourDetailsController implements Initializable {
     @FXML
     private Label imagePath;
     @FXML
+    private Label popularity;
+    @FXML
+    private Label childFriendly;
+    @FXML
     private ChoiceBox<String> transportType;
     @FXML
     private ImageView tourMap;
 
-    private final ObservableList<String> transList = FXCollections.observableArrayList("CAR", "WALK", "CYCLE");
+    private final ObservableList<String> transList = FXCollections.observableArrayList("AUTO", "WALKING", "BICYCLE");
     private TourDetailsViewModel tourDetailsViewModel;
 
     public TourDetailsController() {
@@ -66,5 +70,7 @@ public class TourDetailsController implements Initializable {
         imagePath.textProperty().bindBidirectional(tourDetailsViewModel.getImagePath());
         transportType.valueProperty().bindBidirectional(tourDetailsViewModel.getType());
         tourMap.imageProperty().bindBidirectional(tourDetailsViewModel.getTourMap());
+        popularity.textProperty().bindBidirectional(tourDetailsViewModel.getPopularity());
+        childFriendly.textProperty().bindBidirectional(tourDetailsViewModel.getChildFriendly());
     }
 }

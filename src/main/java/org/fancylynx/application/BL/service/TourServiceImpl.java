@@ -28,6 +28,7 @@ public class TourServiceImpl implements TourServiceNew {
     @Override
     public TourModelNew createNewTour() {
         Tour tour = new Tour();
+        tour.setTransportType("AUTO");
         tourRepository.saveAndFlush(tour);
 
         return setValues(tour);
