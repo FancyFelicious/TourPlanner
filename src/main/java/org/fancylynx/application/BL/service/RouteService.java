@@ -1,8 +1,9 @@
 package org.fancylynx.application.BL.service;
 
-import org.fancylynx.application.DAL.entity.Tour;
+import org.fancylynx.application.BL.model.tour.RouteModel;
+import org.fancylynx.application.BL.model.tour.TourModelNew;
 
 public interface RouteService {
-    public String getRoute(Tour tour);
+    public RouteModel getRoute(TourModelNew tour);
     public String getStaticMap(String sessionId);
 }

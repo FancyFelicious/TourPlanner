@@ -1,34 +1,17 @@
 package org.fancylynx.application.view;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import org.fancylynx.FXMLDependencyInjection;
-import org.fancylynx.application.DAL.entity.Tour;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import org.fancylynx.application.viewmodel.MainViewModel;
 
 import java.io.IOException;
-import java.util.Locale;
 
 public class MainController {
 
     @FXML
-    private TabPane tabPane;
-    @FXML
-    private Tab contentTab;
-    @FXML
-    private ListView<Tour> tourList;
-    @FXML
-    private TourLogController tourLogController;
-    //private ViewHandler viewHandler;
+    private BorderPane mainScene;
     private final MainViewModel viewModel;
 
     public MainController(MainViewModel viewModel) {
@@ -37,39 +20,44 @@ public class MainController {
 
     @FXML
     public void initialize() throws IOException {
-        //this.viewHandler = viewHandler;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("TourDetails.fxml"));
-        AnchorPane content = loader.load();
-        contentTab.setContent(content);
-
-        AnchorPane detailsAnchor = (AnchorPane) content.lookup("#detailsAnchor");
-        detailsAnchor.prefWidthProperty().bind(tabPane.widthProperty());
-        detailsAnchor.prefHeightProperty().bind(tabPane.heightProperty());
-
-        //tourList.setItems();
-        tourList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            viewModel.selectTour(new SimpleObjectProperty<>(newValue));
-        });
     }
 
-    public void handleAddNewTour() {
-        try {
-            FXMLLoader loader = FXMLDependencyInjection.getLoader("TourView.fxml", Locale.GERMAN, null);
-            Parent root = loader.load();
+    @FXML
+    public void importTour(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Tour File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Tour Files", "*.json"));
 
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
+        var file = fileChooser.showOpenDialog(mainScene.getScene().getWindow());
 
-            stage.setTitle("Add Tour");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (file != null) {
+            viewModel.importTour(file);
+        } else {
+            System.out.println("No File selected");
         }
     }
 
-   /* public void handleCreateTourButton() throws IOException {
-        viewHandler.openView(Views.CREATETOUR.getFxmlFileName());
-    }*/
+    @FXML
+    public void exportTour() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Export Tour");
+        var directory = directoryChooser.showDialog(mainScene.getScene().getWindow());
 
+        if (directory != null) {
+            viewModel.exportTour(directory);
+        } else {
+            System.out.println("No Directory selected");
+        }
+    }
+
+    @FXML
+    public void createTourReport() {
+        viewModel.tourReport();
+    }
+
+    @FXML
+    public void createSummaryReport() {
+        viewModel.summaryReport();
+    }
 }

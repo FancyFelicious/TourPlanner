@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fancylynx.application.view.SearchBarController">
+    <TextField fx:id="searchField" id="tourSearch" focusTraversable="false" promptText="Search Tours.." />
+</HBox>

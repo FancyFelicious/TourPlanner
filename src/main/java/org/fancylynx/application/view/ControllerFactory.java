@@ -1,41 +1,46 @@
 package org.fancylynx.application.view;
 
-import org.fancylynx.application.BL.service.TourLogService;
-import org.fancylynx.application.BL.service.TourServiceImpl;
-import org.fancylynx.application.BL.service.TourServiceNew;
+import org.fancylynx.application.BL.service.*;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
-import org.fancylynx.application.BL.service.TourLogServiceImpl;
-import org.fancylynx.application.viewmodel.MainViewModel;
-import org.fancylynx.application.viewmodel.TourLogViewModel;
-import org.fancylynx.application.viewmodel.TourViewModel;
+import org.fancylynx.application.DAL.repository.TourRepository;
+import org.fancylynx.application.viewmodel.*;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class ControllerFactory {
     private final MainViewModel mainViewModel;
-    private final TourLogViewModel tourLogViewModel;
-    private final TourViewModel tourViewModel;
+    private final TourOverviewViewModel tourOverviewViewModel;
+    private final TourDetailsViewModel tourDetailsViewModel;
+    private final TourLogOverviewViewModel tourLogOverviewViewModel;
+    private final TourLogDetailsViewModel tourLogDetailsViewModel;
+    private final SearchBarViewModel searchBarViewModel;
 
     public ControllerFactory(ConfigurableApplicationContext applicationContext) {
         TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
-        TourServiceNew tourService = new TourServiceImpl();
+        TourServiceNew tourService = new TourServiceImpl(applicationContext.getBean(TourRepository.class));
+        RouteService routeService = new RouteServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
 
-        this.tourLogViewModel = new TourLogViewModel(tourLogService);
-        this.tourViewModel = new TourViewModel(tourService);
-        this.mainViewModel = new MainViewModel(tourViewModel, tourLogViewModel);
+        this.tourOverviewViewModel = new TourOverviewViewModel(tourService);
+        this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService, tourLogService);
+        this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
+        this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
+        this.searchBarViewModel = new SearchBarViewModel();
+        this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel, searchBarViewModel, tourService, tourLogService, reportService);
     }
 
     public Object create(Class<?> controllerClass) {
         if (controllerClass == MainController.class) {
             return new MainController(mainViewModel);
-        } else if (controllerClass == TourLogController.class) {
-            return new TourLogController(tourLogViewModel);
-        } else if (controllerClass == TourController.class) {
-            return new TourController(tourViewModel);
-        }
-        else if (controllerClass == AddTourLogController.class) {
-            AddTourLogController addTourLogController = new AddTourLogController();
-            addTourLogController.setTourLogViewModel(tourLogViewModel);
-            return addTourLogController;
+        } else if (controllerClass == TourOverviewController.class) {
+            return new TourOverviewController(tourOverviewViewModel);
+        } else if (controllerClass == TourDetailsController.class) {
+            return new TourDetailsController(tourDetailsViewModel);
+        } else if (controllerClass == TourLogOverviewController.class) {
+            return new TourLogOverviewController(tourLogOverviewViewModel);
+        } else if (controllerClass == TourLogDetailsController.class) {
+            return new TourLogDetailsController(tourLogDetailsViewModel);
+        } else if (controllerClass == SearchBarController.class) {
+            return new SearchBarController(searchBarViewModel);
         } else {
             throw new IllegalArgumentException("Unknown controller class: " + controllerClass);
         }

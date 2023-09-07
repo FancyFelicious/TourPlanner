@@ -1,13 +1,20 @@
 package org.fancylynx.application.DAL.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // 2do
 //, uniqueConstraints = {
 //        @UniqueConstraint(name = "tour_unique_name", columnNames = "test_name2")
 //})
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "tour")
 @Table(name = "tour")
 @Data
@@ -19,29 +26,44 @@ public class Tour {
     @Column(name = "id", unique = true, updatable = false, nullable = false, columnDefinition = "BIGINT")
     private long id; // note: best practice to use long for id, not really necessary regarding the scope of this project
 
-    @Column(name = "name", unique = true, nullable = false, columnDefinition = "TEXT")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "description", columnDefinition = "TEXT")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "origin", columnDefinition = "TEXT")
+    @Column(name = "origin")
     private String origin;
 
-    @Column(name = "destination", columnDefinition = "TEXT")
+    @Column(name = "destination")
     private String destination;
 
-    @Column(name = "transport_type", columnDefinition = "TEXT")
-    private String transportType; // 2do: make enum?
+    @Column(name = "transport_type")
+    private String transportType;
 
-    @Column(name = "distance", columnDefinition = "TEXT")
-    private String distance; // 2do: float?
+    @Column(name = "distance")
+    private Double distance; // 2do: float?
 
-    @Column(name = "estimated_time", columnDefinition = "TEXT")
-    private String estimatedTime; // 2do: time?
+    @Column(name = "estimated_time")
+    private long estimatedTime; // 2do: time?
 
-    @Column(name = "image_path", columnDefinition = "TEXT")
+    @Column(name = "image_path")
     private String imagePath;
+
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<TourLog> tourLogs = new ArrayList<>();
+
+    public Tour(long id, String name, String description, String origin, String destination, String transportType, Double distance, long estimatedTime, String imagePath) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.origin = origin;
+        this.destination = destination;
+        this.transportType = transportType;
+        this.distance = distance;
+        this.estimatedTime = estimatedTime;
+        this.imagePath = imagePath;
+    }
 }
 
 
