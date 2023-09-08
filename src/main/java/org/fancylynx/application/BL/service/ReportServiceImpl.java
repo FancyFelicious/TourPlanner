@@ -39,6 +39,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void generateTourReport(TourModel tourModel) {
         this.tour = tourModel;
+        // Check if report path exists
+        if (!new java.io.File(REPORT_PATH).exists()) {
+            new java.io.File(REPORT_PATH).mkdir();
+        }
+
         try {
             // Unique name for the report
             PdfWriter writer = new PdfWriter(REPORT_PATH + tourModel.getName() + ".pdf");

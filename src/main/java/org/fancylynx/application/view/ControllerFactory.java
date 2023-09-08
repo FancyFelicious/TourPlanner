@@ -7,6 +7,7 @@ import org.fancylynx.application.viewmodel.*;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class ControllerFactory {
+    ConfigurableApplicationContext applicationContext;
     private final MainViewModel mainViewModel;
     private final TourOverviewViewModel tourOverviewViewModel;
     private final TourDetailsViewModel tourDetailsViewModel;
@@ -15,6 +16,7 @@ public class ControllerFactory {
     private final SearchBarViewModel searchBarViewModel;
 
     public ControllerFactory(ConfigurableApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
         TourLogService tourLogService = new TourLogServiceImpl(applicationContext.getBean(TourLogRepository.class));
         TourServiceNew tourService = new TourServiceImpl(applicationContext.getBean(TourRepository.class));
         RouteService routeService = new RouteServiceImpl();
@@ -30,7 +32,7 @@ public class ControllerFactory {
 
     public Object create(Class<?> controllerClass) {
         if (controllerClass == MainController.class) {
-            return new MainController(mainViewModel);
+            return new MainController(applicationContext, mainViewModel);
         } else if (controllerClass == TourOverviewController.class) {
             return new TourOverviewController(tourOverviewViewModel);
         } else if (controllerClass == TourDetailsController.class) {

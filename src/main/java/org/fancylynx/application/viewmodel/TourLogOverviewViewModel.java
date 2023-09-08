@@ -67,6 +67,10 @@ public class TourLogOverviewViewModel {
     }
 
     public void addTourLog() {
+        if (tour == null) {
+            return;
+        }
+
         var tourLog = tourLogService.createNewTourLog(tour);
         tourLogModels.add(tourLog);
 

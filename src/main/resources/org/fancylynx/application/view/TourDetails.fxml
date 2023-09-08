@@ -22,29 +22,29 @@
         <children>
             <Label fx:id="tourEstTime" prefHeight="31.0" prefWidth="378.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
             <Label text="Tour Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Description" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label text="Destination" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Estimated Time" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Label text="%Description" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="%Destination" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label text="%EstimatedTime" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <ChoiceBox fx:id="transportType" prefHeight="26.0" prefWidth="325.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <TextField fx:id="tourName" promptText="Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label text="Transport Type" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label text="Origin" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label text="%TransportType" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Label text="%Origin" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="tourDesc" promptText="Description" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="from" promptText="From" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <TextField fx:id="to" prefHeight="25.0" prefWidth="248.0" promptText="To" GridPane.columnIndex="2" GridPane.rowIndex="5" />
 
             <Label fx:id="imagePath" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-            <Label text="Image Path" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <Button fx:id="saveTour" mnemonicParsing="false" onAction="#saveTour" prefHeight="35.0" prefWidth="129.0" text="Save Tour" GridPane.columnIndex="2" GridPane.rowIndex="13">
+            <Label text="%ImagePath" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Button fx:id="saveTour" mnemonicParsing="false" onAction="#saveTour" prefHeight="35.0" prefWidth="129.0" text="%SaveTour" GridPane.columnIndex="2" GridPane.rowIndex="13">
                 <opaqueInsets>
                     <Insets />
                 </opaqueInsets>
             </Button>
-            <Label text="Distance" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Label text="%Distance" GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <Label fx:id="distance" GridPane.columnIndex="2" GridPane.rowIndex="8" />
-            <Label text="Popularity" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+            <Label text="%Popularity" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <Label fx:id="popularity" GridPane.columnIndex="2" GridPane.rowIndex="11" />
-            <Label text="Child Friendliness" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+            <Label text="%ChildFriendliness" GridPane.columnIndex="1" GridPane.rowIndex="12" />
             <Label fx:id="childFriendly" GridPane.columnIndex="2" GridPane.rowIndex="12" />
         </children>
         <padding>

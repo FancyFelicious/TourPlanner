@@ -58,16 +58,18 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="%File">
             <items>
-                <MenuItem onAction="#importTour" mnemonicParsing="false" text="Import Tour" />
-                <MenuItem onAction="#exportTour" mnemonicParsing="false" text="Export Tour" />
+                <MenuItem onAction="#importTour" mnemonicParsing="false" text="%ImportTour" />
+                <MenuItem onAction="#exportTour" mnemonicParsing="false" text="%ExportTour" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Misc">
                 <items>
-                    <MenuItem onAction="#createTourReport" mnemonicParsing="false" text="Create Tour Report" />
-                    <MenuItem onAction="#createSummaryReport" mnemonicParsing="false" text="Create Summary Report" />
+                    <MenuItem onAction="#createTourReport" mnemonicParsing="false" text="%CreateTourReport" />
+                    <MenuItem onAction="#createSummaryReport" mnemonicParsing="false" text="%CreateSummaryReport" />
+                    <MenuItem onAction="#switchToEnglish" mnemonicParsing="false" text="Switch to English" />
+                    <MenuItem onAction="#switchToGerman" mnemonicParsing="false" text="Switch to German" />
                 </items>
             </Menu>
         </menus>
