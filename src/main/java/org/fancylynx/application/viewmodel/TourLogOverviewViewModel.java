@@ -4,12 +4,12 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.springframework.stereotype.Component;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +18,11 @@ import java.util.List;
 public class TourLogOverviewViewModel {
     private static final Logger logger = LogManager.getLogger(TourLogOverviewViewModel.class);
     private final TourLogService tourLogService;
-    private List<SelectionChangedListener> listeners = new ArrayList<>();
-
+    private final List<SelectionChangedListener> listeners = new ArrayList<>();
+    private final ObservableList<TourLogModel> tourLogModels = FXCollections.observableArrayList();
+    
     @Getter
     private TourModel tour;
-    private ObservableList<TourLogModel> tourLogModels = FXCollections.observableArrayList();
 
     public TourLogOverviewViewModel(TourLogService tourLogService) {
         this.tourLogService = tourLogService;

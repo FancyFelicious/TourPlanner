@@ -9,10 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-// 2do
-//, uniqueConstraints = {
-//        @UniqueConstraint(name = "tour_unique_name", columnNames = "test_name2")
-//})
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "tour")

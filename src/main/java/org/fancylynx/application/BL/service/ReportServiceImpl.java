@@ -41,7 +41,6 @@ public class ReportServiceImpl implements ReportService {
         this.tour = tourModel;
         try {
             // Unique name for the report
-            // PdfWriter writer = new PdfWriter(REPORT_PATH + tourModel.getName() + "_" + System.currentTimeMillis() + ".pdf");
             PdfWriter writer = new PdfWriter(REPORT_PATH + tourModel.getName() + ".pdf");
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
@@ -61,7 +60,6 @@ public class ReportServiceImpl implements ReportService {
     public void generateSummaryReport(Map<TourModel, List<TourLogModel>> tours) {
         try {
             // Unique name for the report
-            // PdfWriter writer = new PdfWriter(REPORT_PATH + "SummaryReport_" + System.currentTimeMillis() + ".pdf");
             PdfWriter writer = new PdfWriter(REPORT_PATH + "SummaryReport.pdf");
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);

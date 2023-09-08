@@ -1,21 +1,13 @@
 package org.fancylynx.application.view;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import lombok.Getter;
-import org.fancylynx.FXMLDependencyInjection;
-import org.fancylynx.application.BL.model.tour.TourModel;
-
 import javafx.scene.control.ListView;
+import lombok.Getter;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.viewmodel.TourOverviewViewModel;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TourOverviewController implements Initializable {

@@ -22,7 +22,6 @@ public class TourModel {
     private Double distance;
     private long estimatedTime;
     private String imagePath;
-
     private List<TourLogModel> tourLogs;
 
     public TourModel(long tourId, String name, String description, String from, String to, String transportType, Double distance, long estimatedTime, String imagePath) {

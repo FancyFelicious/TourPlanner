@@ -11,17 +11,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TourLogOverviewController implements Initializable {
-    @FXML
-    public ListView<TourLogModel> tourLogList;
-
-
     @Getter
     private final TourLogOverviewViewModel tourLogOverviewViewModel;
+    @FXML
+    public ListView<TourLogModel> tourLogList;
 
     public TourLogOverviewController(TourLogOverviewViewModel tourLogOverviewViewModel) {
         this.tourLogOverviewViewModel = tourLogOverviewViewModel;
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

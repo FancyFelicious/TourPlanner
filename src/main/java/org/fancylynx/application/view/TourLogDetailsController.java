@@ -1,10 +1,11 @@
 package org.fancylynx.application.view;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.util.converter.NumberStringConverter;
 import org.controlsfx.control.Rating;
 import org.fancylynx.application.viewmodel.TourLogDetailsViewModel;
@@ -14,6 +15,7 @@ import java.util.ResourceBundle;
 
 public class TourLogDetailsController implements Initializable {
 
+    private final TourLogDetailsViewModel tourLogDetailsViewModel;
     @FXML
     private DatePicker tourLogDate;
     @FXML
@@ -24,12 +26,6 @@ public class TourLogDetailsController implements Initializable {
     private Rating tourLogRating;
     @FXML
     private TextArea tourLogComment;
-
-
-    private TourLogDetailsViewModel tourLogDetailsViewModel;
-
-    public TourLogDetailsController() {
-    }
 
     public TourLogDetailsController(TourLogDetailsViewModel tourLogDetailsViewModel) {
         this.tourLogDetailsViewModel = tourLogDetailsViewModel;
