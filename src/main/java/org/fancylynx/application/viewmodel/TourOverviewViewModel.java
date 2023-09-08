@@ -32,7 +32,6 @@ public class TourOverviewViewModel {
     public void addNewTour() {
         var tour = tourServiceNew.createNewTour();
         tourModels.add(tour);
-
         logger.info("Added new tour with id=[{}]", tour.getTourId());
     }
 

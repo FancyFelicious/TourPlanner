@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 public class TourDetailsController implements Initializable {
 
     private final ObservableList<String> transList = FXCollections.observableArrayList("AUTO", "WALKING", "BICYCLE");
+    private final TourDetailsViewModel tourDetailsViewModel;
     @FXML
     private Label tourEstTime;
     @FXML
@@ -39,17 +40,11 @@ public class TourDetailsController implements Initializable {
     @FXML
     private Label childFriendly;
     @FXML
-    private Label statusLabel;
-    @FXML
     private Label statusMessage;
     @FXML
     private ChoiceBox<String> transportType;
     @FXML
     private ImageView tourMap;
-    private TourDetailsViewModel tourDetailsViewModel;
-
-    public TourDetailsController() {
-    }
 
     public TourDetailsController(TourDetailsViewModel tourDetailsViewModel) {
         this.tourDetailsViewModel = tourDetailsViewModel;
@@ -67,41 +62,49 @@ public class TourDetailsController implements Initializable {
     public void saveTour() {
 
         if (validateInput()) {
+            statusMessage.setTextFill(Color.color(1, 1, 1));
+            statusMessage.setText("Calculating route...");
             tourDetailsViewModel.saveTour();
+            statusMessage.setText("Request processed");
         }
     }
 
-    public Boolean validateInput() {
+    private Boolean validateInput() {
+        boolean isValidInput = true;
+        String newStatusMessage = "";
+
         // Check for empty input
         if (tourName.textProperty().getValue() == null || tourName.textProperty().getValue().trim().isEmpty()) {
-            tourName.setStyle("-fx-text-fill: red;");
-            statusMessage.setTextFill(Color.color(1, 0, 0));
-            statusMessage.setText("'Tour Name' must not be empty");
-            return false;
+            newStatusMessage = "'Tour Name' must not be empty";
+            isValidInput = false;
         }
-
         if (from.textProperty().getValue() == null || from.textProperty().getValue().trim().isEmpty()) {
-            statusMessage.setText("'Origin' must not be empty");
-            return false;
+            newStatusMessage = "'Origin' must not be empty";
+            isValidInput = false;
         }
-
         if (to.textProperty().getValue() == null || to.textProperty().getValue().trim().isEmpty()) {
-            statusMessage.setText("'Destination' must not be empty");
-            return false;
+            newStatusMessage = "'Destination' must not be empty";
+            isValidInput = false;
         }
 
-        // Create pattern, check for special characters and numbers (only letters allowed for origin and destination)
-        Pattern pattern = Pattern.compile("^[a-zA-ZäÄöÖüÜ]+$");
-        Matcher validateFrom = pattern.matcher(from.textProperty().getValue());
-        Matcher validateTo = pattern.matcher(to.textProperty().getValue());
+        if (isValidInput) {
+            // Create pattern, check for special characters and numbers (only letters allowed for origin and destination)
+            Pattern pattern = Pattern.compile("^[a-zA-ZäÄöÖüÜ]+$");
+            Matcher validateFrom = pattern.matcher(from.textProperty().getValue());
+            Matcher validateTo = pattern.matcher(to.textProperty().getValue());
 
-        if (!(validateFrom.matches() && validateTo.matches())) {
-            statusMessage.setText("Origin and destination must not contain numbers or special characters");
-            return false;
+            if (!(validateFrom.matches() && validateTo.matches())) {
+                newStatusMessage = "Origin and destination must not contain numbers or special characters";
+                isValidInput = false;
+            }
         }
 
-        statusMessage.setTextFill(Color.color(1, 1, 1));
-        return true;
+        if (!isValidInput) {
+            statusMessage.setTextFill(Color.color(1, 0, 0));
+            statusMessage.setText(newStatusMessage);
+        }
+
+        return isValidInput;
     }
 
     public void bindProperties() {

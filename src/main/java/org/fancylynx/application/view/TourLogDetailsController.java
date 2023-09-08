@@ -43,7 +43,6 @@ public class TourLogDetailsController implements Initializable {
 
     private void bindProperties() {
         tourLogDate.valueProperty().bindBidirectional(tourLogDetailsViewModel.getDate());
-
         difficulty.valueProperty().bindBidirectional(tourLogDetailsViewModel.getDifficulty());
         tourLogTime.textProperty().bindBidirectional(tourLogDetailsViewModel.getTotalTime(), new NumberStringConverter());
         tourLogRating.ratingProperty().bindBidirectional(tourLogDetailsViewModel.getRating());
