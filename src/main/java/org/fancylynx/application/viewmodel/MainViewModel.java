@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +50,7 @@ public class MainViewModel {
         tourLogDetailsViewModel.setTourLogModel(tourLogModel);
     }
 
-    public void selectTour(TourModelNew tour){
+    public void selectTour(TourModelNew tour) {
         this.selectedTour = tour;
         tourLogOverviewViewModel.setTour(tour);
         tourDetailsViewModel.setTour(tour);
@@ -76,7 +78,12 @@ public class MainViewModel {
         selectedTour.setTourLogs(tourLogs);
 
         try {
-            JsonConverter.writeToJsonFile(selectedTour, directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json");
+            String json = JsonConverter.convertToJson(selectedTour);
+            try (FileWriter fileWriter = new FileWriter(directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json")) {
+                fileWriter.write(json);
+            } catch (IOException e) {
+                logger.error("Error while writing tour to file=[{}]", directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json", e);
+            }
         } catch (Exception e) {
             logger.error("Error while exporting tour=[{}] to directory=[{}]", selectedTour.getName(), directory, e);
         }

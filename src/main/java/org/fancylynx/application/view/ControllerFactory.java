@@ -24,7 +24,7 @@ public class ControllerFactory {
         this.tourDetailsViewModel = new TourDetailsViewModel(tourService, routeService, tourLogService);
         this.tourLogOverviewViewModel = new TourLogOverviewViewModel(tourLogService);
         this.tourLogDetailsViewModel = new TourLogDetailsViewModel(tourLogService);
-        this.searchBarViewModel = new SearchBarViewModel(tourOverviewViewModel, tourService, tourLogService);
+        this.searchBarViewModel = new SearchBarViewModel(tourOverviewViewModel, tourDetailsViewModel, tourService, tourLogService);
         this.mainViewModel = new MainViewModel(tourOverviewViewModel, tourDetailsViewModel, tourLogOverviewViewModel, tourLogDetailsViewModel, searchBarViewModel, tourService, tourLogService, reportService);
     }
 

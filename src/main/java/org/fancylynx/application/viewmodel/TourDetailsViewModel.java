@@ -59,7 +59,7 @@ public class TourDetailsViewModel {
 
         this.tourModelNew = tourModelNew;
         retrieveValues(tourModelNew);
-        calculatePopularity();
+        popularity.set(calculatePopularity(tourModelNew));
     }
 
     public void saveTour() {
@@ -117,17 +117,17 @@ public class TourDetailsViewModel {
         }
     }
 
-    public void calculatePopularity() {
-        int tourLogs = tourLogService.getAllTourLogs(tourModelNew.getTourId()).size();
+    public String calculatePopularity(TourModelNew tourModel) {
+        int tourLogs = tourLogService.getAllTourLogs(tourModel.getTourId()).size();
 
         if (tourLogs > 15) {
-            popularity.set("Very popular: " + tourLogs + " logs");
+            return "Very popular: " + tourLogs + " logs";
         } else if (tourLogs > 10) {
-            popularity.set("Popular: " + tourLogs + " logs");
+            return "Popular: " + tourLogs + " logs";
         } else if (tourLogs > 5) {
-            popularity.set("Average: " + tourLogs + " logs");
+            return "Somewhat popular: " + tourLogs + " logs";
         } else {
-            popularity.set("Not popular: " + tourLogs + " logs");
+            return "Not popular: " + tourLogs + " logs";
         }
     }
 

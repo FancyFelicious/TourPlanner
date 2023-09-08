@@ -1,5 +1,7 @@
 package org.fancylynx.application.BL.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.entity.TourLog;
@@ -12,6 +14,7 @@ import java.util.Optional;
 
 @Component
 public class TourLogServiceImpl implements TourLogService{
+    private static final Logger logger = LogManager.getLogger(TourLogServiceImpl.class);
     private final TourLogRepository tourLogRepository;
 
     public TourLogServiceImpl(TourLogRepository tourLogRepository) {
@@ -27,7 +30,7 @@ public class TourLogServiceImpl implements TourLogService{
                     ).toList();
 
         } catch (Exception e) {
-            System.out.println("Error retrieving tour logs from database: " + e.getMessage());
+            logger.error("Error while getting all tour logs from database", e);
         }
         return null;
     }
@@ -40,13 +43,10 @@ public class TourLogServiceImpl implements TourLogService{
 
         try {
             tourLogRepository.save(tourLog);
-            System.out.println("Tour log saved to database");
-            // print the tourlog to the console
-            System.out.println(tourLog);
 
             return setTourLogValues(tourLog);
         } catch (Exception e) {
-            System.out.println("Error saving tour log to database: " + e.getMessage());
+            logger.error("Error while creating new tour log", e);
         }
 
         return null;
@@ -57,7 +57,7 @@ public class TourLogServiceImpl implements TourLogService{
         try {
             tourLogRepository.deleteById(tourLog.getTourLogId());
         } catch (Exception e) {
-            System.out.println("Error deleting tour log from database: " + e.getMessage());
+            logger.error("Error while deleting tour log", e);
         }
     }
 
@@ -70,7 +70,7 @@ public class TourLogServiceImpl implements TourLogService{
             tourLogRepository.saveAndFlush(tourlog);
             tourLogRepository.saveAndFlush(setValues(tourlog, tourLogModel));
         } catch (Exception e) {
-            System.out.println("Error saving tour log to database: " + e.getMessage());
+            logger.error("Error while importing tour log", e);
         }
     }
 

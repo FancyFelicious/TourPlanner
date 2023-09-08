@@ -1,5 +1,7 @@
 package org.fancylynx.application.BL.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.repository.TourRepository;
@@ -10,7 +12,9 @@ import java.util.Optional;
 
 @Component
 public class TourServiceImpl implements TourServiceNew {
+    private static final Logger logger = LogManager.getLogger(TourServiceImpl.class);
     private final TourRepository tourRepository;
+
     public TourServiceImpl(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
     }
@@ -28,7 +32,12 @@ public class TourServiceImpl implements TourServiceNew {
     public TourModelNew createNewTour() {
         Tour tour = new Tour();
         tour.setTransportType("AUTO");
-        tourRepository.saveAndFlush(tour);
+
+        try {
+            tourRepository.save(tour);
+        } catch (Exception e) {
+            logger.error("Error while creating new tour", e);
+        }
 
         return setValues(tour);
     }
@@ -46,7 +55,11 @@ public class TourServiceImpl implements TourServiceNew {
     public TourModelNew importTour(TourModelNew tourModel) {
         Tour tour = new Tour();
         setValues(tour, tourModel);
-        tourRepository.saveAndFlush(tour);
+        try {
+            tourRepository.saveAndFlush(tour);
+        } catch (Exception e) {
+            logger.error("Error while importing tour", e);
+        }
 
         return setValues(tour);
     }
