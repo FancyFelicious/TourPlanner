@@ -40,14 +40,8 @@ public class MainViewModel {
         this.tourLogService = tourLogService;
         this.reportService = reportService;
 
-        this.searchBarViewModel.addSearchListener(this::searchTours);
-
         this.tourOverviewViewModel.addSelectionChangedListener(this::selectTour);
         this.tourLogOverviewViewModel.addSelectionChangedListener(this::selectTourLog);
-    }
-
-    public void searchTours(String searchString) {
-        logger.info("Perform search with searchString=[{}]", searchString);
     }
 
     public void selectTourLog(TourLogModel tourLogModel) {
@@ -71,7 +65,7 @@ public class MainViewModel {
 
             tourOverviewViewModel.addTourToList(importedTour);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error("Error while importing tour from file=[{}]", file, e);
         }
 
         logger.info("Import tour from file=[{}]", file);
@@ -84,7 +78,7 @@ public class MainViewModel {
         try {
             JsonConverter.writeToJsonFile(selectedTour, directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            logger.error("Error while exporting tour=[{}] to directory=[{}]", selectedTour.getName(), directory, e);
         }
 
         logger.info("Export tour to directory=[{}]", directory);
@@ -92,6 +86,8 @@ public class MainViewModel {
 
     public void tourReport() {
         reportService.generateTourReport(selectedTour);
+
+        logger.info("Generate tour report for tour=[{}]", selectedTour.getName());
     }
 
     public void summaryReport() {
@@ -105,5 +101,6 @@ public class MainViewModel {
 
         reportService.generateSummaryReport(completeTours);
 
+        logger.info("Generate summary report");
     }
 }

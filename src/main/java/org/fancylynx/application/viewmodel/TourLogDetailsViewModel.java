@@ -70,4 +70,6 @@ public class TourLogDetailsViewModel {
         tourLogModel.setTotalTime(totalTime.get());
         tourLogModel.setRating(rating.get());
     }
+
+    // TODO: Refresh tour list after adding tour log?
 }

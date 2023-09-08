@@ -74,10 +74,14 @@ public class TourLogOverviewViewModel {
     public void addTourLog() {
         var tourLog = tourLogService.createNewTourLog(tour);
         tourLogModels.add(tourLog);
+
+        logger.info("Added new tour log with id=[{}]", tourLog.getTourLogId());
     }
 
     public void deleteTourLog(TourLogModel tourLog) {
        tourLogService.deleteTourLog(tourLog);
        tourLogModels.remove(tourLog);
+
+       logger.info("Deleted tour log with id=[{}]", tourLog.getTourLogId());
     }
 }

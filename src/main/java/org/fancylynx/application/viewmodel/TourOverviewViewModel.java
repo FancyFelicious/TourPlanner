@@ -36,11 +36,15 @@ public class TourOverviewViewModel {
     public void addNewTour() {
         var tour = tourServiceNew.createNewTour();
         tourModels.add(tour);
+
+        logger.info("Added new tour with id=[{}]", tour.getTourId());
     }
 
     public void deleteTour(TourModelNew tourModel) {
         tourServiceNew.deleteTour(tourModel);
         tourModels.remove(tourModel);
+
+        logger.info("Deleted tour with id=[{}]", tourModel.getTourId());
     }
 
     public void addTourToList(TourModelNew tourModel) {

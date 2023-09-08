@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
 import java.nio.file.Paths;
 
 @Component
@@ -76,12 +77,15 @@ public class TourDetailsViewModel {
         tourModelNew.setDistance(route.getDistance());
         tourModelNew.setImagePath(imagePath);
 
-        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+        String path = System.getProperty("user.dir") + File.separator + tourModelNew.getImagePath();
+
         tourMap.set(new Image(path));
         distance.set(route.getDistance());
         estimatedTime.set(route.getTime());
 
         tourServiceNew.updateTour(tourModelNew);
+
+        logger.info("Saved tour with id=[{}]", tourModelNew.getTourId());
     }
 
     public void retrieveValues(TourModelNew tourModelNew) {

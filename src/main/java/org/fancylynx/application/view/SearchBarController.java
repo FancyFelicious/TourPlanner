@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 public class SearchBarController implements Initializable {
     @FXML
     private TextField searchField;
-
     private final SearchBarViewModel searchBarViewModel;
 
     public SearchBarController(SearchBarViewModel searchBarViewModel) {
@@ -21,13 +20,12 @@ public class SearchBarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
 
         searchField.setOnKeyPressed( event -> {
-            if( event.getCode() == KeyCode.ENTER ) {
-                System.out.println("Enter pressed");
+            if (event.getCode() == KeyCode.ENTER) {
+                searchBarViewModel.doSearch(searchField.getText());
             }
         });
-    }
 
+    }
 }
