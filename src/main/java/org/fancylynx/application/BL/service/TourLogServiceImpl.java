@@ -1,11 +1,14 @@
 package org.fancylynx.application.BL.service;
 
+import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class TourLogServiceImpl implements TourLogService{
@@ -20,14 +23,7 @@ public class TourLogServiceImpl implements TourLogService{
         try {
             return tourLogRepository.findByTourId(tourId)
                     .stream().map(
-                            tourLog -> new TourLogModel(
-                                    tourLog.getId(),
-                                    tourLog.getDate(),
-                                    tourLog.getComment(),
-                                    tourLog.getDifficulty(),
-                                    tourLog.getTotalTime(),
-                                    tourLog.getRating()
-                            )
+                            this::setTourLogValues
                     ).toList();
 
         } catch (Exception e) {
@@ -37,55 +33,93 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public TourLogModel createNewTourLog(TourLog tourLog) {
+    public TourLogModel createNewTourLog(TourModelNew tourModel) {
+        Tour tour = setTourValues(tourModel);
+
+        TourLog tourLog = new TourLog(tour);
+
         try {
             tourLogRepository.save(tourLog);
             System.out.println("Tour log saved to database");
             // print the tourlog to the console
-            System.out.println(tourLog.toString());
+            System.out.println(tourLog);
 
-            return new TourLogModel(
-                    tourLog.getId(),
-                    tourLog.getDate(),
-                    tourLog.getComment(),
-                    tourLog.getDifficulty(),
-                    tourLog.getTotalTime(),
-                    tourLog.getRating()
-            );
+            return setTourLogValues(tourLog);
         } catch (Exception e) {
             System.out.println("Error saving tour log to database: " + e.getMessage());
         }
+
         return null;
     }
 
     @Override
-    public Boolean deleteTourLog(long tourLogId) {
+    public void deleteTourLog(TourLogModel tourLog) {
         try {
-            tourLogRepository.deleteById(tourLogId);
-            return true;
+            tourLogRepository.deleteById(tourLog.getTourLogId());
         } catch (Exception e) {
             System.out.println("Error deleting tour log from database: " + e.getMessage());
         }
-        return false;
     }
 
     @Override
-    public TourLog updateTourLog(TourLog tourLog) {
+    public void importTourLog(TourLogModel tourLogModel, TourModelNew tourModel) {
+        Tour tour = setTourValues(tourModel);
+        TourLog tourlog = new TourLog(tour);
+
         try {
-            return tourLogRepository.save(tourLog);
+            tourLogRepository.saveAndFlush(tourlog);
+            tourLogRepository.saveAndFlush(setValues(tourlog, tourLogModel));
         } catch (Exception e) {
-            System.out.println("Error updating tour log in database: " + e.getMessage());
+            System.out.println("Error saving tour log to database: " + e.getMessage());
         }
-        return null;
     }
 
     @Override
-    public TourLog getTourLog(long tourLogId) {
-        try {
-            return tourLogRepository.findById(tourLogId).orElse(null);
-        } catch (Exception e) {
-            System.out.println("Error retrieving tour log from database: " + e.getMessage());
-        }
-        return null;
+    public void updateTourLog(TourLogModel tourLog) {
+        Optional<TourLog> tourLogOpt = tourLogRepository.findById(tourLog.getTourLogId());
+        tourLogOpt.ifPresent(tourLogEntity -> {
+            tourLogEntity.setDate(tourLog.getDate());
+            tourLogEntity.setComment(tourLog.getComment());
+            tourLogEntity.setDifficulty(tourLog.getDifficulty());
+            tourLogEntity.setTotalTime(tourLog.getTotalTime());
+            tourLogEntity.setRating(tourLog.getRating());
+            tourLogRepository.saveAndFlush(tourLogEntity);
+        });
+
+    }
+
+
+    public TourLog setValues(TourLog tourLog, TourLogModel tourLogModel) {
+        tourLog.setDate(tourLogModel.getDate());
+        tourLog.setComment(tourLogModel.getComment());
+        tourLog.setDifficulty(tourLogModel.getDifficulty());
+        tourLog.setTotalTime(tourLogModel.getTotalTime());
+        tourLog.setRating(tourLogModel.getRating());
+
+        return tourLog;
+    }
+
+    public Tour setTourValues(TourModelNew tourModel) {
+        return new Tour(
+                tourModel.getTourId(),
+                tourModel.getName(),
+                tourModel.getDescription(),
+                tourModel.getFrom(),
+                tourModel.getTo(),
+                tourModel.getTransportType(),
+                tourModel.getDistance(),
+                tourModel.getEstimatedTime(),
+                tourModel.getImagePath());
+    }
+
+    public TourLogModel setTourLogValues(TourLog tourLog) {
+        return new TourLogModel(
+                tourLog.getId(),
+                tourLog.getDate(),
+                tourLog.getComment(),
+                tourLog.getDifficulty(),
+                tourLog.getTotalTime(),
+                tourLog.getRating()
+        );
     }
 }

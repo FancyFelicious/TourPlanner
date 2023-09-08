@@ -10,7 +10,7 @@ public final class Constants {
 
     // Default Image Settings (Tour Map)
     public static final String DEFAULT_IMAGE_SAVE_DIRECTORY = "images/";
-    public static final String DEFAULT_IMAGE_NAME = "Tour Map";
+    public static final String DEFAULT_IMAGE_NAME = "TourMap";
     public static final String DEFAULT_IMAGE_FORMAT = FILE_EXTENSION_PNG;
     public static final String DEFAULT_TOUR_MAP_PLACEHOLDER_IMAGE = "images/tourImage_PLACEHOLDER.png"; //2do
 
@@ -31,7 +31,6 @@ public final class Constants {
     public static final String STAGE_TITLE_MAIN = "Main";
 
     // 2do: put paths into constants or overkill?
-//    public static final String VIEW_FXML_FILE_CREATE_TOUR = "TourView.fxml";
 
     // Prevents other classes from creating instances of 'Constants' (this is supposed to be a collection of constant values rather than an object with a state)
     private Constants() {

@@ -16,7 +16,7 @@ public class TourLogModel {
     private long tourLogId;
     private LocalDate date;
     private String comment;
-    private String difficulty;
+    private int difficulty;
     private double totalTime;
     private int rating;
 }

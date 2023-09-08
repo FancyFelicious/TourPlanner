@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.fancylynx.application.view.TourOverviewController"
+            prefWidth="600.0">
+    <ToolBar>
+        <Label text="%TourOverview" />
+        <Pane HBox.hgrow="ALWAYS" />
+        <Button onAction="#createTour" text="+" />
+        <Button fx:id="deleteTourButton" onAction="#deleteTour" text="-" />
+    </ToolBar>
+    <ListView fx:id="tourList" VBox.vgrow="ALWAYS" />
+</VBox>
