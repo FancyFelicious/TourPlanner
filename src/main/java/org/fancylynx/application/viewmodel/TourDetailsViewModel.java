@@ -63,9 +63,10 @@ public class TourDetailsViewModel {
     }
 
     public void saveTour() {
-        if (!validInput()) {
-            return;
-        }
+
+//        if (!validInput()) {
+//            return;
+//        }
 
         setValues();
 
@@ -76,9 +77,15 @@ public class TourDetailsViewModel {
         tourModelNew.setDistance(route.getDistance());
         tourModelNew.setImagePath(imagePath);
 
-        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+//        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+//        String path = "F:\\Stern\\Sem 4\\SWEN2\\TourPlanner\\images\\TourMap_19.png";
+//
+//        System.out.println("OK HIER DAS IS PATH");
+//        System.out.println(path);
 
-        tourMap.set(new Image(path));
+//        String path = tourModelNew.getImagePath();
+
+//        tourMap.set(new Image(path));
         distance.set(route.getDistance());
         estimatedTime.set(route.getTime());
 
@@ -147,7 +154,12 @@ public class TourDetailsViewModel {
         tourModelNew.setImagePath(imagePath.get());
     }
 
-    public Boolean validInput() {
-        return true;
-    }
+//    public Boolean validInput() {
+//        System.out.println("HE HALLO ICH BIN HIER OK TEST");
+//        System.out.println();
+////        System.out.println(from.get());
+////        System.out.println(to.get());
+//
+//        return true;
+//    }
 }
