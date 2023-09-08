@@ -10,12 +10,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.io.IOException;
 import java.util.Locale;
 
 @SpringBootApplication
 public class TourPlanner extends Application {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Configuration.loadAppConfiguration();
         launch(args);
     }

@@ -13,15 +13,12 @@
     </parent>
     <groupId>org.fancylynx</groupId>
     <artifactId>TourPlanner</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.9</version>
     <name>TourPlanner</name>
-    <description>Description here</description>
+    <description>A semester project by Raza Sohaib Ghulam and Felix Piber</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-
-        <!-- 2do: order? -->
-        <!-- <springdatajpa.version>3.0.3</springdatajpa.version> -->
         <junit.jupiter.version>5.9.2</junit.jupiter.version>
         <lombok.version>1.18.26</lombok.version>
         <javafx.version>17.0.2</javafx.version>
@@ -31,12 +28,6 @@
         <mybatis.version>3.5.13</mybatis.version>
         <log4j.version>2.20.0</log4j.version>
         <itext.version>8.0.1</itext.version>
-
-
-        <!-- 2do: remove -->
-        <maven.plugin.validation>VERBOSE</maven.plugin.validation>
-        <!-- <maven.compiler.source>17</maven.compiler.source> -->
-        <!-- <maven.compiler.target>17</maven.compiler.target> -->
     </properties>
 
     <dependencies>
@@ -53,7 +44,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--                    <version>3.0.6</version>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,12 +104,11 @@
             <version>11.1.2</version>
         </dependency>
 
-
         <!-- Log4j -->
         <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-api</artifactId>
-        <version>${log4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -166,33 +155,7 @@
             <version>${itext.version}</version>
         </dependency>
 
-        <!-- 2do: needed? (probably not) -->
-
-        <!-- Spring Data JPA -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.data</groupId>-->
-        <!--            <artifactId>spring-data-jpa</artifactId>-->
-        <!--            <version>${springdatajpa.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
-        <!-- Mybatis (run .sql script) -->
-        <!--        <dependency>-->
-        <!--            <groupId>org.mybatis</groupId>-->
-        <!--            <artifactId>mybatis</artifactId>-->
-        <!--            <version>${mybatis.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
-        <!-- HikariCP -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.zaxxer</groupId>-->
-        <!--            <artifactId>HikariCP</artifactId>-->
-        <!--            <version>${hikaricp.version}</version>-->
-        <!--            <scope>compile</scope>-->
-        <!--        </dependency>-->
-
-        <!--        Lombok-->
+        <!-- Lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

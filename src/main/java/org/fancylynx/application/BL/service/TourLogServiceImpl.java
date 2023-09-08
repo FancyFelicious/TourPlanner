@@ -1,6 +1,8 @@
 package org.fancylynx.application.BL.service;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
@@ -11,7 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TourLogServiceImpl implements TourLogService{
+public class TourLogServiceImpl implements TourLogService {
+    private static final Logger logger = LogManager.getLogger(TourLogServiceImpl.class);
     private final TourLogRepository tourLogRepository;
 
     public TourLogServiceImpl(TourLogRepository tourLogRepository) {
@@ -27,26 +30,23 @@ public class TourLogServiceImpl implements TourLogService{
                     ).toList();
 
         } catch (Exception e) {
-            System.out.println("Error retrieving tour logs from database: " + e.getMessage());
+            logger.error("Error while getting all tour logs from database", e);
         }
         return null;
     }
 
     @Override
-    public TourLogModel createNewTourLog(TourModelNew tourModel) {
+    public TourLogModel createNewTourLog(TourModel tourModel) {
         Tour tour = setTourValues(tourModel);
 
         TourLog tourLog = new TourLog(tour);
 
         try {
             tourLogRepository.save(tourLog);
-            System.out.println("Tour log saved to database");
-            // print the tourlog to the console
-            System.out.println(tourLog);
 
             return setTourLogValues(tourLog);
         } catch (Exception e) {
-            System.out.println("Error saving tour log to database: " + e.getMessage());
+            logger.error("Error while creating new tour log", e);
         }
 
         return null;
@@ -57,12 +57,12 @@ public class TourLogServiceImpl implements TourLogService{
         try {
             tourLogRepository.deleteById(tourLog.getTourLogId());
         } catch (Exception e) {
-            System.out.println("Error deleting tour log from database: " + e.getMessage());
+            logger.error("Error while deleting tour log", e);
         }
     }
 
     @Override
-    public void importTourLog(TourLogModel tourLogModel, TourModelNew tourModel) {
+    public void importTourLog(TourLogModel tourLogModel, TourModel tourModel) {
         Tour tour = setTourValues(tourModel);
         TourLog tourlog = new TourLog(tour);
 
@@ -70,7 +70,7 @@ public class TourLogServiceImpl implements TourLogService{
             tourLogRepository.saveAndFlush(tourlog);
             tourLogRepository.saveAndFlush(setValues(tourlog, tourLogModel));
         } catch (Exception e) {
-            System.out.println("Error saving tour log to database: " + e.getMessage());
+            logger.error("Error while importing tour log", e);
         }
     }
 
@@ -99,7 +99,7 @@ public class TourLogServiceImpl implements TourLogService{
         return tourLog;
     }
 
-    public Tour setTourValues(TourModelNew tourModel) {
+    public Tour setTourValues(TourModel tourModel) {
         return new Tour(
                 tourModel.getTourId(),
                 tourModel.getName(),

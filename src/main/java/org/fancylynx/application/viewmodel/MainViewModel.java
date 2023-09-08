@@ -1,6 +1,6 @@
 package org.fancylynx.application.viewmodel;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.ReportService;
 import org.fancylynx.application.BL.service.TourLogService;
@@ -11,6 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,7 @@ public class MainViewModel {
     private final ReportService reportService;
     private final TourServiceNew tourService;
     private final TourLogService tourLogService;
-    private TourModelNew selectedTour;
+    private TourModel selectedTour;
 
 
     public MainViewModel(TourOverviewViewModel tourOverviewViewModel, TourDetailsViewModel tourDetailsViewModel, TourLogOverviewViewModel tourLogOverviewViewModel, TourLogDetailsViewModel tourLogDetailsViewModel, SearchBarViewModel searchBarViewModel, TourServiceNew tourService, TourLogService tourLogService, ReportService reportService) {
@@ -48,7 +50,7 @@ public class MainViewModel {
         tourLogDetailsViewModel.setTourLogModel(tourLogModel);
     }
 
-    public void selectTour(TourModelNew tour){
+    public void selectTour(TourModel tour) {
         this.selectedTour = tour;
         tourLogOverviewViewModel.setTour(tour);
         tourDetailsViewModel.setTour(tour);
@@ -56,8 +58,8 @@ public class MainViewModel {
 
     public void importTour(File file) {
         try {
-            TourModelNew tour = JsonConverter.readFromJsonFile(file);
-            TourModelNew importedTour = tourService.importTour(tour);
+            TourModel tour = JsonConverter.readFromJsonFile(file);
+            TourModel importedTour = tourService.importTour(tour);
 
             for (TourLogModel tourLog : tour.getTourLogs()) {
                 tourLogService.importTourLog(tourLog, importedTour);
@@ -76,7 +78,12 @@ public class MainViewModel {
         selectedTour.setTourLogs(tourLogs);
 
         try {
-            JsonConverter.writeToJsonFile(selectedTour, directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json");
+            String json = JsonConverter.convertToJson(selectedTour);
+            try (FileWriter fileWriter = new FileWriter(directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json")) {
+                fileWriter.write(json);
+            } catch (IOException e) {
+                logger.error("Error while writing tour to file=[{}]", directory.getAbsolutePath() + "\\" + selectedTour.getName() + ".json", e);
+            }
         } catch (Exception e) {
             logger.error("Error while exporting tour=[{}] to directory=[{}]", selectedTour.getName(), directory, e);
         }
@@ -91,10 +98,10 @@ public class MainViewModel {
     }
 
     public void summaryReport() {
-        Map<TourModelNew, List<TourLogModel>> completeTours = new HashMap<>();
-        List<TourModelNew> tours = tourService.getAllTours();
+        Map<TourModel, List<TourLogModel>> completeTours = new HashMap<>();
+        List<TourModel> tours = tourService.getAllTours();
 
-        for (TourModelNew tour : tours) {
+        for (TourModel tour : tours) {
             List<TourLogModel> tourLogs = tourLogService.getAllTourLogs(tour.getTourId());
             completeTours.put(tour, tourLogs);
         }

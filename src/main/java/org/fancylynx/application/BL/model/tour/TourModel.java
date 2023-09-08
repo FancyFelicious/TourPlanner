@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TourModelNew {
+public class TourModel {
     private long tourId;
     private String name;
     private String description;
@@ -22,10 +22,9 @@ public class TourModelNew {
     private Double distance;
     private long estimatedTime;
     private String imagePath;
-
     private List<TourLogModel> tourLogs;
 
-    public TourModelNew(long tourId, String name, String description, String from, String to, String transportType, Double distance, long estimatedTime, String imagePath) {
+    public TourModel(long tourId, String name, String description, String from, String to, String transportType, Double distance, long estimatedTime, String imagePath) {
         this.tourId = tourId;
         this.name = name;
         this.description = description;

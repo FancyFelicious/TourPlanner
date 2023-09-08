@@ -6,24 +6,22 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import org.fancylynx.application.viewmodel.MainViewModel;
 
-import java.io.IOException;
-
 public class MainController {
 
+    private final MainViewModel viewModel;
     @FXML
     private BorderPane mainScene;
-    private final MainViewModel viewModel;
 
     public MainController(MainViewModel viewModel) {
         this.viewModel = viewModel;
     }
 
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() {
     }
 
     @FXML
-    public void importTour(){
+    public void importTour() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Tour File");
         fileChooser.getExtensionFilters().addAll(
