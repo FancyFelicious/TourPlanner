@@ -12,6 +12,8 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.UnitValue;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,7 @@ import java.util.Map;
 
 @Component
 public class ReportServiceImpl implements ReportService{
+    private static final Logger logger = LogManager.getLogger(ReportServiceImpl.class);
     private static final String REPORT_PATH = System.getProperty("user.dir") + "/reports/";
     private static final String MAP_NOT_FOUND = System.getProperty("user.dir") + "/src/main/resources/misc/noMapFound.jpg";
     TourModelNew tour;
@@ -42,8 +45,8 @@ public class ReportServiceImpl implements ReportService{
             document.add(tourLogsTable());
 
             document.close();
-            System.out.println("PDF Created");
         } catch (IOException e) {
+            logger.error("Error while generating tour report", e);
             throw new RuntimeException(e);
         }
     }
@@ -65,8 +68,8 @@ public class ReportServiceImpl implements ReportService{
             document.add(summaryTable);
 
             document.close();
-            System.out.println("PDF Created");
         } catch (IOException e) {
+            logger.error("Error while generating summary report", e);
             throw new RuntimeException(e);
         }
 

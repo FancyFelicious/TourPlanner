@@ -11,7 +11,6 @@ import java.util.Optional;
 @Component
 public class TourServiceImpl implements TourServiceNew {
     private final TourRepository tourRepository;
-
     public TourServiceImpl(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
     }

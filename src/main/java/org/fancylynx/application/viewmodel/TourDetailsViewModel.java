@@ -83,6 +83,8 @@ public class TourDetailsViewModel {
         estimatedTime.set(route.getTime());
 
         tourServiceNew.updateTour(tourModelNew);
+
+        logger.info("Saved tour with id=[{}]", tourModelNew.getTourId());
     }
 
     public void retrieveValues(TourModelNew tourModelNew) {
