@@ -72,8 +72,8 @@ public class TourDetailsViewModel {
         tourModel.setDistance(route.getDistance());
         tourModel.setImagePath(imagePath);
 
-//        String path = Paths.get("").toAbsolutePath() + "\\" + tourModel.getImagePath();
-//        tourMap.set(new Image(path));
+        String path = Paths.get("").toAbsolutePath() + "\\" + tourModel.getImagePath();
+        tourMap.set(new Image(path));
         distance.set(route.getDistance());
         estimatedTime.set(route.getTime());
 
