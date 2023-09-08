@@ -2,7 +2,7 @@ package org.fancylynx.application.BL.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.repository.TourRepository;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class TourServiceImpl implements TourServiceNew {
     }
 
     @Override
-    public List<TourModelNew> getAllTours() {
+    public List<TourModel> getAllTours() {
 
         return tourRepository.findAll()
                 .stream().map(
@@ -29,7 +29,7 @@ public class TourServiceImpl implements TourServiceNew {
     }
 
     @Override
-    public TourModelNew createNewTour() {
+    public TourModel createNewTour() {
         Tour tour = new Tour();
         tour.setTransportType("AUTO");
 
@@ -43,7 +43,7 @@ public class TourServiceImpl implements TourServiceNew {
     }
 
     @Override
-    public void updateTour(TourModelNew tourModel) {
+    public void updateTour(TourModel tourModel) {
         Optional<Tour> tourOptional = tourRepository.findById(tourModel.getTourId());
         tourOptional.ifPresent(tour -> {
             setValues(tour, tourModel);
@@ -52,7 +52,7 @@ public class TourServiceImpl implements TourServiceNew {
     }
 
     @Override
-    public TourModelNew importTour(TourModelNew tourModel) {
+    public TourModel importTour(TourModel tourModel) {
         Tour tour = new Tour();
         setValues(tour, tourModel);
         try {
@@ -65,11 +65,11 @@ public class TourServiceImpl implements TourServiceNew {
     }
 
     @Override
-    public void deleteTour(TourModelNew tourModelNew) {
-        tourRepository.deleteById(tourModelNew.getTourId());
+    public void deleteTour(TourModel tourModel) {
+        tourRepository.deleteById(tourModel.getTourId());
     }
 
-    public void setValues(Tour tour, TourModelNew tourModel) {
+    public void setValues(Tour tour, TourModel tourModel) {
         tour.setName(tourModel.getName());
         tour.setDescription(tourModel.getDescription());
         tour.setOrigin(tourModel.getFrom());
@@ -80,8 +80,8 @@ public class TourServiceImpl implements TourServiceNew {
         tour.setImagePath(tourModel.getImagePath());
     }
 
-    public TourModelNew setValues(Tour tour) {
-        return new TourModelNew(
+    public TourModel setValues(Tour tour) {
+        return new TourModel(
                 tour.getId(),
                 tour.getName(),
                 tour.getDescription(),

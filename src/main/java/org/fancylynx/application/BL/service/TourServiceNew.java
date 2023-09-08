@@ -1,15 +1,19 @@
 package org.fancylynx.application.BL.service;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 
 import java.util.List;
 
 public interface TourServiceNew {
-    List<TourModelNew> getAllTours();
-    TourModelNew createNewTour();
-    void updateTour(TourModelNew tourModel);
-    TourModelNew importTour(TourModelNew tourModel);
-    void deleteTour(TourModelNew tourModelNew);
+    List<TourModel> getAllTours();
+
+    TourModel createNewTour();
+
+    void updateTour(TourModel tourModel);
+
+    TourModel importTour(TourModel tourModel);
+
+    void deleteTour(TourModel tourModel);
 
 
 }

@@ -2,7 +2,7 @@ package org.fancylynx.viewmodel;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.fancylynx.application.BL.service.TourServiceNew;
@@ -20,6 +20,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class SearchBarViewModelTest {
+
+    private static List<TourModel> provideTours() {
+        List<TourModel> tourModels = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            TourModel mockTour = new TourModel();
+
+            if (i % 2 == 0) {
+                mockTour.setName("Amazing Tour");
+            }
+
+            tourModels.add(mockTour);
+        }
+
+        return tourModels;
+    }
+
+    private static List<TourLogModel> provideTourLogsCmt() {
+        List<TourLogModel> tourLogModels = new ArrayList<>();
+
+        TourLogModel mockTourLog = new TourLogModel();
+        mockTourLog.setComment("Pikachu");
+        tourLogModels.add(mockTourLog);
+
+        return tourLogModels;
+    }
 
     @Test
     void validSearch() {
@@ -68,9 +94,10 @@ public class SearchBarViewModelTest {
         searchBarViewModel.doSearch("Pikachu");
         assertEquals(searchBarViewModel.getFilteredTours().size(), 4);
     }
+
     @Test
     void invalidSearch() {
-        ObservableList <TourModelNew> tours = FXCollections.observableArrayList();
+        ObservableList<TourModel> tours = FXCollections.observableArrayList();
         TourOverviewViewModel tourOverviewViewModel = mock(TourOverviewViewModel.class);
         TourDetailsViewModel tourDetailsViewModel = mock(TourDetailsViewModel.class);
         TourServiceNew tourService = mock(TourServiceNew.class);
@@ -84,32 +111,5 @@ public class SearchBarViewModelTest {
 
         searchBarViewModel.doSearch("invalid search");
         assertEquals(searchBarViewModel.getFilteredTours().size(), 0);
-    }
-
-    private static List<TourModelNew> provideTours() {
-        List<TourModelNew> tourModels = new ArrayList<>();
-
-        for (int i = 0; i < 4; i++) {
-            TourModelNew mockTour = new TourModelNew();
-
-            if (i % 2 == 0) {
-                mockTour.setName("Amazing Tour");
-            }
-
-            tourModels.add(mockTour);
-        }
-
-        return tourModels;
-    }
-
-
-    private static List<TourLogModel> provideTourLogsCmt() {
-        List<TourLogModel> tourLogModels = new ArrayList<>();
-
-        TourLogModel mockTourLog = new TourLogModel();
-        mockTourLog.setComment("Pikachu");
-        tourLogModels.add(mockTourLog);
-
-        return tourLogModels;
     }
 }

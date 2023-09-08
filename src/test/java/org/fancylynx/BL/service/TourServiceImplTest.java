@@ -1,6 +1,6 @@
 package org.fancylynx.BL.service;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.service.TourServiceImpl;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.repository.TourRepository;
@@ -18,10 +18,11 @@ public class TourServiceImplTest {
         TourRepository tourRepository = mock(TourRepository.class);
         tourService = new TourServiceImpl(tourRepository);
     }
+
     @Test
     void tourToTourModel() {
         var tour = new Tour(1, "Test", "This is a description", "Vienna", "France", "AUTO", 123.1, 123, "images/mhm.png");
-        TourModelNew tourModel;
+        TourModel tourModel;
         tourModel = tourService.setValues(tour);
 
         assertEquals(tourModel.getTourId(), tour.getId());

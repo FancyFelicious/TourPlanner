@@ -2,7 +2,7 @@ package org.fancylynx.application.BL.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.entity.TourLog;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TourLogServiceImpl implements TourLogService{
+public class TourLogServiceImpl implements TourLogService {
     private static final Logger logger = LogManager.getLogger(TourLogServiceImpl.class);
     private final TourLogRepository tourLogRepository;
 
@@ -36,7 +36,7 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public TourLogModel createNewTourLog(TourModelNew tourModel) {
+    public TourLogModel createNewTourLog(TourModel tourModel) {
         Tour tour = setTourValues(tourModel);
 
         TourLog tourLog = new TourLog(tour);
@@ -62,7 +62,7 @@ public class TourLogServiceImpl implements TourLogService{
     }
 
     @Override
-    public void importTourLog(TourLogModel tourLogModel, TourModelNew tourModel) {
+    public void importTourLog(TourLogModel tourLogModel, TourModel tourModel) {
         Tour tour = setTourValues(tourModel);
         TourLog tourlog = new TourLog(tour);
 
@@ -99,7 +99,7 @@ public class TourLogServiceImpl implements TourLogService{
         return tourLog;
     }
 
-    public Tour setTourValues(TourModelNew tourModel) {
+    public Tour setTourValues(TourModel tourModel) {
         return new Tour(
                 tourModel.getTourId(),
                 tourModel.getName(),

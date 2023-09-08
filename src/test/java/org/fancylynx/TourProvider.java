@@ -1,6 +1,6 @@
 package org.fancylynx;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.mockito.Mockito;
 
@@ -9,19 +9,19 @@ import java.util.List;
 
 public class TourProvider {
 
-    public static TourModelNew provideTour() {
-        TourModelNew tourModelNew = new TourModelNew();
-        tourModelNew.setTourId(1L);
-        tourModelNew.setName("TestTour");
-        tourModelNew.setDescription("TestDescription");
-        tourModelNew.setFrom("TestFrom");
-        tourModelNew.setTo("TestTo");
-        tourModelNew.setTransportType("AUTO");
-        tourModelNew.setDistance(100.0);
-        tourModelNew.setEstimatedTime(100L);
-        tourModelNew.setImagePath(null);
+    public static TourModel provideTour() {
+        TourModel tourModel = new TourModel();
+        tourModel.setTourId(1L);
+        tourModel.setName("TestTour");
+        tourModel.setDescription("TestDescription");
+        tourModel.setFrom("TestFrom");
+        tourModel.setTo("TestTo");
+        tourModel.setTransportType("AUTO");
+        tourModel.setDistance(100.0);
+        tourModel.setEstimatedTime(100L);
+        tourModel.setImagePath(null);
 
-        return tourModelNew;
+        return tourModel;
     }
 
     public static List<TourLogModel> provideTourLogs() {

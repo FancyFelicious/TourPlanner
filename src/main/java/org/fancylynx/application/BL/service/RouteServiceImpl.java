@@ -3,7 +3,7 @@ package org.fancylynx.application.BL.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fancylynx.application.BL.model.tour.RouteModel;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.config.Constants;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Component
 public class RouteServiceImpl implements RouteService {
-    public RouteModel getRoute(TourModelNew tour) {
+    public RouteModel getRoute(TourModel tour) {
         // 2do: implement .png / transport type options
         // Generate request URL
         String endpoint = Constants.MAP_QUEST_ENDPOINT_DIRECTIONS;

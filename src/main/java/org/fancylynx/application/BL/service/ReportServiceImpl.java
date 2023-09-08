@@ -14,7 +14,7 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.properties.UnitValue;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.springframework.stereotype.Component;
 
@@ -26,14 +26,18 @@ import java.util.Map;
 
 
 @Component
-public class ReportServiceImpl implements ReportService{
+public class ReportServiceImpl implements ReportService {
     private static final Logger logger = LogManager.getLogger(ReportServiceImpl.class);
     private static final String REPORT_PATH = System.getProperty("user.dir") + "/reports/";
     private static final String MAP_NOT_FOUND = System.getProperty("user.dir") + "/src/main/resources/misc/noMapFound.jpg";
-    public TourModelNew tour;
+    public TourModel tour;
+
+    private static Cell getHeaderCell(String s) {
+        return new Cell().add(new Paragraph(s)).setBold().setBackgroundColor(ColorConstants.GRAY);
+    }
 
     @Override
-    public void generateTourReport(TourModelNew tourModel) {
+    public void generateTourReport(TourModel tourModel) {
         this.tour = tourModel;
         try {
             // Unique name for the report
@@ -54,7 +58,7 @@ public class ReportServiceImpl implements ReportService{
     }
 
     @Override
-    public void generateSummaryReport(Map<TourModelNew, List<TourLogModel>> tours) {
+    public void generateSummaryReport(Map<TourModel, List<TourLogModel>> tours) {
         try {
             // Unique name for the report
             // PdfWriter writer = new PdfWriter(REPORT_PATH + "SummaryReport_" + System.currentTimeMillis() + ".pdf");
@@ -65,7 +69,7 @@ public class ReportServiceImpl implements ReportService{
             document.add(summaryHeader());
             Table summaryTable = summaryTableHeader();
 
-            for (Map.Entry<TourModelNew, List<TourLogModel>> entry : tours.entrySet()) {
+            for (Map.Entry<TourModel, List<TourLogModel>> entry : tours.entrySet()) {
                 summaryTable(summaryTable, entry.getKey(), entry.getValue());
             }
 
@@ -162,7 +166,7 @@ public class ReportServiceImpl implements ReportService{
         return table;
     }
 
-    private void summaryTable(Table table, TourModelNew tour, List<TourLogModel> tourLogs) {
+    private void summaryTable(Table table, TourModel tour, List<TourLogModel> tourLogs) {
         table.setBackgroundColor(ColorConstants.WHITE);
 
         table.addCell(tour.getName() == null ? "" : tour.getName());
@@ -177,9 +181,5 @@ public class ReportServiceImpl implements ReportService{
         table.addCell(String.format("%.2f", tourLogs.stream().mapToDouble(TourLogModel::getRating).average().orElse(0)));
         table.addCell(String.format("%.2f", tourLogs.stream().mapToDouble(TourLogModel::getTotalTime).average().orElse(0)));
 
-    }
-
-    private static Cell getHeaderCell(String s) {
-        return new Cell().add(new Paragraph(s)).setBold().setBackgroundColor(ColorConstants.GRAY);
     }
 }

@@ -1,6 +1,6 @@
 package org.fancylynx.BL.service;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.ReportServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class ReportServiceImplTest {
     void generateReport() {
         ReportServiceImpl reportService = new ReportServiceImpl();
 
-        TourModelNew tour = provideTour();
+        TourModel tour = provideTour();
         tour.setTourLogs(provideTourLogs());
 
         reportService.generateTourReport(tour);
@@ -37,10 +37,10 @@ public class ReportServiceImplTest {
     void generateSummaryReport() {
         ReportServiceImpl reportService = new ReportServiceImpl();
 
-        TourModelNew tour = provideTour();
+        TourModel tour = provideTour();
         tour.setTourLogs(provideTourLogs());
 
-        Map<TourModelNew, List<TourLogModel>> tours = Map.of(tour, provideTourLogs());
+        Map<TourModel, List<TourLogModel>> tours = Map.of(tour, provideTourLogs());
 
         reportService.generateSummaryReport(tours);
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fancylynx.application.BL.model.tour.RouteModel;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.service.RouteService;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.fancylynx.application.BL.service.TourServiceNew;
@@ -43,7 +43,7 @@ public class TourDetailsViewModel {
     private final TourServiceNew tourServiceNew;
     private final RouteService routeService;
     private final TourLogService tourLogService;
-    private TourModelNew tourModelNew;
+    private TourModel tourModel;
 
     public TourDetailsViewModel(TourServiceNew tourServiceNew, RouteService routeService, TourLogService tourLogService) {
         this.tourServiceNew = tourServiceNew;
@@ -51,73 +51,61 @@ public class TourDetailsViewModel {
         this.tourLogService = tourLogService;
     }
 
-    public void setTour(TourModelNew tourModelNew) {
-        if (tourModelNew == null) {
+    public void setTour(TourModel tourModel) {
+        if (tourModel == null) {
             resetValues();
             return;
         }
 
-        this.tourModelNew = tourModelNew;
-        retrieveValues(tourModelNew);
-        popularity.set(calculatePopularity(tourModelNew));
+        this.tourModel = tourModel;
+        retrieveValues(tourModel);
+        popularity.set(calculatePopularity(tourModel));
     }
 
     public void saveTour() {
-
-//        if (!validInput()) {
-//            return;
-//        }
-
         setValues();
 
-        RouteModel route = routeService.getRoute(tourModelNew);
+        RouteModel route = routeService.getRoute(tourModel);
         String imagePath = routeService.getStaticMap(route.getSessionId());
 
-        tourModelNew.setEstimatedTime(route.getTime());
-        tourModelNew.setDistance(route.getDistance());
-        tourModelNew.setImagePath(imagePath);
+        tourModel.setEstimatedTime(route.getTime());
+        tourModel.setDistance(route.getDistance());
+        tourModel.setImagePath(imagePath);
 
-//        String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
-//        String path = "F:\\Stern\\Sem 4\\SWEN2\\TourPlanner\\images\\TourMap_19.png";
-//
-//        System.out.println("OK HIER DAS IS PATH");
-//        System.out.println(path);
-
-//        String path = tourModelNew.getImagePath();
-
+//        String path = Paths.get("").toAbsolutePath() + "\\" + tourModel.getImagePath();
 //        tourMap.set(new Image(path));
         distance.set(route.getDistance());
         estimatedTime.set(route.getTime());
 
-        tourServiceNew.updateTour(tourModelNew);
+        tourServiceNew.updateTour(tourModel);
 
-        logger.info("Saved tour with id=[{}]", tourModelNew.getTourId());
+        logger.info("Saved tour with id=[{}]", tourModel.getTourId());
     }
 
-    public void retrieveValues(TourModelNew tourModelNew) {
-        name.set(tourModelNew.getName());
-        description.set(tourModelNew.getDescription());
-        from.set(tourModelNew.getFrom());
-        to.set(tourModelNew.getTo());
-        type.set(tourModelNew.getTransportType());
-        estimatedTime.set(tourModelNew.getEstimatedTime());
-        imagePath.set(tourModelNew.getImagePath());
+    public void retrieveValues(TourModel tourModel) {
+        name.set(tourModel.getName());
+        description.set(tourModel.getDescription());
+        from.set(tourModel.getFrom());
+        to.set(tourModel.getTo());
+        type.set(tourModel.getTransportType());
+        estimatedTime.set(tourModel.getEstimatedTime());
+        imagePath.set(tourModel.getImagePath());
 
-        if (tourModelNew.getImagePath() != null) {
-            String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+        if (tourModel.getImagePath() != null) {
+            String path = Paths.get("").toAbsolutePath() + "\\" + tourModel.getImagePath();
             tourMap.set(new Image(path));
         } else {
             tourMap.set(null);
         }
 
-        if (tourModelNew.getDistance() != null) {
-            distance.set(tourModelNew.getDistance());
+        if (tourModel.getDistance() != null) {
+            distance.set(tourModel.getDistance());
         } else {
             distance.set(0);
         }
     }
 
-    public String calculatePopularity(TourModelNew tourModel) {
+    public String calculatePopularity(TourModel tourModel) {
         int tourLogs = tourLogService.getAllTourLogs(tourModel.getTourId()).size();
 
         if (tourLogs > 15) {
@@ -144,22 +132,13 @@ public class TourDetailsViewModel {
     }
 
     public void setValues() {
-        tourModelNew.setName(name.get());
-        tourModelNew.setDescription(description.get());
-        tourModelNew.setFrom(from.get());
-        tourModelNew.setTo(to.get());
-        tourModelNew.setTransportType(type.get());
-        tourModelNew.setDistance(distance.get());
-        tourModelNew.setEstimatedTime(estimatedTime.get());
-        tourModelNew.setImagePath(imagePath.get());
+        tourModel.setName(name.get());
+        tourModel.setDescription(description.get());
+        tourModel.setFrom(from.get());
+        tourModel.setTo(to.get());
+        tourModel.setTransportType(type.get());
+        tourModel.setDistance(distance.get());
+        tourModel.setEstimatedTime(estimatedTime.get());
+        tourModel.setImagePath(imagePath.get());
     }
-
-//    public Boolean validInput() {
-//        System.out.println("HE HALLO ICH BIN HIER OK TEST");
-//        System.out.println();
-////        System.out.println(from.get());
-////        System.out.println(to.get());
-//
-//        return true;
-//    }
 }

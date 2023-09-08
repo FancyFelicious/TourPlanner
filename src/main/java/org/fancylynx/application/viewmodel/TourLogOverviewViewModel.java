@@ -4,7 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.Getter;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.springframework.stereotype.Component;
@@ -17,17 +17,16 @@ import java.util.List;
 @Component
 public class TourLogOverviewViewModel {
     private static final Logger logger = LogManager.getLogger(TourLogOverviewViewModel.class);
-    public interface SelectionChangedListener {
-        void changeSelection(TourLogModel tourLogModel);
-    }
+    private final TourLogService tourLogService;
     private List<SelectionChangedListener> listeners = new ArrayList<>();
 
     @Getter
-    private TourModelNew tour;
-    private final TourLogService tourLogService;
-
+    private TourModel tour;
     private ObservableList<TourLogModel> tourLogModels = FXCollections.observableArrayList();
 
+    public TourLogOverviewViewModel(TourLogService tourLogService) {
+        this.tourLogService = tourLogService;
+    }
 
     public ObservableList<TourLogModel> getObservableTourLogs() {
         return tourLogModels;
@@ -41,17 +40,13 @@ public class TourLogOverviewViewModel {
         return (observableValue, oldValue, newValue) -> notifyListeners(newValue);
     }
 
-    public TourLogOverviewViewModel(TourLogService tourLogService) {
-        this.tourLogService = tourLogService;
-    }
-
     private void notifyListeners(TourLogModel newValue) {
-        for ( var listener : listeners ) {
+        for (var listener : listeners) {
             listener.changeSelection(newValue);
         }
     }
 
-    public void setTour(TourModelNew tour) {
+    public void setTour(TourModel tour) {
         if (tour == null) {
             tourLogModels.clear();
             return;
@@ -79,9 +74,13 @@ public class TourLogOverviewViewModel {
     }
 
     public void deleteTourLog(TourLogModel tourLog) {
-       tourLogService.deleteTourLog(tourLog);
-       tourLogModels.remove(tourLog);
+        tourLogService.deleteTourLog(tourLog);
+        tourLogModels.remove(tourLog);
 
-       logger.info("Deleted tour log with id=[{}]", tourLog.getTourLogId());
+        logger.info("Deleted tour log with id=[{}]", tourLog.getTourLogId());
+    }
+
+    public interface SelectionChangedListener {
+        void changeSelection(TourLogModel tourLogModel);
     }
 }

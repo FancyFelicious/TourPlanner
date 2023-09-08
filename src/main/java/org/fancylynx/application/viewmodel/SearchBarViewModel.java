@@ -3,7 +3,7 @@ package org.fancylynx.application.viewmodel;
 import lombok.Getter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.model.tourlog.TourLogModel;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.fancylynx.application.BL.service.TourServiceNew;
@@ -23,61 +23,13 @@ public class SearchBarViewModel {
     private final TourServiceNew tourService;
     private final TourLogService tourLogService;
     @Getter
-    private List<TourModelNew> filteredTours;
+    private List<TourModel> filteredTours;
 
-    public SearchBarViewModel(TourOverviewViewModel tourOverviewViewModel,TourDetailsViewModel tourDetailsViewModel, TourServiceNew tourService, TourLogService tourLogService) {
+    public SearchBarViewModel(TourOverviewViewModel tourOverviewViewModel, TourDetailsViewModel tourDetailsViewModel, TourServiceNew tourService, TourLogService tourLogService) {
         this.tourOverviewViewModel = tourOverviewViewModel;
         this.tourDetailsViewModel = tourDetailsViewModel;
         this.tourService = tourService;
         this.tourLogService = tourLogService;
-    }
-
-    public void doSearch(String searchString) {
-        String popularity;
-        String childFriendly;
-
-        searchString = searchString.toLowerCase();
-        Map<TourModelNew, List<TourLogModel>> completeTours = new HashMap<>();
-        List<TourModelNew> tours = tourService.getAllTours();
-        tourOverviewViewModel.setTours(tours);
-
-        if (searchString.isEmpty()) {
-            return;
-        }
-
-        for (TourModelNew tour : tours) {
-            List<TourLogModel> tourLogs = tourLogService.getAllTourLogs(tour.getTourId());
-            completeTours.put(tour, tourLogs);
-        }
-
-        filteredTours = new ArrayList<>();
-
-        for (Map.Entry<TourModelNew, List<TourLogModel>> entry : completeTours.entrySet()) {
-            TourModelNew tour = entry.getKey();
-            popularity = tourDetailsViewModel.calculatePopularity(tour).toLowerCase();
-            //childFriendly = tourDetailsViewModel.calculateChildFriendly();
-
-            List<TourLogModel> tourLogs = entry.getValue();
-
-            if (containsStringInFields(tour, searchString) || popularity.contains(searchString)) {
-                filteredTours.add(tour);
-            } else {
-                for (TourLogModel tourLog : tourLogs) {
-                    if (containsStringInFields(tourLog, searchString)) {
-                        filteredTours.add(tour);
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (!filteredTours.isEmpty()) {
-            tourOverviewViewModel.setTours(filteredTours);
-        } else {
-            tourOverviewViewModel.getObservableTours().clear();
-        }
-
-        logger.info("Perform search with searchString=[{}]", searchString);
     }
 
     public static boolean containsStringInFields(Object object, String searchString) {
@@ -108,6 +60,54 @@ public class SearchBarViewModel {
 
 
         return false;
+    }
+
+    public void doSearch(String searchString) {
+        String popularity;
+        String childFriendly;
+
+        searchString = searchString.toLowerCase();
+        Map<TourModel, List<TourLogModel>> completeTours = new HashMap<>();
+        List<TourModel> tours = tourService.getAllTours();
+        tourOverviewViewModel.setTours(tours);
+
+        if (searchString.isEmpty()) {
+            return;
+        }
+
+        for (TourModel tour : tours) {
+            List<TourLogModel> tourLogs = tourLogService.getAllTourLogs(tour.getTourId());
+            completeTours.put(tour, tourLogs);
+        }
+
+        filteredTours = new ArrayList<>();
+
+        for (Map.Entry<TourModel, List<TourLogModel>> entry : completeTours.entrySet()) {
+            TourModel tour = entry.getKey();
+            popularity = tourDetailsViewModel.calculatePopularity(tour).toLowerCase();
+            //childFriendly = tourDetailsViewModel.calculateChildFriendly();
+
+            List<TourLogModel> tourLogs = entry.getValue();
+
+            if (containsStringInFields(tour, searchString) || popularity.contains(searchString)) {
+                filteredTours.add(tour);
+            } else {
+                for (TourLogModel tourLog : tourLogs) {
+                    if (containsStringInFields(tourLog, searchString)) {
+                        filteredTours.add(tour);
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!filteredTours.isEmpty()) {
+            tourOverviewViewModel.setTours(filteredTours);
+        } else {
+            tourOverviewViewModel.getObservableTours().clear();
+        }
+
+        logger.info("Perform search with searchString=[{}]", searchString);
     }
 
 

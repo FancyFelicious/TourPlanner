@@ -1,6 +1,6 @@
 package org.fancylynx.viewmodel;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.service.RouteService;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.fancylynx.application.BL.service.TourServiceNew;
@@ -8,7 +8,8 @@ import org.fancylynx.application.viewmodel.TourDetailsViewModel;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.fancylynx.TourProvider.*;
+import static org.fancylynx.TourProvider.provideTour;
+import static org.fancylynx.TourProvider.provideTourLogs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -23,9 +24,9 @@ public class TourDetailsViewModelTest {
 
         Mockito.when(tourLogService.getAllTourLogs(Mockito.anyLong())).thenReturn(provideTourLogs());
 
-        TourModelNew tourModelNew = provideTour();
+        TourModel tourModel = provideTour();
 
-        assertEquals(tourDetailsViewModel.calculatePopularity(tourModelNew), "Somewhat popular: 9 logs");
+        assertEquals(tourDetailsViewModel.calculatePopularity(tourModel), "Somewhat popular: 9 logs");
 
 
     }

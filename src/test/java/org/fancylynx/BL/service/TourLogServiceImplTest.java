@@ -1,6 +1,6 @@
 package org.fancylynx.BL.service;
 
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 import org.fancylynx.application.BL.service.TourLogServiceImpl;
 import org.fancylynx.application.DAL.entity.Tour;
 import org.fancylynx.application.DAL.repository.TourLogRepository;
@@ -23,7 +23,7 @@ public class TourLogServiceImplTest {
     @Test
     void tourModelToTour() {
         Tour tour;
-        TourModelNew tourModel = provideTour();
+        TourModel tourModel = provideTour();
 
         tour = tourLogService.setTourValues(tourModel);
 

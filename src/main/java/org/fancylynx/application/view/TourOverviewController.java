@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.Getter;
 import org.fancylynx.FXMLDependencyInjection;
-import org.fancylynx.application.BL.model.tour.TourModelNew;
+import org.fancylynx.application.BL.model.tour.TourModel;
 
 import javafx.scene.control.ListView;
 import org.fancylynx.application.viewmodel.TourOverviewViewModel;
@@ -19,15 +19,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TourOverviewController implements Initializable {
-    @FXML
-    public ListView<TourModelNew> tourList;
-
     @Getter
     private final TourOverviewViewModel tourOverviewViewModel;
+    @FXML
+    public ListView<TourModel> tourList;
 
     public TourOverviewController(TourOverviewViewModel tourOverviewViewModel) {
         this.tourOverviewViewModel = tourOverviewViewModel;
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tourList.setItems(tourOverviewViewModel.getObservableTours());
@@ -38,6 +38,7 @@ public class TourOverviewController implements Initializable {
         tourOverviewViewModel.addNewTour();
         tourList.getSelectionModel().selectLast();
     }
+
     public void deleteTour() {
         tourOverviewViewModel.deleteTour(tourList.getSelectionModel().getSelectedItem());
     }
