@@ -30,13 +30,15 @@ public class ReportServiceImpl implements ReportService{
     private static final Logger logger = LogManager.getLogger(ReportServiceImpl.class);
     private static final String REPORT_PATH = System.getProperty("user.dir") + "/reports/";
     private static final String MAP_NOT_FOUND = System.getProperty("user.dir") + "/src/main/resources/misc/noMapFound.jpg";
-    TourModelNew tour;
+    public TourModelNew tour;
 
     @Override
     public void generateTourReport(TourModelNew tourModel) {
         this.tour = tourModel;
         try {
-            PdfWriter writer = new PdfWriter(REPORT_PATH + tourModel.getName() + "_" + System.currentTimeMillis() + ".pdf");
+            // Unique name for the report
+            // PdfWriter writer = new PdfWriter(REPORT_PATH + tourModel.getName() + "_" + System.currentTimeMillis() + ".pdf");
+            PdfWriter writer = new PdfWriter(REPORT_PATH + tourModel.getName() + ".pdf");
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
 
@@ -54,7 +56,9 @@ public class ReportServiceImpl implements ReportService{
     @Override
     public void generateSummaryReport(Map<TourModelNew, List<TourLogModel>> tours) {
         try {
-            PdfWriter writer = new PdfWriter(REPORT_PATH + "SummaryReport_" + System.currentTimeMillis() + ".pdf");
+            // Unique name for the report
+            // PdfWriter writer = new PdfWriter(REPORT_PATH + "SummaryReport_" + System.currentTimeMillis() + ".pdf");
+            PdfWriter writer = new PdfWriter(REPORT_PATH + "SummaryReport.pdf");
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
 

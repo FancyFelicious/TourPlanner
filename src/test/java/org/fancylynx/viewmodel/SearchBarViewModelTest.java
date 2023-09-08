@@ -15,6 +15,7 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.fancylynx.TourProvider.provideTourLogs;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
@@ -101,14 +102,6 @@ public class SearchBarViewModelTest {
         return tourModels;
     }
 
-    private static List<TourLogModel> provideTourLogs() {
-        List<TourLogModel> tourLogModels = new ArrayList<>();
-
-        TourLogModel mockTourLog = Mockito.mock(TourLogModel.class);
-        tourLogModels.add(mockTourLog);
-
-        return tourLogModels;
-    }
 
     private static List<TourLogModel> provideTourLogsCmt() {
         List<TourLogModel> tourLogModels = new ArrayList<>();
