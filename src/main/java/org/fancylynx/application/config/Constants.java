@@ -10,7 +10,7 @@ public final class Constants {
 
     // Default Image Settings (Tour Map)
     public static final String DEFAULT_IMAGE_SAVE_DIRECTORY = "images/";
-    public static final String DEFAULT_IMAGE_NAME = "Tour Map";
+    public static final String DEFAULT_IMAGE_NAME = "TourMap";
     public static final String DEFAULT_IMAGE_FORMAT = FILE_EXTENSION_PNG;
     public static final String DEFAULT_TOUR_MAP_PLACEHOLDER_IMAGE = "images/tourImage_PLACEHOLDER.png"; //2do
 

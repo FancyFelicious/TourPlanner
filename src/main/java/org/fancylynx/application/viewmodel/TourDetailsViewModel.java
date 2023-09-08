@@ -3,14 +3,14 @@ package org.fancylynx.application.viewmodel;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
 import lombok.Getter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fancylynx.application.BL.model.tour.RouteModel;
 import org.fancylynx.application.BL.model.tour.TourModelNew;
 import org.fancylynx.application.BL.service.RouteService;
 import org.fancylynx.application.BL.service.TourLogService;
 import org.fancylynx.application.BL.service.TourServiceNew;
 import org.springframework.stereotype.Component;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.nio.file.Paths;
 
@@ -77,6 +77,7 @@ public class TourDetailsViewModel {
         tourModelNew.setImagePath(imagePath);
 
         String path = Paths.get("").toAbsolutePath() + "\\" + tourModelNew.getImagePath();
+
         tourMap.set(new Image(path));
         distance.set(route.getDistance());
         estimatedTime.set(route.getTime());
