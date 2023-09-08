@@ -1,0 +1,1 @@
+{"tourId":124,"name":"Tour 47","description":"This is not a test","from":"Vienna","to":"France","transportType":"AUTO","distance":119.8035,"estimatedTime":1234,"imagePath":"someImagePath/1234.jpg","tourLogs":[{"tourLogId":1,"date":null,"comment":null,"difficulty":0,"totalTime":0.0,"rating":0}]}

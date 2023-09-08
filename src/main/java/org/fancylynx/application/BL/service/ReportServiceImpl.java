@@ -94,7 +94,7 @@ public class ReportServiceImpl implements ReportService{
     }
 
     private Table tourTable() throws MalformedURLException {
-        Table table = new Table(UnitValue.createPercentArray(8)).useAllAvailableWidth();
+        Table table = new Table(UnitValue.createPercentArray(7)).useAllAvailableWidth();
         table.addHeaderCell(getHeaderCell("Map"));
         table.addHeaderCell(getHeaderCell("From"));
         table.addHeaderCell(getHeaderCell("To"));
