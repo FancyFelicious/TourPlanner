@@ -3,7 +3,7 @@
 💎 🔥 ✨ Raza Ghulam ❤️ Felix Piber ✨ 🔥 💎
   </b></p>
 
-[Link to GitHub Repository](https://github.com/FancyFelicious/TourPlanner)  <sub>*- remove?*</sub>
+[Link to GitHub Repository](https://github.com/FancyFelicious/TourPlanner)
 
 ---
 
